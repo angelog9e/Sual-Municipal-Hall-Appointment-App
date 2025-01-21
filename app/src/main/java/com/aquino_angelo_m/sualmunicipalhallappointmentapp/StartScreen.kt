@@ -6,8 +6,10 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.app.ActivityOptionsCompat
 
 class StartScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,13 +25,16 @@ class StartScreen : AppCompatActivity() {
 
         val startBtn = findViewById<Button>(R.id.button)
         val logo = findViewById<ImageView>(R.id.logo)
+        val shadow = findViewById<CardView>(R.id.cardView)
 
         startBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
 
-            val options = androidx.core.app.ActivityOptionsCompat.makeSceneTransitionAnimation(
-                this, logo, "transition_name"
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this,
+                shadow, "transition_name"  // Transition for CardView (the parent of the ImageView)
             )
+
             startActivity(intent, options.toBundle())
         }
     }

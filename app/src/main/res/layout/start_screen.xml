@@ -17,22 +17,34 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/bg_main">
 
-        <ImageView
-            android:id="@+id/logo"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="260dp"
             android:layout_height="260dp"
-            android:background="@drawable/logo"
+            app:cardCornerRadius="130dp"
+            app:cardElevation="100dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="160dp"
             android:contentDescription="logo"
-            android:transitionName="transition_name"
-            android:scaleType="fitXY"/>
+            android:layout_gravity="center"
+            android:transitionName="transition_name">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/logo"
+                android:scaleType="fitXY"
+                android:contentDescription="logo"
+                android:transitionName="transition_name"/>
+
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/logo"
+            android:layout_below="@id/cardView"
             android:layout_marginTop="40dp"
             android:layout_centerHorizontal="true"
             android:text="Make an appointment"

@@ -1,29 +1,98 @@
 package com.aquino_angelo_m.sualmunicipalhallappointmentapp
 
 import android.os.Bundle
-import android.transition.Transition
-import android.transition.TransitionInflater
+import android.transition.Slide
+import android.view.Gravity
+import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.FrameLayout
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        applyWindowInsets()
+        setupFrameLayoutAnimation()
+        setupBarangaySpinner()
+    }
+
+    private fun applyWindowInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
 
-        val transition: Transition = TransitionInflater.from(this)
-            .inflateTransition(android.R.transition.move)
-        transition.duration = 600L
-        window.sharedElementEnterTransition = transition
-        window.sharedElementReturnTransition = transition
+    private fun setupFrameLayoutAnimation() {
+        val frameLayout = findViewById<FrameLayout>(R.id.sheet)
+
+        val slideTransition = Slide(Gravity.BOTTOM).apply {
+            duration = 600L
+            interpolator = AccelerateDecelerateInterpolator()
+        }
+
+        frameLayout.visibility = FrameLayout.INVISIBLE
+
+        frameLayout.post {
+            frameLayout.visibility = FrameLayout.VISIBLE
+            slideTransition.addTarget(frameLayout)
+            slideTransition.startDelay = 100L
+            frameLayout.startAnimation(
+                android.view.animation.TranslateAnimation(
+                    0f, 0f, frameLayout.height.toFloat(), 0f
+                ).apply {
+                    duration = 600
+                    interpolator = AccelerateDecelerateInterpolator()
+                }
+            )
+        }
+    }
+
+    private fun setupBarangaySpinner() {
+        val barangayInput: Spinner = findViewById(R.id.brgyInput)
+
+        // Get the list of barangays from resources
+        val barangayList = resources.getStringArray(R.array.barangay_list).toMutableList()
+
+        // Create an ArrayAdapter
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item, // Default spinner layout
+            barangayList
+        ).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
+
+        // Attach the adapter to the spinner
+        barangayInput.adapter = adapter
+
+        // Set the first item ("Select a Barangay") as the default hint
+        barangayInput.setSelection(0, false)
+
+        // Handle selection events
+        barangayInput.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                if (position > 0) {
+                    val selectedBarangay = barangayList[position]
+                    Toast.makeText(this@MainActivity, "Selected: $selectedBarangay", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Optional: Handle case where nothing is selected
+            }
+        })
     }
 }
