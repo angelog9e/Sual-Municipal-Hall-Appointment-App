@@ -63,25 +63,20 @@ class MainActivity : AppCompatActivity() {
     private fun setupBarangaySpinner() {
         val barangayInput: Spinner = findViewById(R.id.brgyInput)
 
-        // Get the list of barangays from resources
         val barangayList = resources.getStringArray(R.array.barangay_list).toMutableList()
 
-        // Create an ArrayAdapter
         val adapter = ArrayAdapter(
             this,
-            android.R.layout.simple_spinner_item, // Default spinner layout
+            android.R.layout.simple_spinner_item,
             barangayList
         ).apply {
             setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         }
 
-        // Attach the adapter to the spinner
         barangayInput.adapter = adapter
 
-        // Set the first item ("Select a Barangay") as the default hint
         barangayInput.setSelection(0, false)
 
-        // Handle selection events
         barangayInput.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 if (position > 0) {
@@ -91,7 +86,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // Optional: Handle case where nothing is selected
             }
         })
     }

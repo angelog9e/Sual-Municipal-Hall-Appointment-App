@@ -32,7 +32,7 @@ class StartScreen : AppCompatActivity() {
 
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this,
-                shadow, "transition_name"  // Transition for CardView (the parent of the ImageView)
+                shadow, "transition_name"
             )
 
             startActivity(intent, options.toBundle())
