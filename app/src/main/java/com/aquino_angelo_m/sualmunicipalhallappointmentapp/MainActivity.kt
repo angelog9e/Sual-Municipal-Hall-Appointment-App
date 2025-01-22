@@ -1,6 +1,8 @@
 package com.aquino_angelo_m.sualmunicipalhallappointmentapp
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.transition.Slide
 import android.view.Gravity
 import android.view.View
@@ -14,8 +16,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.viewpager2.widget.ViewPager2
+import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var viewPager: ViewPager2
+    private val handler = Handler(Looper.getMainLooper())
+    private var currentPage = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         applyWindowInsets()
         setupFrameLayoutAnimation()
         setupBarangaySpinner()
+        setupViewPager2()
     }
 
     private fun applyWindowInsets() {
@@ -60,6 +69,42 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupViewPager2() {
+        viewPager = findViewById(R.id.viewPager)
+
+        val images = listOf(
+            R.drawable.image1,
+            R.drawable.image2,
+            R.drawable.image3,
+            R.drawable.image4
+        )
+
+        val adapter = ImagePagerAdapter(images)
+        viewPager.adapter = adapter
+
+        val autoSlide = object : Runnable {
+            override fun run() {
+
+                currentPage = (currentPage + 1) % images.size
+                viewPager.setCurrentItem(currentPage, true)
+                handler.postDelayed(this, 10000)
+            }
+        }
+
+        handler.postDelayed(autoSlide, 5000)
+
+        viewPager.setPageTransformer { page, position ->
+            page.alpha = 1 - abs(position)
+            page.scaleX = 1 - 0.2f * abs(position)
+            page.scaleY = 1 - 0.2f * abs(position)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacksAndMessages(null)
+    }
+
     private fun setupBarangaySpinner() {
         val barangayInput: Spinner = findViewById(R.id.brgyInput)
 
@@ -77,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
         barangayInput.setSelection(0, false)
 
-        barangayInput.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+        barangayInput.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 if (position > 0) {
                     val selectedBarangay = barangayList[position]
@@ -85,8 +130,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-            }
-        })
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
     }
 }

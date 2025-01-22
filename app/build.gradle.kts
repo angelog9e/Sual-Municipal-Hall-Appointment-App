@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "com.aquino_angelo_m.sualmunicipalhallappointmentapp"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -37,9 +37,9 @@ android {
 
 dependencies {
 
+    implementation(libs.material)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
