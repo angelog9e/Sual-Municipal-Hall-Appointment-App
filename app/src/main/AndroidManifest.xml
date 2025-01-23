@@ -25,6 +25,14 @@
         <activity
                 android:name=".MainActivity"
                 android:exported="true"/>
+
+        <activity
+            android:name=".PickingPage"
+            android:exported="true"/>
+
+        <activity
+            android:name=".VisitorsPage"
+            android:exported="true"/>
     </application>
 
 </manifest>

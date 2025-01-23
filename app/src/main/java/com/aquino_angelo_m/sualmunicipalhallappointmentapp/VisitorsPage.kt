@@ -22,7 +22,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
 import kotlin.math.abs
 
-class MainActivity : AppCompatActivity() {
+class VisitorsPage : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager2
     private val handler = Handler(Looper.getMainLooper())
@@ -31,16 +31,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.visitors_page)
 
         applyWindowInsets()
         setupFrameLayoutAnimation()
-        setupBarangaySpinner()
+        setupProvinceSpinner()
         setupViewPager2()
     }
 
     private fun applyWindowInsets() {
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { view, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.visitor)) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -107,27 +107,27 @@ class MainActivity : AppCompatActivity() {
         handler.removeCallbacksAndMessages(null)
     }
 
-    private fun setupBarangaySpinner() {
-        val barangayInput: Spinner = findViewById(R.id.brgyInput)
+    private fun setupProvinceSpinner() {
+        val provinceInput: Spinner = findViewById(R.id.provinceInput)
 
-        val barangayList = resources.getStringArray(R.array.barangay_list).toMutableList()
+        val provinceList = resources.getStringArray(R.array.province_list).toMutableList()
 
         val adapter = ArrayAdapter(
             this,
             R.layout.spinner_item,
-            barangayList
+            provinceList
         ).apply {
             setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         }
 
-        barangayInput.adapter = adapter
+        provinceInput.adapter = adapter
 
-        barangayInput.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        provinceInput.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 if (position == 0) {
-                    (view as? TextView)?.setTextColor(ContextCompat.getColor(this@MainActivity, R.color.lightgrey))
+                    (view as? TextView)?.setTextColor(ContextCompat.getColor(this@VisitorsPage, R.color.lightgrey))
                 } else {
-                    (view as? TextView)?.setTextColor(ContextCompat.getColor(this@MainActivity, R.color.blackknight))
+                    (view as? TextView)?.setTextColor(ContextCompat.getColor(this@VisitorsPage, R.color.blackknight))
                 }
             }
 
@@ -138,17 +138,22 @@ class MainActivity : AppCompatActivity() {
         val addressInput = findViewById<EditText>(R.id.addressInput)
         val contactInput = findViewById<EditText>(R.id.contactInput)
         val nextButton = findViewById<View>(R.id.nextbtn)
+        val zipInput = findViewById<EditText>(R.id.zipInput)
 
         nextButton.setOnClickListener {
             when {
-                barangayInput.selectedItemPosition == 0 -> {
-                    Toast.makeText(this, "Please select a valid barangay", Toast.LENGTH_SHORT).show()
+                provinceInput.selectedItemPosition == 0 -> {
+                    Toast.makeText(this, "Please select a valid province", Toast.LENGTH_SHORT).show()
                 }
                 nameInput.text.isEmpty() -> {
                     Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show()
                 }
                 addressInput.text.isEmpty() -> {
                     Toast.makeText(this, "Please enter your address", Toast.LENGTH_SHORT).show()
+                }
+
+                zipInput.text.isEmpty() -> {
+                    Toast.makeText(this, "Please enter your zip code", Toast.LENGTH_SHORT).show()
                 }
                 contactInput.text.isEmpty() -> {
                     Toast.makeText(this, "Please enter your contact number", Toast.LENGTH_SHORT).show()
