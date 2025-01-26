@@ -2,47 +2,110 @@
     <string name="app_name">Sual Municipal Hall Appointment App</string>
     <string-array name="barangay_list">
         <item>Select Barangay</item>
-        <item>Brgy. Baquioen</item>
-        <item>Brgy. Baybay Norte</item>
-        <item>Brgy. Baybay Sur</item>
-        <item>Brgy. Bolaoen</item>
-        <item>Brgy. Cabalitian</item>
-        <item>Brgy. Calumbuyan</item>
-        <item>Brgy. Camagsingalan</item>
-        <item>Brgy. Caoayan</item>
-        <item>Brgy. Capantolan</item>
-        <item>Brgy. Macaycayawan</item>
-        <item>Brgy. Paitan East</item>
-        <item>Brgy. Paitan West</item>
-        <item>Brgy. Pangascasan</item>
-        <item>Brgy. Poblacion</item>
-        <item>Brgy. Santo Domingo</item>
-        <item>Brgy. Seselangen</item>
-        <item>Brgy. Sioasio East</item>
-        <item>Brgy. Sioasio West</item>
-        <item>Brgy. Victoria</item>
+        <item>Baquioen</item>
+        <item>Baybay Norte</item>
+        <item>Baybay Sur</item>
+        <item>Bolaoen</item>
+        <item>Cabalitian</item>
+        <item>Calumbuyan</item>
+        <item>Camagsingalan</item>
+        <item>Caoayan</item>
+        <item>Capantolan</item>
+        <item>Macaycayawan</item>
+        <item>Paitan East</item>
+        <item>Paitan West</item>
+        <item>Pangascasan</item>
+        <item>Poblacion</item>
+        <item>Santo Domingo</item>
+        <item>Seselangen</item>
+        <item>Sioasio East</item>
+        <item>Sioasio West</item>
+        <item>Victoria</item>
     </string-array>
 
     <string-array name="province_list">
         <item>Select Province</item>
-        <item>Brgy. Baquioen</item>
-        <item>Brgy. Baybay Norte</item>
-        <item>Brgy. Baybay Sur</item>
-        <item>Brgy. Bolaoen</item>
-        <item>Brgy. Cabalitian</item>
-        <item>Brgy. Calumbuyan</item>
-        <item>Brgy. Camagsingalan</item>
-        <item>Brgy. Caoayan</item>
-        <item>Brgy. Capantolan</item>
-        <item>Brgy. Macaycayawan</item>
-        <item>Brgy. Paitan East</item>
-        <item>Brgy. Paitan West</item>
-        <item>Brgy. Pangascasan</item>
-        <item>Brgy. Poblacion</item>
-        <item>Brgy. Santo Domingo</item>
-        <item>Brgy. Seselangen</item>
-        <item>Brgy. Sioasio East</item>
-        <item>Brgy. Sioasio West</item>
-        <item>Brgy. Victoria</item>
+        <item>Abra</item>
+        <item>Agusan del Norte</item>
+        <item>Agusan del Sur</item>
+        <item>Aklan</item>
+        <item>Albay</item>
+        <item>Antique</item>
+        <item>Apayao</item>
+        <item>Aurora</item>
+        <item>Basilan</item>
+        <item>Bataan</item>
+        <item>Batanes</item>
+        <item>Batangas</item>
+        <item>Benguet</item>
+        <item>Biliran</item>
+        <item>Bohol</item>
+        <item>Bukidnon</item>
+        <item>Bulacan</item>
+        <item>Cagayan</item>
+        <item>Camarines Norte</item>
+        <item>Camarines Sur</item>
+        <item>Camiguin</item>
+        <item>Capiz</item>
+        <item>Catanduanes</item>
+        <item>Cavite</item>
+        <item>Cebu</item>
+        <item>Cotabato</item>
+        <item>Davao de Oro</item>
+        <item>Davao del Norte</item>
+        <item>Davao del Sur</item>
+        <item>Davao Occidental</item>
+        <item>Davao Oriental</item>
+        <item>Dinagat Islands</item>
+        <item>Eastern Samar</item>
+        <item>Guimaras</item>
+        <item>Ifugao</item>
+        <item>Ilocos Norte</item>
+        <item>Ilocos Sur</item>
+        <item>Iloilo</item>
+        <item>Isabela</item>
+        <item>Kalinga</item>
+        <item>La Union</item>
+        <item>Laguna</item>
+        <item>Lanao del Norte</item>
+        <item>Lanao del Sur</item>
+        <item>Leyte</item>
+        <item>Maguindanao del Norte</item>
+        <item>Maguindanao del Sur</item>
+        <item>Marinduque</item>
+        <item>Masbate</item>
+        <item>Misamis Occidental</item>
+        <item>Misamis Oriental</item>
+        <item>Mountain Province</item>
+        <item>Negros Occidental</item>
+        <item>Negros Oriental</item>
+        <item>Northern Samar</item>
+        <item>Nueva Ecija</item>
+        <item>Nueva Vizcaya</item>
+        <item>Occidental Mindoro</item>
+        <item>Oriental Mindoro</item>
+        <item>Palawan</item>
+        <item>Pampanga</item>
+        <item>Pangasinan</item>
+        <item>Quezon</item>
+        <item>Quirino</item>
+        <item>Rizal</item>
+        <item>Romblon</item>
+        <item>Samar</item>
+        <item>Sarangani</item>
+        <item>Siquijor</item>
+        <item>Sorsogon</item>
+        <item>South Cotabato</item>
+        <item>Southern Leyte</item>
+        <item>Sultan Kudarat</item>
+        <item>Sulu</item>
+        <item>Surigao del Norte</item>
+        <item>Surigao del Sur</item>
+        <item>Tarlac</item>
+        <item>Tawi-Tawi</item>
+        <item>Zambales</item>
+        <item>Zamboanga del Norte</item>
+        <item>Zamboanga del Sur</item>
+        <item>Zamboanga Sibugay</item>
     </string-array>
 </resources>

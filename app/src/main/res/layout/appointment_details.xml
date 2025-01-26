@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/appointment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/wrap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/blackknight">
+
+        <FrameLayout
+            android:id="@+id/sheet"
+            android:layout_width="match_parent"
+            android:layout_height="660dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Appointment Details"
+                android:fontFamily="@font/notosansjp_semibold"
+                android:textColor="@color/moonlight"
+                android:textSize="24sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"/>
+
+            <RelativeLayout
+                android:layout_width="400dp"
+                android:layout_height="600dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:background="@drawable/bg_main">
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginBottom="4dp"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
+                    android:shadowColor="#80000000"
+                    android:shadowRadius="2"/>
+
+                <Button
+                    android:id="@+id/datebtn"
+                    android:layout_width="160dp"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/text1"
+                    android:layout_marginStart="30dp"
+                    android:layout_alignParentStart="true"
+                    android:hint="Select Date"
+                    android:background="@drawable/bg_input"/>
+
+                <TextView
+                    android:id="@+id/text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="140dp"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginBottom="4dp"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
+                    android:shadowColor="#80000000"
+                    android:shadowRadius="2"/>
+
+                <Button
+                    android:id="@+id/timebtn"
+                    android:layout_width="160dp"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/text1"
+                    android:layout_marginEnd="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:hint="Select Time"
+                    android:background="@drawable/bg_input"/>
+
+                <TextView
+                    android:id="@+id/text3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/datebtn"
+                    android:text="Office"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="4dp"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
+                    android:shadowColor="#80000000"
+                    android:shadowRadius="2"/>
+
+                <Spinner
+                    android:id="@+id/brgyInput"
+                    android:layout_width="340dp"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/text3"
+                    android:layout_marginStart="30dp"
+                    android:spinnerMode="dropdown"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@color/blackknight"
+                    android:background="@drawable/bg_input"
+                    android:elevation="24dp"/>
+
+                <TextView
+                    android:id="@+id/text4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/brgyInput"
+                    android:text="Purpose of Visit"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="4dp"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
+                    android:shadowColor="#80000000"
+                    android:shadowRadius="2"/>
+
+                <Spinner
+                    android:id="@+id/purposeInput"
+                    android:layout_width="340dp"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/text4"
+                    android:layout_marginStart="30dp"
+                    android:spinnerMode="dropdown"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@color/blackknight"
+                    android:background="@drawable/bg_input"
+                    android:elevation="24dp"/>
+
+                <TextView
+                    android:id="@+id/text5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/purposeInput"
+                    android:text="Other: (optional)"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="4dp"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
+                    android:shadowColor="#80000000"
+                    android:shadowRadius="2"/>
+
+                <EditText
+                    android:id="@+id/otherInput"
+                    android:layout_width="340dp"
+                    android:layout_height="140dp"
+                    android:background="@drawable/bg_input"
+                    android:layout_below="@+id/text5"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="30dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:textColor="@color/blackknight"
+                    android:inputType="textShortMessage"
+                    android:hint="other purpose of visit"
+                    android:textColorHint="@color/lightgrey"
+                    android:elevation="24dp"/>
+
+                <Button
+                    android:id="@+id/backbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Back"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginBottom="26dp"/>
+
+                <Button
+                    android:id="@+id/nextbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Next"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="100dp"
+                    android:layout_marginBottom="26dp"/>
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

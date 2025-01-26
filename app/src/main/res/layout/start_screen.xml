@@ -36,7 +36,8 @@
             android:layout_marginTop="160dp"
             android:contentDescription="logo"
             android:layout_gravity="center"
-            android:transitionName="transition_name">
+            android:transitionName="transition_name"
+            app:cardBackgroundColor="@color/moonlight">
 
             <ImageView
                 android:id="@+id/logo"
@@ -48,6 +49,8 @@
                 android:transitionName="transition_name"/>
 
         </androidx.cardview.widget.CardView>
+
+
 
         <ImageView
             android:layout_width="match_parent"
@@ -65,14 +68,27 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cardView"
+            android:layout_below="@id/text"
             android:layout_marginTop="80dp"
             android:layout_centerHorizontal="true"
             android:text="Make an appointment"
-            android:textSize="16sp"
-            android:textColor="@color/moonlight"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:background="?attr/selectableItemBackground"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:shadowDx="4"
+            android:shadowDy="4"
+            android:shadowColor="#80000000"
+            android:shadowRadius="2"/>
+
+        <ImageView
+            android:id="@+id/text"
+            android:layout_width="280dp"
+            android:layout_height="120dp"
+            android:background="@drawable/text"
+            android:layout_below="@id/cardView"
+            android:layout_centerHorizontal="true"/>
 
 
     </RelativeLayout>

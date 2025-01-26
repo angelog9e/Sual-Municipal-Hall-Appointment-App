@@ -3,7 +3,9 @@ package com.aquino_angelo_m.sualmunicipalhallappointmentapp
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.VideoView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +37,13 @@ class StartScreen : AppCompatActivity() {
 
         val startBtn = findViewById<Button>(R.id.button)
         val shadow = findViewById<CardView>(R.id.cardView)
+        val startText = findViewById<ImageView>(R.id.text)
+
+        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+
+        startBtn.startAnimation(fadeInAnimation)
+        startText.startAnimation(fadeInAnimation)
+        shadow.startAnimation(fadeInAnimation)
 
         startBtn.setOnClickListener {
             val intent = Intent(this, PickingPage::class.java)

@@ -3,10 +3,12 @@ package com.aquino_angelo_m.sualmunicipalhallappointmentapp
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.InputFilter
 import android.transition.Slide
 import android.view.Gravity
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
@@ -134,24 +136,56 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
+        //Texts
+        val text1 = findViewById<TextView>(R.id.text1)
+        val text2 = findViewById<TextView>(R.id.text2)
+        val text3 = findViewById<TextView>(R.id.text3)
+        val text4 = findViewById<TextView>(R.id.text4)
+        val text5 = findViewById<TextView>(R.id.text5)
+
+
+        //Inputs
         val nameInput = findViewById<EditText>(R.id.nameInput)
         val addressInput = findViewById<EditText>(R.id.addressInput)
         val contactInput = findViewById<EditText>(R.id.contactInput)
+        val emailInput = findViewById<EditText>(R.id.emailInput)
         val nextButton = findViewById<View>(R.id.nextbtn)
+
+        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+
+        // Texts Animation
+        text1.startAnimation(fadeInAnimation)
+        text2.startAnimation(fadeInAnimation)
+        text3.startAnimation(fadeInAnimation)
+        text4.startAnimation(fadeInAnimation)
+        text5.startAnimation(fadeInAnimation)
+
+
+        // Inputs Animation
+        addressInput.startAnimation(fadeInAnimation)
+        contactInput.startAnimation(fadeInAnimation)
+        nameInput.startAnimation(fadeInAnimation)
+        nextButton.startAnimation(fadeInAnimation)
+        emailInput.startAnimation(fadeInAnimation)
+        barangayInput.startAnimation(fadeInAnimation)
+
+        contactInput.filters = arrayOf(InputFilter.LengthFilter(11))
+        nameInput.filters = arrayOf(InputFilter.LengthFilter(50))
+        addressInput.filters = arrayOf(InputFilter.LengthFilter(100))
 
         nextButton.setOnClickListener {
             when {
                 barangayInput.selectedItemPosition == 0 -> {
                     Toast.makeText(this, "Please select a valid barangay", Toast.LENGTH_SHORT).show()
                 }
-                nameInput.text.isEmpty() -> {
-                    Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show()
+                nameInput.text.isEmpty() || nameInput.text.length < 12 -> {
+                    Toast.makeText(this, "Please enter a valid name with at least 12 characters", Toast.LENGTH_SHORT).show()
                 }
-                addressInput.text.isEmpty() -> {
-                    Toast.makeText(this, "Please enter your address", Toast.LENGTH_SHORT).show()
+                addressInput.text.isEmpty() || addressInput.text.length < 10 -> {
+                    Toast.makeText(this, "Please enter a valid address with at least 10 characters", Toast.LENGTH_SHORT).show()
                 }
-                contactInput.text.isEmpty() -> {
-                    Toast.makeText(this, "Please enter your contact number", Toast.LENGTH_SHORT).show()
+                contactInput.text.length != 11 || !contactInput.text.toString().matches("\\d{11}".toRegex()) -> {
+                    Toast.makeText(this, "Please enter a valid 11-digit contact number", Toast.LENGTH_SHORT).show()
                 }
             }
         }

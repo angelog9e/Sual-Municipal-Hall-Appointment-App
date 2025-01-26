@@ -3,7 +3,9 @@ package com.aquino_angelo_m.sualmunicipalhallappointmentapp
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.TextView
 import android.widget.VideoView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -36,6 +38,13 @@ class PickingPage : AppCompatActivity() {
         val residentBtn = findViewById<Button>(R.id.residentBtn)
         val shadow = findViewById<CardView>(R.id.cardView)
         val visitorBtn = findViewById<Button>(R.id.visitorBtn)
+        val questionText = findViewById<TextView>(R.id.questiontxt)
+
+        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+
+        residentBtn.startAnimation(fadeInAnimation)
+        visitorBtn.startAnimation(fadeInAnimation)
+        questionText.startAnimation(fadeInAnimation)
 
         residentBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
