@@ -1,5 +1,6 @@
 package com.aquino_angelo_m.sualmunicipalhallappointmentapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,6 +9,7 @@ import android.transition.Slide
 import android.view.Gravity
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -18,6 +20,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -109,9 +113,18 @@ class MainActivity : AppCompatActivity() {
         handler.removeCallbacksAndMessages(null)
     }
 
+    private fun animateViewsSequentially(vararg views: View) {
+        val delay = 100L // Delay between animations
+        views.forEachIndexed { index, view ->
+            view.postDelayed({
+                view.visibility = View.VISIBLE // Make the view visible
+                view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in))
+            }, index * delay)
+        }
+    }
+
     private fun setupBarangaySpinner() {
         val barangayInput: Spinner = findViewById(R.id.brgyInput)
-
         val barangayList = resources.getStringArray(R.array.barangay_list).toMutableList()
 
         val adapter = ArrayAdapter(
@@ -136,56 +149,58 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        //Texts
+        // Texts
         val text1 = findViewById<TextView>(R.id.text1)
         val text2 = findViewById<TextView>(R.id.text2)
         val text3 = findViewById<TextView>(R.id.text3)
         val text4 = findViewById<TextView>(R.id.text4)
         val text5 = findViewById<TextView>(R.id.text5)
 
-
-        //Inputs
+        // Inputs
         val nameInput = findViewById<EditText>(R.id.nameInput)
         val addressInput = findViewById<EditText>(R.id.addressInput)
         val contactInput = findViewById<EditText>(R.id.contactInput)
         val emailInput = findViewById<EditText>(R.id.emailInput)
         val nextButton = findViewById<View>(R.id.nextbtn)
 
-        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+        // Set Initial State
+        val viewsToAnimate = arrayOf(
+            text1, nameInput, text2, addressInput,
+            text3, barangayInput,
+            text4, contactInput, text5, emailInput,
+            nextButton
+        )
 
-        // Texts Animation
-        text1.startAnimation(fadeInAnimation)
-        text2.startAnimation(fadeInAnimation)
-        text3.startAnimation(fadeInAnimation)
-        text4.startAnimation(fadeInAnimation)
-        text5.startAnimation(fadeInAnimation)
-
-
-        // Inputs Animation
-        addressInput.startAnimation(fadeInAnimation)
-        contactInput.startAnimation(fadeInAnimation)
-        nameInput.startAnimation(fadeInAnimation)
-        nextButton.startAnimation(fadeInAnimation)
-        emailInput.startAnimation(fadeInAnimation)
-        barangayInput.startAnimation(fadeInAnimation)
+        viewsToAnimate.forEach { it.visibility = View.INVISIBLE }
 
         contactInput.filters = arrayOf(InputFilter.LengthFilter(11))
         nameInput.filters = arrayOf(InputFilter.LengthFilter(50))
         addressInput.filters = arrayOf(InputFilter.LengthFilter(100))
 
+        // Call Sequential Animation
+        val frameLayout = findViewById<FrameLayout>(R.id.sheet)
+        frameLayout.post {
+            animateViewsSequentially(*viewsToAnimate)
+        }
+
         nextButton.setOnClickListener {
             when {
                 barangayInput.selectedItemPosition == 0 -> {
-                    Toast.makeText(this, "Please select a valid barangay", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please select a barangay", Toast.LENGTH_SHORT).show()
                 }
                 nameInput.text.isEmpty() || nameInput.text.length < 12 -> {
-                    Toast.makeText(this, "Please enter a valid name with at least 12 characters", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please enter a name with at least 12 characters", Toast.LENGTH_SHORT).show()
                 }
                 addressInput.text.isEmpty() || addressInput.text.length < 10 -> {
-                    Toast.makeText(this, "Please enter a valid address with at least 10 characters", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please enter a address with at least 10 characters", Toast.LENGTH_SHORT).show()
                 }
                 contactInput.text.length != 11 || !contactInput.text.toString().matches("\\d{11}".toRegex()) -> {
-                    Toast.makeText(this, "Please enter a valid 11-digit contact number", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please enter a 11-digit contact number", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    // Start the AppointmentDetails activity without any animation
+                    val intent = Intent(this@MainActivity, AppointmentDetails::class.java)
+                    startActivity(intent)
                 }
             }
         }

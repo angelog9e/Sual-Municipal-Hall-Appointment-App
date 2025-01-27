@@ -108,4 +108,28 @@
         <item>Zamboanga del Sur</item>
         <item>Zamboanga Sibugay</item>
     </string-array>
+
+    <string-array name="office_list">
+        <item>Select Office</item>
+        <item>B</item>
+        <item>B</item>
+        <item>B</item>
+        <item>B</item>
+        <item>C</item>
+        <item>C</item>
+        <item>C</item>
+        <item>C</item>
+        <item>C</item>
+        <item>M</item>
+        <item>P</item>
+        <item>P</item>
+        <item>P</item>
+        <item>P</item>
+        <item>S</item>
+        <item>S</item>
+        <item>S</item>
+        <item>S</item>
+        <item>V</item>
+    </string-array>
+
 </resources>

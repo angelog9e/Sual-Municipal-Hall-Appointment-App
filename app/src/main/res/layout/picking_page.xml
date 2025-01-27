@@ -37,7 +37,8 @@
             android:layout_marginBottom="36dp"
             android:contentDescription="logo"
             android:layout_gravity="center"
-            android:transitionName="transition_name">
+            android:transitionName="transition_name"
+            app:cardBackgroundColor="@color/moonlight">
 
             <ImageView
                 android:id="@+id/logo"

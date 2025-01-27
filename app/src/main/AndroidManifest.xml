@@ -33,6 +33,10 @@
         <activity
             android:name=".VisitorsPage"
             android:exported="true"/>
+
+        <activity
+            android:name=".AppointmentDetails"
+            android:exported="true"/>
     </application>
 
 </manifest>
