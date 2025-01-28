@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Sual Municipal Hall Appointment App</string>
+
+    <string-array name="am_pm_list">
+        <item>AM</item>
+        <item>PM</item>
+    </string-array>
+
     <string-array name="barangay_list">
         <item>Select Barangay</item>
         <item>Baquioen</item>
@@ -110,6 +116,29 @@
     </string-array>
 
     <string-array name="office_list">
+        <item>Select Office</item>
+        <item>B</item>
+        <item>B</item>
+        <item>B</item>
+        <item>B</item>
+        <item>C</item>
+        <item>C</item>
+        <item>C</item>
+        <item>C</item>
+        <item>C</item>
+        <item>M</item>
+        <item>P</item>
+        <item>P</item>
+        <item>P</item>
+        <item>P</item>
+        <item>S</item>
+        <item>S</item>
+        <item>S</item>
+        <item>S</item>
+        <item>V</item>
+    </string-array>
+
+    <string-array name="purpose_list">
         <item>Select Office</item>
         <item>B</item>
         <item>B</item>

@@ -9,10 +9,10 @@ import android.transition.Slide
 import android.view.Gravity
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.Spinner
@@ -20,8 +20,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -117,7 +115,7 @@ class MainActivity : AppCompatActivity() {
         val delay = 100L // Delay between animations
         views.forEachIndexed { index, view ->
             view.postDelayed({
-                view.visibility = View.VISIBLE // Make the view visible
+                view.visibility = View.VISIBLE
                 view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in))
             }, index * delay)
         }
@@ -149,6 +147,10 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
+        //Buttons
+        val backButton = findViewById<Button>(R.id.backbtn)
+        val nextButton = findViewById<Button>(R.id.nextbtn)
+
         // Texts
         val text1 = findViewById<TextView>(R.id.text1)
         val text2 = findViewById<TextView>(R.id.text2)
@@ -161,9 +163,8 @@ class MainActivity : AppCompatActivity() {
         val addressInput = findViewById<EditText>(R.id.addressInput)
         val contactInput = findViewById<EditText>(R.id.contactInput)
         val emailInput = findViewById<EditText>(R.id.emailInput)
-        val nextButton = findViewById<View>(R.id.nextbtn)
 
-        // Set Initial State
+        // Initial State
         val viewsToAnimate = arrayOf(
             text1, nameInput, text2, addressInput,
             text3, barangayInput,
@@ -177,7 +178,7 @@ class MainActivity : AppCompatActivity() {
         nameInput.filters = arrayOf(InputFilter.LengthFilter(50))
         addressInput.filters = arrayOf(InputFilter.LengthFilter(100))
 
-        // Call Sequential Animation
+        // Sequential Animation
         val frameLayout = findViewById<FrameLayout>(R.id.sheet)
         frameLayout.post {
             animateViewsSequentially(*viewsToAnimate)
@@ -185,24 +186,40 @@ class MainActivity : AppCompatActivity() {
 
         nextButton.setOnClickListener {
             when {
-                barangayInput.selectedItemPosition == 0 -> {
-                    Toast.makeText(this, "Please select a barangay", Toast.LENGTH_SHORT).show()
-                }
                 nameInput.text.isEmpty() || nameInput.text.length < 12 -> {
                     Toast.makeText(this, "Please enter a name with at least 12 characters", Toast.LENGTH_SHORT).show()
                 }
                 addressInput.text.isEmpty() || addressInput.text.length < 10 -> {
                     Toast.makeText(this, "Please enter a address with at least 10 characters", Toast.LENGTH_SHORT).show()
                 }
+                barangayInput.selectedItemPosition == 0 -> {
+                    Toast.makeText(this, "Please select a barangay", Toast.LENGTH_SHORT).show()
+                }
                 contactInput.text.length != 11 || !contactInput.text.toString().matches("\\d{11}".toRegex()) -> {
                     Toast.makeText(this, "Please enter a 11-digit contact number", Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-                    // Start the AppointmentDetails activity without any animation
-                    val intent = Intent(this@MainActivity, AppointmentDetails::class.java)
+
+                    val bundle = Bundle().apply {
+                        putString("name", nameInput.text.toString())
+                        putString("address", addressInput.text.toString())
+                        putString("barangay", barangayInput.selectedItem.toString())
+                        putString("contact", contactInput.text.toString())
+                        putString("email", emailInput.text.toString())
+                    }
+
+                    val intent = Intent(this@MainActivity, AppointmentDetails::class.java).apply {
+                        putExtras(bundle)
+                    }
+
                     startActivity(intent)
                 }
             }
+        }
+
+        backButton.setOnClickListener {
+
+            finish()
         }
     }
 }

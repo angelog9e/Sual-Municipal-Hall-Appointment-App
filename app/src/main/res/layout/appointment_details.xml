@@ -64,6 +64,7 @@
             android:id="@+id/sheet2"
             android:layout_width="match_parent"
             android:layout_height="660dp"
+            android:background="@drawable/bg_square"
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
             android:visibility="visible">
@@ -108,6 +109,8 @@
                     android:layout_marginStart="30dp"
                     android:layout_alignParentStart="true"
                     android:hint="Select Date"
+                    android:textSize="18sp"
+                    android:textColorHint="@color/blackknight"
                     android:textColor="@color/blackknight"
                     android:background="@drawable/bg_input"/>
 
@@ -135,6 +138,8 @@
                     android:layout_marginEnd="30dp"
                     android:layout_alignParentEnd="true"
                     android:hint="Select Time"
+                    android:textSize="18sp"
+                    android:textColorHint="@color/blackknight"
                     android:textColor="@color/blackknight"
                     android:background="@drawable/bg_input"/>
 
@@ -220,13 +225,14 @@
                     android:layout_below="@+id/othertxt"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="30dp"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
                     android:textColor="@color/blackknight"
-                    android:inputType="textShortMessage"
+                    android:inputType="textMultiLine"
                     android:hint="other purpose of visit"
                     android:textColorHint="@color/lightgrey"
-                    android:elevation="24dp"/>
+                    android:elevation="24dp"
+                    android:gravity="top"
+                    android:padding="12dp"
+                    android:minLines="6"/>
 
                 <Button
                     android:id="@+id/backbtn"

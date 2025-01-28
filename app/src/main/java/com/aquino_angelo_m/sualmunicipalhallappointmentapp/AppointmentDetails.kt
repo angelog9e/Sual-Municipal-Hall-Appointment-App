@@ -1,10 +1,8 @@
 package com.aquino_angelo_m.sualmunicipalhallappointmentapp
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.InputFilter
 import android.transition.Slide
 import android.view.Gravity
 import android.view.View
@@ -15,17 +13,19 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.NumberPicker
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
+import java.util.Calendar
+import java.util.Locale
 import kotlin.math.abs
 
 class AppointmentDetails : AppCompatActivity() {
@@ -43,6 +43,22 @@ class AppointmentDetails : AppCompatActivity() {
         setupFrameLayoutAnimation()
         setupOfficeSpinner()
         setupViewPager2()
+
+        // Retrieve data from Resident
+        val Rname = intent.getStringExtra("name")
+        val Raddress = intent.getStringExtra("address")
+        val Rbarangay = intent.getStringExtra("barangay")
+        val Rcontact = intent.getStringExtra("contact")
+        val Remail = intent.getStringExtra("email")
+
+        // Retrieve data from Visitor
+        val Vname = intent.getStringExtra("name")
+        val Vaddress = intent.getStringExtra("address")
+        val Vzip = intent.getStringExtra("zip")
+        val Vprovince = intent.getStringExtra("province")
+        val Vcontact = intent.getStringExtra("contact")
+        val Vemail = intent.getStringExtra("email")
+
     }
 
     private fun applyWindowInsets() {
@@ -149,6 +165,9 @@ class AppointmentDetails : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
+        // Buttons
+        val timeButton = findViewById<Button>(R.id.timebtn)
+        val dateButton = findViewById<Button>(R.id.datebtn)
         val backButton = findViewById<Button>(R.id.backbtn)
         val nextButton = findViewById<Button>(R.id.nextbtn)
 
@@ -160,22 +179,20 @@ class AppointmentDetails : AppCompatActivity() {
         val text5 = findViewById<TextView>(R.id.othertxt)
 
         // Inputs
-        val dateButton = findViewById<View>(R.id.datebtn)
-        val timeButton = findViewById<View>(R.id.timebtn)
         val purposeInput = findViewById<Spinner>(R.id.purposeInput)
         val otherInput = findViewById<EditText>(R.id.otherInput)
 
-        // Set Initial State
+        //Initial State
         val viewsToAnimate = arrayOf(
             text1, dateButton, text2, timeButton,
             text3, officeInput,
             text4, purposeInput, text5, otherInput,
-            nextButton
+            nextButton, backButton
         )
 
         viewsToAnimate.forEach { it.visibility = View.INVISIBLE }
 
-        // Call Sequential Animation
+        //Sequential Animation
         val frameLayout = findViewById<FrameLayout>(R.id.sheet2)
         frameLayout.post {
             animateViewsSequentially(*viewsToAnimate)
@@ -187,6 +204,68 @@ class AppointmentDetails : AppCompatActivity() {
                     Toast.makeText(this, "Please select a office", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        backButton.setOnClickListener {
+
+            finish()
+        }
+
+        timeButton.setOnClickListener {
+            // Custom dialog for time selection
+            val dialogView = layoutInflater.inflate(R.layout.custom_time_picker, null)
+
+            val hourPicker = dialogView.findViewById<NumberPicker>(R.id.hourPicker)
+            val minutePicker = dialogView.findViewById<NumberPicker>(R.id.minutePicker)
+            val ampmSpinner = dialogView.findViewById<Spinner>(R.id.ampmSpinner)
+
+            // Maximum and minimum values
+            hourPicker.minValue = 1
+            hourPicker.maxValue = 12
+            minutePicker.minValue = 0
+            minutePicker.maxValue = 59
+
+            val dialog = AlertDialog.Builder(this)
+                .setTitle("Select Time")
+                .setView(dialogView)
+                .setPositiveButton("OK") { _, _ ->
+                    val selectedHour = hourPicker.value
+                    val selectedMinute = minutePicker.value
+                    val selectedAMPM = ampmSpinner.selectedItem.toString()
+
+                    if (selectedAMPM == "PM" && selectedHour == 12) {
+                        Toast.makeText(this, "Lunch break from 12 PM to 1 PM. Please choose another time.", Toast.LENGTH_SHORT).show()
+                        return@setPositiveButton
+                    }
+
+                    val isValidTime = when (selectedAMPM) {
+                        "AM" -> selectedHour in 8..11
+                        "PM" -> {
+
+                            selectedHour in 1..4 || (selectedHour == 4 && selectedMinute <= 30)
+                        }
+                        else -> false
+                    }
+
+                    if (isValidTime) {
+
+                        val formattedTime = String.format(
+                            Locale.getDefault(),
+                            "%d:%02d %s",
+                            selectedHour,
+                            selectedMinute,
+                            selectedAMPM
+                        )
+
+                        timeButton.text = formattedTime
+                    } else {
+                        Toast.makeText(this, "Please select a time between 8:00 AM and 4:30 PM.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .setNegativeButton("Cancel", null)
+                .create()
+
+            dialog.show()
         }
     }
 }

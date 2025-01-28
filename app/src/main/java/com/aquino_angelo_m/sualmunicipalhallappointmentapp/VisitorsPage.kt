@@ -1,5 +1,6 @@
 package com.aquino_angelo_m.sualmunicipalhallappointmentapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -42,7 +43,7 @@ class VisitorsPage : AppCompatActivity() {
     }
 
     private fun applyWindowInsets() {
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.visitor)) { view, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.visitors)) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -109,9 +110,18 @@ class VisitorsPage : AppCompatActivity() {
         handler.removeCallbacksAndMessages(null)
     }
 
+    private fun animateViewsSequentially(vararg views: View) {
+        val delay = 100L // Delay between animations
+        views.forEachIndexed { index, view ->
+            view.postDelayed({
+                view.visibility = View.VISIBLE
+                view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in))
+            }, index * delay)
+        }
+    }
+
     private fun setupProvinceSpinner() {
         val provinceInput: Spinner = findViewById(R.id.provinceInput)
-
         val provinceList = resources.getStringArray(R.array.province_list).toMutableList()
 
         val adapter = ArrayAdapter(
@@ -136,7 +146,12 @@ class VisitorsPage : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        //Texts
+        //Buttons
+        val backButton = findViewById<View>(R.id.backbtn)
+        val nextButton = findViewById<View>(R.id.nextbtn)
+
+
+        // Texts
         val text1 = findViewById<TextView>(R.id.text1)
         val text2 = findViewById<TextView>(R.id.text2)
         val text3 = findViewById<TextView>(R.id.text3)
@@ -144,57 +159,75 @@ class VisitorsPage : AppCompatActivity() {
         val text5 = findViewById<TextView>(R.id.text5)
         val text6 = findViewById<TextView>(R.id.zip)
 
-        //Inputs
+        // Inputs
         val nameInput = findViewById<EditText>(R.id.nameInput)
         val addressInput = findViewById<EditText>(R.id.addressInput)
         val contactInput = findViewById<EditText>(R.id.contactInput)
         val emailInput = findViewById<EditText>(R.id.emailInput)
+
         val zipInput = findViewById<EditText>(R.id.zipInput)
-        val nextButton = findViewById<View>(R.id.nextbtn)
 
-        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+        // Initial State
+        val viewsToAnimate = arrayOf(
+            text1, nameInput, text2, addressInput,
+            text6, zipInput, text3, provinceInput,
+            text4, contactInput, text5, emailInput,
+            backButton, nextButton
+        )
 
-        // Texts Animation
-        text1.startAnimation(fadeInAnimation)
-        text2.startAnimation(fadeInAnimation)
-        text3.startAnimation(fadeInAnimation)
-        text4.startAnimation(fadeInAnimation)
-        text5.startAnimation(fadeInAnimation)
-        text6.startAnimation(fadeInAnimation)
-
-        // Inputs Animation
-        addressInput.startAnimation(fadeInAnimation)
-        contactInput.startAnimation(fadeInAnimation)
-        nameInput.startAnimation(fadeInAnimation)
-        emailInput.startAnimation(fadeInAnimation)
-        provinceInput.startAnimation(fadeInAnimation)
-        zipInput.startAnimation(fadeInAnimation)
-        nextButton.startAnimation(fadeInAnimation)
+        viewsToAnimate.forEach { it.visibility = View.INVISIBLE }
 
         zipInput.filters = arrayOf(InputFilter.LengthFilter(4))
         contactInput.filters = arrayOf(InputFilter.LengthFilter(11))
         nameInput.filters = arrayOf(InputFilter.LengthFilter(50))
         addressInput.filters = arrayOf(InputFilter.LengthFilter(100))
 
+        // Sequential Animation
+        val frameLayout = findViewById<FrameLayout>(R.id.sheet)
+        frameLayout.post {
+            animateViewsSequentially(*viewsToAnimate)
+        }
+
         nextButton.setOnClickListener {
             when {
-                provinceInput.selectedItemPosition == 0 -> {
-                    Toast.makeText(this, "Please select a valid province", Toast.LENGTH_SHORT).show()
-                }
                 nameInput.text.isEmpty() || nameInput.text.length < 12 -> {
-                    Toast.makeText(this, "Please enter a valid name with at least 12 characters", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please enter a name with at least 12 characters", Toast.LENGTH_SHORT).show()
                 }
                 addressInput.text.isEmpty() || addressInput.text.length < 10 -> {
-                    Toast.makeText(this, "Please enter a valid address with at least 10 characters", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please enter a address with at least 10 characters", Toast.LENGTH_SHORT).show()
                 }
-
                 zipInput.text.length != 4 || !zipInput.text.toString().matches("\\d{4}".toRegex()) -> {
-                    Toast.makeText(this, "Please enter a valid 4-digit zip code", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please enter a 4-digit zip code", Toast.LENGTH_SHORT).show()
+                }
+                provinceInput.selectedItemPosition == 0 -> {
+                    Toast.makeText(this, "Please select a province", Toast.LENGTH_SHORT).show()
                 }
                 contactInput.text.length != 11 || !contactInput.text.toString().matches("\\d{11}".toRegex()) -> {
-                    Toast.makeText(this, "Please enter a valid 11-digit contact number", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please enter a 11-digit contact number", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+
+                    val bundle = Bundle().apply {
+                        putString("name", nameInput.text.toString())
+                        putString("address", addressInput.text.toString())
+                        putString("province", provinceInput.selectedItem.toString())
+                        putString("contact", contactInput.text.toString())
+                        putString("email", emailInput.text.toString())
+                        putString("zip", zipInput.text.toString())
+                    }
+
+                    val intent = Intent(this@VisitorsPage, AppointmentDetails::class.java).apply {
+                        putExtras(bundle)
+                    }
+
+                    startActivity(intent)
                 }
             }
+        }
+
+        backButton.setOnClickListener {
+
+            finish()
         }
     }
 }
