@@ -1,5 +1,6 @@
 package com.aquino_angelo_m.sualmunicipalhallappointmentapp
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -45,19 +46,19 @@ class AppointmentDetails : AppCompatActivity() {
         setupViewPager2()
 
         // Retrieve data from Resident
-        val Rname = intent.getStringExtra("name")
-        val Raddress = intent.getStringExtra("address")
-        val Rbarangay = intent.getStringExtra("barangay")
-        val Rcontact = intent.getStringExtra("contact")
-        val Remail = intent.getStringExtra("email")
+        val rName = intent.getStringExtra("name")
+        val rAddress = intent.getStringExtra("address")
+        val rBarangay = intent.getStringExtra("barangay")
+        val rContact = intent.getStringExtra("contact")
+        val rEmail = intent.getStringExtra("email")
 
         // Retrieve data from Visitor
-        val Vname = intent.getStringExtra("name")
-        val Vaddress = intent.getStringExtra("address")
-        val Vzip = intent.getStringExtra("zip")
-        val Vprovince = intent.getStringExtra("province")
-        val Vcontact = intent.getStringExtra("contact")
-        val Vemail = intent.getStringExtra("email")
+        val vName = intent.getStringExtra("name")
+        val vAddress = intent.getStringExtra("address")
+        val vZip = intent.getStringExtra("zip")
+        val vProvince = intent.getStringExtra("province")
+        val vContact = intent.getStringExtra("contact")
+        val vEmail = intent.getStringExtra("email")
 
     }
 
@@ -233,17 +234,9 @@ class AppointmentDetails : AppCompatActivity() {
                     val selectedMinute = minutePicker.value
                     val selectedAMPM = ampmSpinner.selectedItem.toString()
 
-                    if (selectedAMPM == "PM" && selectedHour == 12) {
-                        Toast.makeText(this, "Lunch break from 12 PM to 1 PM. Please choose another time.", Toast.LENGTH_SHORT).show()
-                        return@setPositiveButton
-                    }
-
                     val isValidTime = when (selectedAMPM) {
                         "AM" -> selectedHour in 8..11
-                        "PM" -> {
-
-                            selectedHour in 1..4 || (selectedHour == 4 && selectedMinute <= 30)
-                        }
+                        "PM" -> selectedHour == 12 || selectedHour in 1..4
                         else -> false
                     }
 
@@ -259,7 +252,7 @@ class AppointmentDetails : AppCompatActivity() {
 
                         timeButton.text = formattedTime
                     } else {
-                        Toast.makeText(this, "Please select a time between 8:00 AM and 4:30 PM.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Please select a time between 8:00 AM and 4:00 PM.", Toast.LENGTH_SHORT).show()
                     }
                 }
                 .setNegativeButton("Cancel", null)
@@ -267,5 +260,42 @@ class AppointmentDetails : AppCompatActivity() {
 
             dialog.show()
         }
+
+        dateButton.setOnClickListener {
+            // Get the current date
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            // Create and show the DatePickerDialog
+            val datePickerDialog = DatePickerDialog(
+                this,
+                { _, selectedYear, selectedMonth, selectedDay ->
+                    val selectedCalendar = Calendar.getInstance()
+                    selectedCalendar.set(selectedYear, selectedMonth, selectedDay)
+
+                    val dayOfWeek = selectedCalendar.get(Calendar.DAY_OF_WEEK)
+
+                    if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY) {
+                        Toast.makeText(this, "Weekends are not allowed. Please select a weekday.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        val formattedDate = String.format(
+                            Locale.getDefault(),
+                            "%02d/%02d/%04d",
+                            selectedDay,
+                            selectedMonth + 1,
+                            selectedYear
+                        )
+                        dateButton.text = formattedDate
+                    }
+                },
+                year, month, day
+            )
+
+            datePickerDialog.datePicker.minDate = calendar.timeInMillis // Set the minimum date to today
+            datePickerDialog.show()
+        }
+
     }
 }

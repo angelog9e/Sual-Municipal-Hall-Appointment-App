@@ -117,19 +117,19 @@
 
     <string-array name="office_list">
         <item>Select Office</item>
-        <item>B</item>
-        <item>B</item>
-        <item>B</item>
-        <item>B</item>
-        <item>C</item>
-        <item>C</item>
-        <item>C</item>
-        <item>C</item>
-        <item>C</item>
-        <item>M</item>
-        <item>P</item>
-        <item>P</item>
-        <item>P</item>
+        <item>OFFICE OF THE MUNICIPAL MAYOR</item>
+        <item>OFFICE OF THE HUMAN RESOURCE MANAGEMENT OFFICER</item>
+        <item>OFFICE OF THE MUNICIPAL TREASURER</item>
+        <item>OFFICE OF THE MUNICIPAL ASSESSOR</item>
+        <item>OFFICE OF THE MUNICIPAL BUDGET OFFICER</item>
+        <item>OFFICE OF THE MUNICIPAL PLANNING AND DEVELOPMENT OFFICER</item>
+        <item>OFFICE OF THE MUNICIPAL ENGINEER</item>
+        <item>OFFICE OF THE MUNICIPAL HEALTH OFFICER</item>
+        <item>OFFICE OF THE MUNICIPAL CIVIL REGISTRAR</item>
+        <item>OFFICE OF THE MUNICIPAL SOCIAL WELFARE AND DEVELOPMENT</item>
+        <item>OFFICE OF THE MUNICIPAL AGRICULTURIST</item>
+        <item>OFFICE OF THE MUNICIPAL</item>
+        <item>OFFICE OF THE MUNICIPAL</item>
         <item>P</item>
         <item>S</item>
         <item>S</item>
