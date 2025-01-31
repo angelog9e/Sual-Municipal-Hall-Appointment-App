@@ -117,48 +117,37 @@
 
     <string-array name="office_list">
         <item>Select Office</item>
-        <item>OFFICE OF THE MUNICIPAL MAYOR</item>
-        <item>OFFICE OF THE HUMAN RESOURCE MANAGEMENT OFFICER</item>
-        <item>OFFICE OF THE MUNICIPAL TREASURER</item>
-        <item>OFFICE OF THE MUNICIPAL ASSESSOR</item>
-        <item>OFFICE OF THE MUNICIPAL BUDGET OFFICER</item>
-        <item>OFFICE OF THE MUNICIPAL PLANNING AND DEVELOPMENT OFFICER</item>
-        <item>OFFICE OF THE MUNICIPAL ENGINEER</item>
-        <item>OFFICE OF THE MUNICIPAL HEALTH OFFICER</item>
-        <item>OFFICE OF THE MUNICIPAL CIVIL REGISTRAR</item>
-        <item>OFFICE OF THE MUNICIPAL SOCIAL WELFARE AND DEVELOPMENT</item>
-        <item>OFFICE OF THE MUNICIPAL AGRICULTURIST</item>
-        <item>OFFICE OF THE MUNICIPAL</item>
-        <item>OFFICE OF THE MUNICIPAL</item>
-        <item>Office of the Vice Mayor</item>
-        <item>S</item>
-        <item>S</item>
-        <item>S</item>
-        <item>S</item>
-        <item>V</item>
+        <item>Office of the Municipal Mayor</item>
+        <item>Office of the Municipal Vice Mayor</item>
+        <item>Office of the Human Resource Management Officer</item>
+        <item>Office of the Municipal Treasurer</item>
+        <item>Office of the Municipal Secretary</item>
+        <item>Office of the Municipal Assessor</item>
+        <item>Office of the Municipal Budget Officer</item>
+        <item>Office of the Municipal Planning and Development Officer</item>
+        <item>Office of the Municipal Engineer</item>
+        <item>Office of the Municipal Health Officer</item>
+        <item>Office of the Municipal Civil Registrar</item>
+        <item>Office of the Municipal Social Welfare and Development</item>
+        <item>Office of the Municipal Agriculturist</item>
+        <item>Office of the Sanssuntang Kebataan</item>
+        <item>Office of the Municipal Treasurers</item>
     </string-array>
 
     <string-array name="purpose_list">
         <item>Select Office</item>
-        <item>B</item>
-        <item>B</item>
-        <item>B</item>
-        <item>B</item>
-        <item>C</item>
-        <item>C</item>
-        <item>C</item>
-        <item>C</item>
-        <item>C</item>
-        <item>M</item>
-        <item>P</item>
-        <item>P</item>
-        <item>P</item>
-        <item>P</item>
-        <item>S</item>
-        <item>S</item>
-        <item>S</item>
-        <item>S</item>
-        <item>V</item>
+        <item>Senior Citizen\'s ID</item>
+        <item>Persons with Disabilities (PWD) ID</item>
+        <item>Community Tax Certificate (Cedula) </item>
+        <item>Business Permit</item>
+        <item>Municipal Scholarship</item>
+        <item>Medical</item>
+        <item>Voters Registration</item>
+        <item>Residency Permit</item>
+        <item>Indigency</item>
+        <item>Building Permit</item>
+        <item>Meeting Appointment</item>
+        <item>Civil Wedding</item>
     </string-array>
 
 </resources>
