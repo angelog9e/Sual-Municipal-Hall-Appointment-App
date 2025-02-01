@@ -1,6 +1,7 @@
 package com.aquino_angelo_m.sualmunicipalhallappointmentapp
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -45,20 +46,7 @@ class AppointmentDetails : AppCompatActivity() {
         setupOfficeSpinner()
         setupViewPager2()
 
-        // Retrieve data from Resident
-        val rName = intent.getStringExtra("name")
-        val rAddress = intent.getStringExtra("address")
-        val rBarangay = intent.getStringExtra("barangay")
-        val rContact = intent.getStringExtra("contact")
-        val rEmail = intent.getStringExtra("email")
 
-        // Retrieve data from Visitor
-        val vName = intent.getStringExtra("name")
-        val vAddress = intent.getStringExtra("address")
-        val vZip = intent.getStringExtra("zip")
-        val vProvince = intent.getStringExtra("province")
-        val vContact = intent.getStringExtra("contact")
-        val vEmail = intent.getStringExtra("email")
 
     }
 
@@ -201,8 +189,57 @@ class AppointmentDetails : AppCompatActivity() {
 
         nextButton.setOnClickListener {
             when {
+                dateButton.text.isEmpty() -> {
+                    Toast.makeText(this, "Please select a date", Toast.LENGTH_SHORT).show()
+                }
+                timeButton.text.isEmpty() -> {
+                    Toast.makeText(this, "Please select a time", Toast.LENGTH_SHORT).show()
+                }
                 officeInput.selectedItemPosition == 0 -> {
-                    Toast.makeText(this, "Please select a office", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please select an office", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    // Collect data
+                    val office = officeInput.selectedItem.toString()
+                    val date = dateButton.text.toString()
+                    val time = timeButton.text.toString()
+
+                    // Retrieve data from Resident
+                    val rName = intent.getStringExtra("name")
+                    val rAddress = intent.getStringExtra("address")
+                    val rBarangay = intent.getStringExtra("barangay")
+                    val rContact = intent.getStringExtra("contact")
+                    val rEmail = intent.getStringExtra("email")
+
+                    // Retrieve data from Visitor
+                    val vName = intent.getStringExtra("name")
+                    val vAddress = intent.getStringExtra("address")
+                    val vZip = intent.getStringExtra("zip")
+                    val vProvince = intent.getStringExtra("province")
+                    val vContact = intent.getStringExtra("contact")
+                    val vEmail = intent.getStringExtra("email")
+
+                    // Pass data to VerificationPage
+                    val intent = Intent(this, VerificationPage::class.java).apply {
+                        putExtra("office", office)
+                        putExtra("date", date)
+                        putExtra("time", time)
+
+                        // Pass additional resident and visitor data if needed
+                        putExtra("rName", rName)
+                        putExtra("rAddress", rAddress)
+                        putExtra("rBarangay", rBarangay)
+                        putExtra("rContact", rContact)
+                        putExtra("rEmail", rEmail)
+
+                        putExtra("vName", vName)
+                        putExtra("vAddress", vAddress)
+                        putExtra("vZip", vZip)
+                        putExtra("vProvince", vProvince)
+                        putExtra("vContact", vContact)
+                        putExtra("vEmail", vEmail)
+                    }
+                    startActivity(intent)
                 }
             }
         }

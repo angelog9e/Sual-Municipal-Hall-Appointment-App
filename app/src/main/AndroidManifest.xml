@@ -37,6 +37,11 @@
         <activity
             android:name=".AppointmentDetails"
             android:exported="true"/>
+
+        <activity
+            android:name=".VerificationPage"
+            android:exported="true"/>
+
     </application>
 
 </manifest>

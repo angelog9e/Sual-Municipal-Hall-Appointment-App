@@ -99,7 +99,9 @@
                     android:textColor="@color/blackknight"
                     android:inputType="textPersonName"
                     android:textColorHint="@color/lightgrey"
-                    android:elevation="24dp"/>
+                    android:elevation="24dp"
+                    android:drawableStart="@drawable/user"
+                    android:drawablePadding="4dp"/>
 
                 <TextView
                     android:id="@+id/text2"
@@ -130,7 +132,9 @@
                     android:inputType="textPostalAddress"
                     android:hint="e.g. Las Brisas Del Mar Lot 6 Blk 10"
                     android:textColorHint="@color/lightgrey"
-                    android:elevation="24dp"/>
+                    android:elevation="24dp"
+                    android:drawableStart="@drawable/location"
+                    android:drawablePadding="4dp"/>
 
                 <TextView
                     android:id="@+id/text3"
@@ -179,7 +183,9 @@
                     android:inputType="number"
                     android:hint="e.g. 4023"
                     android:textColorHint="@color/lightgrey"
-                    android:elevation="24dp" />
+                    android:elevation="24dp"
+                    android:drawableStart="@drawable/zip"
+                    android:drawablePadding="4dp"/>
 
                 <Spinner
                     android:id="@+id/provinceInput"
@@ -191,7 +197,7 @@
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
                     android:textColor="@color/blackknight"
-                    android:background="@drawable/bg_input"
+                    android:background="@drawable/spinner_bg"
                     android:layout_alignParentEnd="true"
                     android:elevation="24dp"/>
 
@@ -224,7 +230,9 @@
                     android:textColor="@color/blackknight"
                     android:hint="e.g. 09563629014"
                     android:textColorHint="@color/lightgrey"
-                    android:elevation="24dp"/>
+                    android:elevation="24dp"
+                    android:drawableStart="@drawable/phone"
+                    android:drawablePadding="4dp"/>
 
                 <TextView
                     android:id="@+id/text5"
@@ -255,7 +263,9 @@
                     android:hint="e.g. juandelacruz@gmail.com"
                     android:inputType="textEmailAddress"
                     android:textColorHint="@color/lightgrey"
-                    android:elevation="24dp"/>
+                    android:elevation="24dp"
+                    android:drawableStart="@drawable/email"
+                    android:drawablePadding="4dp"/>
 
                 <Button
                     android:id="@+id/backbtn"
@@ -269,7 +279,10 @@
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="100dp"
-                    android:layout_marginBottom="26dp"/>
+                    android:layout_marginBottom="26dp"
+                    android:drawableStart="@drawable/ic_back"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"/>
 
                 <Button
                     android:id="@+id/nextbtn"
@@ -283,7 +296,10 @@
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="100dp"
-                    android:layout_marginBottom="26dp"/>
+                    android:layout_marginBottom="26dp"
+                    android:drawableEnd="@drawable/ic_next"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"/>
 
             </RelativeLayout>
 

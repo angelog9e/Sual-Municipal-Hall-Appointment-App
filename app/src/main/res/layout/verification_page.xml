@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/verification"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VerificationPage">
+
+    <RelativeLayout
+        android:id="@+id/wrap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/bg_blackknight">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentTop="true">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient"/>
+
+        </FrameLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="126dp"
+            android:layout_height="126dp"
+            app:cardCornerRadius="280dp"
+            app:cardElevation="24dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/main_logo"
+            android:layout_marginTop="34dp"
+            android:transitionName="transition_name"
+            android:elevation="24dp"
+            app:cardBackgroundColor="@color/moonlight">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_logo"
+                android:scaleType="fitXY"
+                android:contentDescription="logo"
+                android:transitionName="transition_name"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <FrameLayout
+            android:id="@+id/sheet3"
+            android:layout_width="match_parent"
+            android:layout_height="660dp"
+            android:background="@drawable/bg_square"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Verification"
+                android:fontFamily="@font/notosansjp_semibold"
+                android:textColor="@color/moonlight"
+                android:textSize="24sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"/>
+
+            <RelativeLayout
+                android:layout_width="400dp"
+                android:layout_height="600dp"
+                android:background="@drawable/bg_main"
+                android:layout_gravity="center_horizontal|bottom">
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload Valid ID"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="4dp"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
+                    android:shadowColor="#80000000"
+                    android:shadowRadius="2"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:id="@+id/frontidbtn"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/bg_whitebtn"
+                    android:drawableTop="@drawable/front_id"
+                    android:layout_below="@id/text1"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="20dp"
+                    android:paddingTop="20dp"
+                    android:layout_alignParentStart="true"
+                    android:text="Front Side"
+                    android:textColor="@color/blackknight"
+                    android:textSize="14sp"
+                    android:textAllCaps="false"
+                    android:elevation="24dp"/>
+
+                <Button
+                    android:id="@+id/backidbtn"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/bg_whitebtn"
+                    android:drawableTop="@drawable/back_id"
+                    android:layout_below="@id/text1"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginTop="20dp"
+                    android:paddingTop="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:text="Back Side"
+                    android:textColor="@color/blackknight"
+                    android:textSize="14sp"
+                    android:textAllCaps="false"
+                    android:elevation="24dp"/>
+
+                <TextView
+                    android:id="@+id/text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Capture a self portrait"
+                    android:textColor="@color/white"
+                    android:layout_below="@id/frontidbtn"
+                    android:textSize="18sp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="60dp"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
+                    android:shadowColor="#80000000"
+                    android:shadowRadius="2"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:id="@+id/selfiebtn"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:background="@drawable/bg_whitebtn"
+                    android:layout_below="@id/text2"
+                    android:layout_marginTop="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:drawableTop="@drawable/user2"
+                    android:padding="10dp"
+                    android:text="Selfie"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:id="@+id/backbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Back"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginBottom="26dp"
+                    android:drawableStart="@drawable/ic_back"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"/>
+
+                <Button
+                    android:id="@+id/submitbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SUBMIT"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="90dp"
+                    android:layout_marginBottom="26dp"
+                    android:textAllCaps="false"
+                    android:drawableEnd="@drawable/ic_next"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"/>
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
