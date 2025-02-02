@@ -169,7 +169,7 @@ class MainActivity : AppCompatActivity() {
             text1, nameInput, text2, addressInput,
             text3, barangayInput,
             text4, contactInput, text5, emailInput,
-            nextButton
+            backButton, nextButton
         )
 
         viewsToAnimate.forEach { it.visibility = View.INVISIBLE }

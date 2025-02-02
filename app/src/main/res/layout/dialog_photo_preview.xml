@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/preview_image"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="fitCenter"
+        android:layout_marginBottom="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/retake_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Retake"
+            android:textColor="@color/blackknight"
+            android:background="@drawable/bg_cream"/>
+
+        <Button
+            android:id="@+id/use_photo_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Use Photo"
+            android:textColor="@color/blackknight"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/bg_cream"/>
+    </LinearLayout>
+</LinearLayout>

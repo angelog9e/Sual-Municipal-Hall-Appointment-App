@@ -122,17 +122,16 @@
 
                 <Button
                     android:id="@+id/viewfrontIDbtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_width="100dp"
+                    android:layout_height="34dp"
                     android:layout_below="@id/frontidbtn"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="64dp"
+                    android:layout_marginStart="60dp"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/moonlight"
                     android:text="View Photo"
                     android:textAllCaps="false"
-                    android:background="@drawable/bg_blacknightbtn"
-                    android:visibility="invisible"/>
+                    android:background="@drawable/bg_blacknightbtn" />
 
                 <Button
                     android:id="@+id/backidbtn"
@@ -153,17 +152,16 @@
 
                 <Button
                     android:id="@+id/viewbackIDbtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_width="100dp"
+                    android:layout_height="34dp"
                     android:layout_below="@id/backidbtn"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="64dp"
+                    android:layout_marginEnd="60dp"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/moonlight"
                     android:text="View Photo"
                     android:textAllCaps="false"
-                    android:background="@drawable/bg_blacknightbtn"
-                    android:visibility="invisible"/>
+                    android:background="@drawable/bg_blacknightbtn" />
 
                 <TextView
                     android:id="@+id/text2"
@@ -192,23 +190,23 @@
                     android:layout_below="@id/text2"
                     android:layout_marginTop="16dp"
                     android:layout_centerHorizontal="true"
-                    android:drawableTop="@drawable/user2"
-                    android:padding="5dp"
+                    android:drawableTop="@drawable/user3"
+                    android:paddingTop="20dp"
                     android:text="Selfie"
+                    android:textColor="@color/blackknight"
                     android:textAllCaps="false"/>
 
                 <Button
                     android:id="@+id/viewselfieIDbtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_width="100dp"
+                    android:layout_height="34dp"
                     android:layout_below="@id/selfiebtn"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/moonlight"
                     android:text="View Photo"
                     android:textAllCaps="false"
-                    android:background="@drawable/bg_blacknightbtn"
-                    android:visibility="invisible"/>
+                    android:background="@drawable/bg_blacknightbtn" />
 
                 <Button
                     android:id="@+id/backbtn"
