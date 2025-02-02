@@ -246,16 +246,16 @@
                     android:layout_height="wrap_content"
                     android:text="Back"
                     android:textSize="16sp"
-                    android:textColor="@color/white"
-                    android:background="?attr/selectableItemBackground"
+                    android:textColor="@color/black"
+                    android:background="@drawable/bg_cream"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="100dp"
                     android:layout_marginBottom="26dp"
                     android:drawableStart="@drawable/ic_back"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"/>
+                    android:paddingEnd="8dp"
+                    android:paddingStart="8dp"/>
 
                 <Button
                     android:id="@+id/nextbtn"
@@ -263,16 +263,16 @@
                     android:layout_height="wrap_content"
                     android:text="Next"
                     android:textSize="16sp"
-                    android:textColor="@color/white"
-                    android:background="?attr/selectableItemBackground"
+                    android:textColor="@color/black"
+                    android:background="@drawable/bg_cream"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="100dp"
                     android:layout_marginBottom="26dp"
                     android:drawableEnd="@drawable/ic_next"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"/>
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"/>
 
             </RelativeLayout>
 
