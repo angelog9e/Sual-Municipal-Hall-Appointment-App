@@ -1,8 +1,11 @@
 package com.aquino_angelo_m.sualmunicipalhallappointmentapp
 
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.MediaStore
 import android.transition.Slide
 import android.view.Gravity
 import android.view.View
@@ -11,6 +14,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -23,6 +27,8 @@ class VerificationPage : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
     private val handler = Handler(Looper.getMainLooper())
     private var currentPage = 0
+
+    private val cameraRequestCode = 1001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,7 +152,71 @@ class VerificationPage : AppCompatActivity() {
 
     private fun setupButtonListeners() {
         val backButton = findViewById<Button>(R.id.backbtn)
+        val frontIDButton = findViewById<Button>(R.id.frontidbtn)
+        val backIDButton = findViewById<Button>(R.id.backidbtn)
+        val selfieButton = findViewById<Button>(R.id.selfiebtn)
+        val viewFrontIDButton = findViewById<Button>(R.id.viewfrontIDbtn)
+        val viewBackIDButton = findViewById<Button>(R.id.viewbackIDbtn)
+        val viewSelfieButton = findViewById<Button>(R.id.viewselfieIDbtn)
+        val submitButton = findViewById<Button>(R.id.submitbtn)
+
         backButton.setOnClickListener { finish() }
+
+        val cameraButtonListener = View.OnClickListener {
+            // Check for camera permission
+            if (checkSelfPermission(android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(android.Manifest.permission.CAMERA), cameraRequestCode)
+            } else {
+                openCamera()
+            }
+        }
+
+        frontIDButton.setOnClickListener(cameraButtonListener)
+        backIDButton.setOnClickListener(cameraButtonListener)
+
+        selfieButton.setOnClickListener {
+            if (checkSelfPermission(android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(android.Manifest.permission.CAMERA), cameraRequestCode)
+            } else {
+                openFrontCamera()
+            }
+        }
+    }
+
+    private fun openFrontCamera() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraIntent.putExtra("android.intent.extras.CAMERA_FACING", 1)
+        cameraIntent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1)
+        cameraIntent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true)
+        try {
+            startActivity(cameraIntent)
+        } catch (e: Exception) {
+            Toast.makeText(this, "Unable to open front camera", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun openCamera() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        try {
+            startActivity(cameraIntent)
+        } catch (e: Exception) {
+            Toast.makeText(this, "Unable to open camera", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == cameraRequestCode) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera()
+            } else {
+                Toast.makeText(this, "Camera permission is required to take a photo", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onDestroy() {

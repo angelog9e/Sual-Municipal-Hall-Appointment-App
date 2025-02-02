@@ -83,7 +83,7 @@
                     android:layout_marginBottom="4dp"
                     android:shadowDx="4"
                     android:shadowDy="4"
-                    android:shadowColor="#80000000"
+                    android:shadowColor="@color/blackknight"
                     android:shadowRadius="2"/>
 
                 <EditText
@@ -116,7 +116,7 @@
                     android:layout_marginBottom="4dp"
                     android:shadowDx="4"
                     android:shadowDy="4"
-                    android:shadowColor="#80000000"
+                    android:shadowColor="@color/blackknight"
                     android:shadowRadius="2"/>
 
                 <EditText
@@ -150,7 +150,7 @@
                     android:layout_alignParentEnd="true"
                     android:shadowDx="4"
                     android:shadowDy="4"
-                    android:shadowColor="#80000000"
+                    android:shadowColor="@color/blackknight"
                     android:shadowRadius="2"/>
 
                 <TextView
@@ -167,7 +167,7 @@
                     android:layout_alignParentStart="true"
                     android:shadowDx="4"
                     android:shadowDy="4"
-                    android:shadowColor="#80000000"
+                    android:shadowColor="@color/blackknight"
                     android:shadowRadius="2"/>
 
                 <EditText
@@ -214,7 +214,7 @@
                     android:layout_marginBottom="4dp"
                     android:shadowDx="4"
                     android:shadowDy="4"
-                    android:shadowColor="#80000000"
+                    android:shadowColor="@color/blackknight"
                     android:shadowRadius="2"/>
 
                 <EditText
@@ -247,7 +247,7 @@
                     android:layout_marginBottom="4dp"
                     android:shadowDx="4"
                     android:shadowDy="4"
-                    android:shadowColor="#80000000"
+                    android:shadowColor="@color/blackknight"
                     android:shadowRadius="2"/>
 
                 <EditText

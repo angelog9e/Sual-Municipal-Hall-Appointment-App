@@ -65,7 +65,6 @@
             android:alpha="0.8"/>
 
         <Button
-            android:padding="5dp"
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,10 +73,12 @@
             android:layout_centerHorizontal="true"
             android:text="Make an Appointment"
             android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textColor="@color/blackknight"
             android:textStyle="bold"
             android:background="@drawable/bg_whitebtn"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:padding="10dp"
+            android:elevation="24dp"/>
 
         <ImageView
             android:id="@+id/text"

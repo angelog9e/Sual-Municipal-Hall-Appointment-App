@@ -64,9 +64,8 @@
             android:alpha="0.8"/>
 
         <TextView
-            android:background="@drawable/bg_btnred"
             android:id="@+id/questiontxt"
-            android:layout_width="300dp"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:text="Are you a Visitor or a Resident?"
             android:textColor="@color/moonlight"
@@ -78,10 +77,7 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/cardView"
             android:padding="4dp"
-            android:shadowDx="4"
-            android:shadowDy="4"
-            android:shadowColor="#80000000"
-            android:shadowRadius="2"/>
+            android:background="@drawable/bg_blacknightbtn"/>
 
         <Button
             android:id="@+id/residentBtn"
