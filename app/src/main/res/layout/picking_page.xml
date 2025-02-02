@@ -64,6 +64,7 @@
             android:alpha="0.8"/>
 
         <TextView
+            android:background="@drawable/bg_btnred"
             android:id="@+id/questiontxt"
             android:layout_width="300dp"
             android:layout_height="wrap_content"

@@ -86,6 +86,8 @@
                 android:layout_gravity="center_horizontal|bottom">
 
                 <TextView
+                    android:background="@drawable/bg_btnred"
+                    android:padding="5dp"
                     android:id="@+id/text1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -136,8 +138,10 @@
                     android:elevation="24dp"/>
 
                 <TextView
+                    android:background="@drawable/bg_btnred"
                     android:id="@+id/text2"
-                    android:layout_width="wrap_content"
+                    android:padding="5dp"
+                    android:layout_width="190dp"
                     android:layout_height="wrap_content"
                     android:text="Capture a self portrait"
                     android:textColor="@color/white"
