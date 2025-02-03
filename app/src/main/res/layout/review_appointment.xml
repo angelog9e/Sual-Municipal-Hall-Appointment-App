@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="700dp"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="#00000000"
+    android:id="@+id/reviewapp">
+
+    <RelativeLayout
+        android:id="@+id/popup_container"
+        android:layout_width="400dp"
+        android:layout_height="700dp"
+        android:background="@drawable/bg_blacknightbtn"
+        android:layout_gravity="center"
+        android:paddingTop="14sp"
+        android:paddingBottom="14dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true">
+
+        <!-- LOGO -->
+        <ImageView
+            android:id="@+id/app_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/main_logo" />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Review Appointment"
+            android:textSize="16sp"
+            android:layout_below="@+id/app_logo"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/moonlight"
+            android:fontFamily="@font/notosansjp_semibold"/>
+
+        <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text1"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_btnred"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <RelativeLayout
+                android:id="@+id/relative"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+                <TextView
+                    android:id="@+id/userdetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Details"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/moonlight"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/notosansjp_semibold"/>
+
+                <TextView
+                    android:id="@+id/text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/userdetails"
+                    android:text="Name:"
+                    android:textColor="@color/moonlight"
+                    android:layout_marginStart="32dp"
+                    android:textSize="16sp"/>
+
+                <EditText
+                    android:id="@+id/namepreview"
+                    android:layout_width="340dp"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/bg_input"
+                    android:layout_below="@id/text2"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:elevation="24dp"
+                    android:textColor="@color/blackknight"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:drawableEnd="@drawable/edit"/>
+
+                <TextView
+                    android:id="@+id/text3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/namepreview"
+                    android:text="Address:"
+                    android:textColor="@color/moonlight"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"/>
+
+                <EditText
+                    android:id="@+id/addresspreview"
+                    android:layout_width="340dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/text3"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:elevation="24dp"
+                    android:textColor="@color/blackknight"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:drawableEnd="@drawable/edit"/>
+
+                <TextView
+                    android:id="@+id/text4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/addresspreview"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:text="Barangay:"
+                    android:textColor="@color/moonlight"/>
+
+                <EditText
+                    android:id="@+id/barangaypreview"
+                    android:layout_width="140dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:layout_below="@id/text4"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:elevation="24dp"
+                    android:textColor="@color/blackknight"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:drawableEnd="@drawable/edit"/>
+
+                <TextView
+                    android:id="@+id/text5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/addresspreview"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="100dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:text="Zip Code:"
+                    android:textColor="@color/moonlight"/>
+
+                <EditText
+                    android:id="@+id/zippreview"
+                    android:layout_width="140dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/text5"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginTop="5dp"
+                    android:elevation="24dp"
+                    android:textColor="@color/blackknight"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:hint="2403"
+                    android:drawableEnd="@drawable/edit"/>
+
+                <TextView
+                    android:id="@+id/text6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/barangaypreview"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:text="Province:"
+                    android:textColor="@color/moonlight"/>
+
+                <EditText
+                    android:id="@+id/provincepreview"
+                    android:layout_width="340dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/text6"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:elevation="24dp"
+                    android:textColor="@color/blackknight"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:hint="Pangasinan"
+                    android:drawableEnd="@drawable/edit"/>
+
+                <TextView
+                    android:id="@+id/text7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact Number:"
+                    android:layout_below="@id/provincepreview"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/moonlight"/>
+
+                <EditText
+                    android:id="@+id/numberpreview"
+                    android:layout_width="180dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:layout_below="@id/text7"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:elevation="24dp"
+                    android:textColor="@color/blackknight"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:drawableEnd="@drawable/edit"/>
+
+                <TextView
+                    android:id="@+id/text8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email:"
+                    android:layout_below="@id/numberpreview"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/moonlight"/>
+
+                <EditText
+                    android:id="@+id/emailpreview"
+                    android:layout_width="340dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/text8"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:elevation="24dp"
+                    android:textColor="@color/blackknight"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:drawableEnd="@drawable/edit"/>
+
+                <TextView
+                    android:id="@+id/appointmentdetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/emailpreview"
+                    android:text="Appointment"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/moonlight"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/notosansjp_semibold"/>
+
+                <TextView
+                    android:id="@+id/text9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/appointmentdetails"
+                    android:text="Date:"
+                    android:layout_marginStart="32dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/moonlight"/>
+
+                <EditText
+                    android:id="@+id/datepreview"
+                    android:layout_width="140dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:layout_below="@id/text9"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:elevation="24dp"
+                    android:textColor="@color/blackknight"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:drawableEnd="@drawable/edit"/>
+
+                <TextView
+                    android:id="@+id/text10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/appointmentdetails"
+                    android:layout_alignParentEnd="true"
+                    android:text="Time:"
+                    android:layout_marginEnd="130dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/moonlight"/>
+
+                <EditText
+                    android:id="@+id/timepreview"
+                    android:layout_width="140dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:layout_below="@id/text10"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginTop="5dp"
+                    android:elevation="24dp"
+                    android:textColor="@color/blackknight"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:drawableEnd="@drawable/edit"/>
+
+                <TextView
+                    android:id="@+id/text11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/datepreview"
+                    android:text="Office:"
+                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="32dp"
+                    android:textColor="@color/moonlight"/>
+
+                <EditText
+                    android:id="@+id/officepreview"
+                    android:layout_width="340dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/text11"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:elevation="24dp"
+                    android:textColor="@color/blackknight"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"/>
+
+                <TextView
+                    android:id="@+id/text12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/officepreview"
+                    android:text="Purpose:"
+                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="32dp"
+                    android:textColor="@color/moonlight"/>
+
+                <EditText
+                    android:id="@+id/pruposepreview"
+                    android:layout_width="340dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/text12"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:elevation="24dp"
+                    android:textColor="@color/blackknight"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"/>
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

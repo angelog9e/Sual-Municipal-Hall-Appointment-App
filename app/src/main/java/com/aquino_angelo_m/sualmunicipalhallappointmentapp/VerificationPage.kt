@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
+import java.io.ByteArrayOutputStream
 import kotlin.math.abs
 
 class VerificationPage : AppCompatActivity() {
@@ -39,6 +40,22 @@ class VerificationPage : AppCompatActivity() {
     private var selfiePhoto: Bitmap? = null
     private var currentPhotoTag: String? = null
 
+    private var office: String? = null
+    private var date: String? = null
+    private var time: String? = null
+
+    private var rName: String? = null
+    private var rAddress: String? = null
+    private var rBarangay: String? = null
+    private var rContact: String? = null
+    private var rEmail: String? = null
+
+    private var vName: String? = null
+    private var vAddress: String? = null
+    private var vZip: String? = null
+    private var vProvince: String? = null
+    private var vContact: String? = null
+    private var vEmail: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,23 +149,29 @@ class VerificationPage : AppCompatActivity() {
 
     private fun retrieveIntentData() {
         intent?.let {
-            val office = it.getStringExtra("office")
-            val date = it.getStringExtra("date")
-            val time = it.getStringExtra("time")
+            office = it.getStringExtra("office")
+            date = it.getStringExtra("date")
+            time = it.getStringExtra("time")
 
-            val rName = it.getStringExtra("rName")
-            val rAddress = it.getStringExtra("rAddress")
-            val rBarangay = it.getStringExtra("rBarangay")
-            val rContact = it.getStringExtra("rContact")
-            val rEmail = it.getStringExtra("rEmail")
+            rName = it.getStringExtra("rName")
+            rAddress = it.getStringExtra("rAddress")
+            rBarangay = it.getStringExtra("rBarangay")
+            rContact = it.getStringExtra("rContact")
+            rEmail = it.getStringExtra("rEmail")
 
-            val vName = it.getStringExtra("vName")
-            val vAddress = it.getStringExtra("vAddress")
-            val vZip = it.getStringExtra("vZip")
-            val vProvince = it.getStringExtra("vProvince")
-            val vContact = it.getStringExtra("vContact")
-            val vEmail = it.getStringExtra("vEmail")
+            vName = it.getStringExtra("vName")
+            vAddress = it.getStringExtra("vAddress")
+            vZip = it.getStringExtra("vZip")
+            vProvince = it.getStringExtra("vProvince")
+            vContact = it.getStringExtra("vContact")
+            vEmail = it.getStringExtra("vEmail")
         }
+    }
+
+    private fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        return byteArrayOutputStream.toByteArray()
     }
 
     private fun setupButtonListeners() {
@@ -156,12 +179,11 @@ class VerificationPage : AppCompatActivity() {
         val frontIDButton = findViewById<Button>(R.id.frontidbtn)
         val backIDButton = findViewById<Button>(R.id.backidbtn)
         val selfieButton = findViewById<Button>(R.id.selfiebtn)
+        val submitButton = findViewById<Button>(R.id.submitbtn)
 
         val viewFrontIDButton = findViewById<Button>(R.id.viewfrontIDbtn).apply { visibility = View.INVISIBLE }
         val viewBackIDButton = findViewById<Button>(R.id.viewbackIDbtn).apply { visibility = View.INVISIBLE }
         val viewSelfieButton = findViewById<Button>(R.id.viewselfieIDbtn).apply { visibility = View.INVISIBLE }
-
-        backButton.setOnClickListener { finish() }
 
         val cameraButtonListener = View.OnClickListener { view ->
             val tag = view.tag.toString()
@@ -183,6 +205,47 @@ class VerificationPage : AppCompatActivity() {
         viewFrontIDButton.setOnClickListener { frontPhoto?.let { showPhotoPreview(it, "frontID") } }
         viewBackIDButton.setOnClickListener { backPhoto?.let { showPhotoPreview(it, "backID") } }
         viewSelfieButton.setOnClickListener { selfiePhoto?.let { showPhotoPreview(it, "selfie") } }
+
+        backButton.setOnClickListener { finish() }
+
+        submitButton.setOnClickListener {
+
+            when {
+                frontPhoto == null -> Toast.makeText(this, "Please take a front ID photo", Toast.LENGTH_SHORT).show()
+                backPhoto == null -> Toast.makeText(this, "Please take a back ID photo", Toast.LENGTH_SHORT).show()
+                selfiePhoto == null -> Toast.makeText(this, "Please take a selfie photo", Toast.LENGTH_SHORT).show()
+                else -> {
+
+                    // Prepare the data bundle
+                    val bundle = Bundle().apply {
+                        putByteArray("frontPhoto", frontPhoto?.let { bitmapToByteArray(it) })
+                        putByteArray("backPhoto", backPhoto?.let { bitmapToByteArray(it) })
+                        putByteArray("selfiePhoto", selfiePhoto?.let { bitmapToByteArray(it) })
+
+                        putString("office", office)
+                        putString("date", date)
+                        putString("time", time)
+
+                        putString("rName", rName)
+                        putString("rAddress", rAddress)
+                        putString("rBarangay", rBarangay)
+                        putString("rContact", rContact)
+                        putString("rEmail", rEmail)
+
+                        putString("vName", vName)
+                        putString("vAddress", vAddress)
+                        putString("vZip", vZip)
+                        putString("vProvince", vProvince)
+                        putString("vContact", vContact)
+                        putString("vEmail", vEmail)
+                    }
+
+                    // Create and show the dialog fragment
+                    val reviewAppointment = ReviewAppointment.newInstance(bundle)
+                    reviewAppointment.show(supportFragmentManager, "ReviewAppointment")
+                }
+            }
+        }
     }
 
     private fun openCamera(tag: String) {
