@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="700dp"
+    android:layout_height="2020dp"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:background="#00000000"
@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/popup_container"
         android:layout_width="400dp"
-        android:layout_height="700dp"
+        android:layout_height="2020dp"
         android:background="@drawable/bg_blacknightbtn"
         android:layout_gravity="center"
         android:paddingTop="14sp"
@@ -87,7 +87,8 @@
                     android:textColor="@color/blackknight"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
-                    android:drawableEnd="@drawable/edit"/>
+                    android:drawableEnd="@drawable/edit"
+                    android:hint="name"/>
 
                 <TextView
                     android:id="@+id/text3"
@@ -113,7 +114,8 @@
                     android:textColor="@color/blackknight"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
-                    android:drawableEnd="@drawable/edit"/>
+                    android:drawableEnd="@drawable/edit"
+                    android:hint="address"/>
 
                 <TextView
                     android:id="@+id/text4"
@@ -128,7 +130,7 @@
 
                 <EditText
                     android:id="@+id/barangaypreview"
-                    android:layout_width="140dp"
+                    android:layout_width="160dp"
                     android:layout_height="48dp"
                     android:background="@drawable/bg_input"
                     android:layout_below="@id/text4"
@@ -138,7 +140,8 @@
                     android:textColor="@color/blackknight"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
-                    android:drawableEnd="@drawable/edit"/>
+                    android:drawableEnd="@drawable/edit"
+                    android:hint="barangay"/>
 
                 <TextView
                     android:id="@+id/text5"
@@ -146,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/addresspreview"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="100dp"
+                    android:layout_marginEnd="80dp"
                     android:layout_marginTop="10dp"
                     android:textSize="16sp"
                     android:text="Zip Code:"
@@ -159,7 +162,7 @@
                     android:background="@drawable/bg_input"
                     android:layout_alignParentEnd="true"
                     android:layout_below="@id/text5"
-                    android:layout_marginEnd="40dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="5dp"
                     android:elevation="24dp"
                     android:textColor="@color/blackknight"
@@ -218,7 +221,8 @@
                     android:textColor="@color/blackknight"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
-                    android:drawableEnd="@drawable/edit"/>
+                    android:drawableEnd="@drawable/edit"
+                    android:hint="number"/>
 
                 <TextView
                     android:id="@+id/text8"
@@ -244,16 +248,17 @@
                     android:textColor="@color/blackknight"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
-                    android:drawableEnd="@drawable/edit"/>
+                    android:drawableEnd="@drawable/edit"
+                    android:hint="email"/>
 
                 <TextView
                     android:id="@+id/appointmentdetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/emailpreview"
-                    android:text="Appointment"
+                    android:text="Appointment Details"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="14dp"
                     android:textColor="@color/moonlight"
                     android:textSize="18sp"
                     android:fontFamily="@font/notosansjp_semibold"/>
@@ -270,7 +275,7 @@
 
                 <EditText
                     android:id="@+id/datepreview"
-                    android:layout_width="140dp"
+                    android:layout_width="160dp"
                     android:layout_height="48dp"
                     android:background="@drawable/bg_input"
                     android:layout_below="@id/text9"
@@ -280,7 +285,8 @@
                     android:textColor="@color/blackknight"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
-                    android:drawableEnd="@drawable/edit"/>
+                    android:drawableEnd="@drawable/edit"
+                    android:hint="date"/>
 
                 <TextView
                     android:id="@+id/text10"
@@ -289,7 +295,7 @@
                     android:layout_below="@+id/appointmentdetails"
                     android:layout_alignParentEnd="true"
                     android:text="Time:"
-                    android:layout_marginEnd="130dp"
+                    android:layout_marginEnd="110dp"
                     android:textSize="16sp"
                     android:textColor="@color/moonlight"/>
 
@@ -300,13 +306,14 @@
                     android:background="@drawable/bg_input"
                     android:layout_below="@id/text10"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="40dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="5dp"
                     android:elevation="24dp"
                     android:textColor="@color/blackknight"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
-                    android:drawableEnd="@drawable/edit"/>
+                    android:drawableEnd="@drawable/edit"
+                    android:hint="time"/>
 
                 <TextView
                     android:id="@+id/text11"
@@ -331,7 +338,8 @@
                     android:elevation="24dp"
                     android:textColor="@color/blackknight"
                     android:paddingStart="12dp"
-                    android:paddingEnd="12dp"/>
+                    android:paddingEnd="12dp"
+                    android:hint="office"/>
 
                 <TextView
                     android:id="@+id/text12"
@@ -345,7 +353,7 @@
                     android:textColor="@color/moonlight"/>
 
                 <EditText
-                    android:id="@+id/pruposepreview"
+                    android:id="@+id/purposepreview"
                     android:layout_width="340dp"
                     android:layout_height="48dp"
                     android:background="@drawable/bg_input"
@@ -356,7 +364,116 @@
                     android:elevation="24dp"
                     android:textColor="@color/blackknight"
                     android:paddingStart="12dp"
-                    android:paddingEnd="12dp"/>
+                    android:paddingEnd="12dp"
+                    android:hint="purpose"/>
+
+                <TextView
+                    android:id="@+id/text13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/purposepreview"
+                    android:text="Other:"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp" />
+
+                <EditText
+                    android:id="@+id/otherpreview"
+                    android:layout_width="340dp"
+                    android:layout_height="140dp"
+                    android:background="@drawable/bg_input"
+                    android:layout_below="@+id/text13"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="30dp"
+                    android:textColor="@color/blackknight"
+                    android:inputType="textMultiLine"
+                    android:hint="other purpose of visit"
+                    android:textColorHint="@color/lightgrey"
+                    android:elevation="24dp"
+                    android:gravity="top"
+                    android:padding="12dp"
+                    android:minLines="6"/>
+
+                <TextView
+                    android:id="@+id/iddetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/otherpreview"
+                    android:text="ID Details"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
+                    android:textColor="@color/moonlight"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/notosansjp_semibold"/>
+
+                <TextView
+                    android:id="@+id/text14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Front ID"
+                    android:textSize="16sp"
+                    android:textColor="@color/moonlight"
+                    android:layout_below="@+id/iddetails"
+                    android:layout_marginStart="32dp"/>
+                
+                <ImageView
+                    android:id="@+id/frontIDpreview"
+                    android:layout_width="340dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/text14"/>
+
+                <TextView
+                    android:id="@+id/text15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Back ID"
+                    android:textSize="16sp"
+                    android:textColor="@color/moonlight"
+                    android:layout_below="@+id/frontIDpreview"
+                    android:layout_marginStart="32dp"/>
+
+                <ImageView
+                    android:id="@+id/backIDpreview"
+                    android:layout_width="340dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/text15"/>
+
+                <TextView
+                    android:id="@+id/text16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Selfie"
+                    android:textSize="16sp"
+                    android:textColor="@color/moonlight"
+                    android:layout_below="@+id/backIDpreview"
+                    android:layout_marginStart="32dp"/>
+
+                <ImageView
+                    android:id="@+id/selfiepreview"
+                    android:layout_width="340dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/text16"/>
+                
+                <Button
+                    android:id="@+id/submitbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/selfiepreview"
+                    android:layout_marginTop="16dp"
+                    android:padding="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:text="Submit Appointment"
+                    android:textColor="@color/blackknight"
+                    android:background="@drawable/bg_cream"
+                    android:textSize="16sp"
+                    android:textAllCaps="false"/>
 
             </RelativeLayout>
 

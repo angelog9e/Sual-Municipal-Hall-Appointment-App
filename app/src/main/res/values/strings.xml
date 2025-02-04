@@ -117,6 +117,7 @@
 
     <string-array name="office_list">
         <item>Select Office</item>
+        <item>COMELEC</item>
         <item>Office of the Municipal Mayor</item>
         <item>Office of the Municipal Vice Mayor</item>
         <item>Office of the Human Resource Management Officer</item>
@@ -130,8 +131,7 @@
         <item>Office of the Municipal Civil Registrar</item>
         <item>Office of the Municipal Social Welfare and Development</item>
         <item>Office of the Municipal Agriculturist</item>
-        <item>Office of the Sanssuntang Kebataan</item>
-        <item>Office of the Municipal Treasurers</item>
+
     </string-array>
 
     <string-array name="purpose_list">

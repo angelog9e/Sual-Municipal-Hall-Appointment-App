@@ -9,12 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 
 class ReviewAppointment : DialogFragment() {
 
     private var frontPhoto: Bitmap? = null
+    private var backPhoto: Bitmap? = null
+    private var selfiePhoto: Bitmap? = null
     private var office: String? = null
     private var date: String? = null
     private var time: String? = null
@@ -38,6 +41,12 @@ class ReviewAppointment : DialogFragment() {
         arguments?.let { bundle ->
             val frontPhotoBytes = bundle.getByteArray("frontPhoto")
             frontPhoto = BitmapFactory.decodeByteArray(frontPhotoBytes, 0, frontPhotoBytes?.size ?: 0)
+
+            val backPhotoBytes = bundle.getByteArray("backPhoto")
+            backPhoto = BitmapFactory.decodeByteArray(backPhotoBytes, 0, backPhotoBytes?.size ?: 0)
+
+            val selfiePhotoBytes = bundle.getByteArray("selfiePhoto")
+            selfiePhoto = BitmapFactory.decodeByteArray(selfiePhotoBytes, 0, selfiePhotoBytes?.size ?: 0)
 
             office = bundle.getString("office")
             date = bundle.getString("date")
@@ -76,6 +85,13 @@ class ReviewAppointment : DialogFragment() {
         val vProvinceTextView: TextView = view.findViewById(R.id.provincepreview)
         val vContactTextView: TextView = view.findViewById(R.id.numberpreview)
         val vEmailTextView: TextView = view.findViewById(R.id.emailpreview)
+        val frontIDButton: ImageView = view.findViewById(R.id.frontIDpreview)
+        val backIDButton: ImageView = view.findViewById(R.id.backIDpreview)
+        val selfieButton: ImageView = view.findViewById(R.id.selfiepreview)
+
+        frontIDButton.setImageBitmap(frontPhoto)
+        backIDButton.setImageBitmap(backPhoto)
+        selfieButton.setImageBitmap(selfiePhoto)
 
         officeTextView.text = office
         dateTextView.text = date
