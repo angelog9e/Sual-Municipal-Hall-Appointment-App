@@ -43,6 +43,7 @@ class VerificationPage : AppCompatActivity() {
     private var office: String? = null
     private var date: String? = null
     private var time: String? = null
+    private var other: String? = null
 
     private var rName: String? = null
     private var rAddress: String? = null
@@ -152,6 +153,7 @@ class VerificationPage : AppCompatActivity() {
             office = it.getStringExtra("office")
             date = it.getStringExtra("date")
             time = it.getStringExtra("time")
+            other = it.getStringExtra("other")
 
             rName = it.getStringExtra("rName")
             rAddress = it.getStringExtra("rAddress")
@@ -225,6 +227,7 @@ class VerificationPage : AppCompatActivity() {
                         putString("office", office)
                         putString("date", date)
                         putString("time", time)
+                        putString("other", other)
 
                         putString("rName", rName)
                         putString("rAddress", rAddress)
@@ -288,7 +291,6 @@ class VerificationPage : AppCompatActivity() {
             Toast.makeText(this, "Photo accepted", Toast.LENGTH_SHORT).show()
 
             val checkIcon = resources.getDrawable(R.drawable.check, theme)
-            val check2Icon = resources.getDrawable(R.drawable.check2, theme)
 
             when (photoTag) {
                 "frontID" -> {
@@ -306,7 +308,7 @@ class VerificationPage : AppCompatActivity() {
                 "selfie" -> {
                     selfiePhoto = photo
                     val selfieButton = findViewById<Button>(R.id.selfiebtn)
-                    selfieButton.setCompoundDrawablesWithIntrinsicBounds(null, check2Icon, null, null)
+                    selfieButton.setCompoundDrawablesWithIntrinsicBounds(null, checkIcon, null, null)
                     fadeInButton(findViewById(R.id.viewselfieIDbtn))
                 }
             }

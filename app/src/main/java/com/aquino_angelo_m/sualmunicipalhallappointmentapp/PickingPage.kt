@@ -5,11 +5,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.VideoView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.app.ActivityOptionsCompat
@@ -36,7 +36,7 @@ class PickingPage : AppCompatActivity() {
         videoView.start()
 
         val residentBtn = findViewById<Button>(R.id.residentBtn)
-        val shadow = findViewById<CardView>(R.id.cardView)
+        val logo = findViewById<ImageView>(R.id.logo)
         val visitorBtn = findViewById<Button>(R.id.visitorBtn)
         val questionText = findViewById<TextView>(R.id.questiontxt)
 
@@ -51,7 +51,7 @@ class PickingPage : AppCompatActivity() {
 
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this,
-                shadow, "transition_name"
+                logo, "transition_name"
             )
 
             startActivity(intent, options.toBundle())
@@ -62,7 +62,7 @@ class PickingPage : AppCompatActivity() {
 
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this,
-                shadow, "transition_name"
+                logo, "transition_name"
             )
 
             startActivity(intent, options.toBundle())

@@ -34,31 +34,17 @@
 
         </FrameLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="126dp"
-            android:layout_height="126dp"
-            app:cardCornerRadius="280dp"
-            app:cardElevation="24dp"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="30dp"
-            android:background="@drawable/main_logo"
-            android:layout_marginTop="34dp"
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/logo"
+            android:scaleType="fitXY"
+            android:contentDescription="logo"
             android:transitionName="transition_name"
-            android:elevation="24dp"
-            app:cardBackgroundColor="@color/moonlight">
-
-            <ImageView
-                android:id="@+id/logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/main_logo"
-                android:scaleType="fitXY"
-                android:contentDescription="logo"
-                android:transitionName="transition_name"/>
-
-        </androidx.cardview.widget.CardView>
+            android:elevation="24dp"/>
 
         <FrameLayout
             android:id="@+id/sheet3"
@@ -214,8 +200,8 @@
                     android:layout_height="wrap_content"
                     android:text="Back"
                     android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:background="@drawable/bg_cream"
+                    android:textColor="@color/moonlight"
+                    android:background="@drawable/button_border"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentStart="true"
@@ -229,10 +215,10 @@
                     android:id="@+id/submitbtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SUBMIT"
+                    android:text="REVIEW"
                     android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:background="@drawable/bg_cream"
+                    android:textColor="@color/moonlight"
+                    android:background="@drawable/button_border"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentEnd="true"

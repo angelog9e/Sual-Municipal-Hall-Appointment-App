@@ -36,21 +36,21 @@ class StartScreen : AppCompatActivity() {
         videoView.start()
 
         val startBtn = findViewById<Button>(R.id.button)
-        val shadow = findViewById<CardView>(R.id.cardView)
+        val logo = findViewById<ImageView>(R.id.logo)
         val startText = findViewById<ImageView>(R.id.text)
 
         val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
 
         startBtn.startAnimation(fadeInAnimation)
         startText.startAnimation(fadeInAnimation)
-        shadow.startAnimation(fadeInAnimation)
+        logo.startAnimation(fadeInAnimation)
 
         startBtn.setOnClickListener {
             val intent = Intent(this, PickingPage::class.java)
 
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this,
-                shadow, "transition_name"
+                logo, "transition_name"
             )
 
             startActivity(intent, options.toBundle())

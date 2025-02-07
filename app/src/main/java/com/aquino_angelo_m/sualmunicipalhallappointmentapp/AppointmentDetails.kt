@@ -203,6 +203,7 @@ class AppointmentDetails : AppCompatActivity() {
                     val office = officeInput.selectedItem.toString()
                     val date = dateButton.text.toString()
                     val time = timeButton.text.toString()
+                    val other = otherInput.text.toString()
 
                     // Retrieve data from Resident
                     val rName = intent.getStringExtra("name")
@@ -224,6 +225,7 @@ class AppointmentDetails : AppCompatActivity() {
                         putExtra("office", office)
                         putExtra("date", date)
                         putExtra("time", time)
+                        putExtra("other", other)
 
                         // Pass additional resident and visitor data if needed
                         putExtra("rName", rName)

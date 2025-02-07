@@ -470,8 +470,8 @@
                     android:padding="10dp"
                     android:layout_centerHorizontal="true"
                     android:text="Submit Appointment"
-                    android:textColor="@color/blackknight"
-                    android:background="@drawable/bg_cream"
+                    android:textColor="@color/moonlight"
+                    android:background="@drawable/button_border"
                     android:textSize="16sp"
                     android:textAllCaps="false"/>
 

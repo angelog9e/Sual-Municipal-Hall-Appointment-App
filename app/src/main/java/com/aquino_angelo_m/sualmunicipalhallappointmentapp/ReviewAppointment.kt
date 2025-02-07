@@ -18,9 +18,11 @@ class ReviewAppointment : DialogFragment() {
     private var frontPhoto: Bitmap? = null
     private var backPhoto: Bitmap? = null
     private var selfiePhoto: Bitmap? = null
+
     private var office: String? = null
     private var date: String? = null
     private var time: String? = null
+    private var other: String? = null
 
     private var rName: String? = null
     private var rAddress: String? = null
@@ -51,6 +53,7 @@ class ReviewAppointment : DialogFragment() {
             office = bundle.getString("office")
             date = bundle.getString("date")
             time = bundle.getString("time")
+            other = bundle.getString("other")
 
             rName = bundle.getString("rName")
             rAddress = bundle.getString("rAddress")
@@ -88,6 +91,7 @@ class ReviewAppointment : DialogFragment() {
         val frontIDButton: ImageView = view.findViewById(R.id.frontIDpreview)
         val backIDButton: ImageView = view.findViewById(R.id.backIDpreview)
         val selfieButton: ImageView = view.findViewById(R.id.selfiepreview)
+        val otherTextView: TextView = view.findViewById(R.id.otherpreview)
 
         frontIDButton.setImageBitmap(frontPhoto)
         backIDButton.setImageBitmap(backPhoto)
@@ -96,6 +100,7 @@ class ReviewAppointment : DialogFragment() {
         officeTextView.text = office
         dateTextView.text = date
         timeTextView.text = time
+        otherTextView.text = other
 
         rNameTextView.text = rName
         rAddressTextView.text = rAddress
