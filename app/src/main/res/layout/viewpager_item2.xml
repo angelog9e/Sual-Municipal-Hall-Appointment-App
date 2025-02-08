@@ -7,22 +7,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/logo"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/get_started2"
-            android:textSize="15sp"
-            android:layout_marginTop="300sp"
-            android:layout_marginRight="50sp"
-            android:layout_marginLeft="50sp"
-            />
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:textColor="@color/blackknight"
+            android:justificationMode="inter_character"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:fontFamily="@font/notosansjp_semibold"/>
 
     </RelativeLayout>
 
