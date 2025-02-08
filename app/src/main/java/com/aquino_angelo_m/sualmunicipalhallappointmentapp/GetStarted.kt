@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -42,20 +44,36 @@ class GetStarted : AppCompatActivity() {
 
         handler.postDelayed(autoSlideRunnable, 3000)
 
+        TabLayoutMediator(tabLayout, viewPager) { tab, _ ->
+            val tabView = LayoutInflater.from(this).inflate(R.layout.tab_item, null)
+            tab.customView = tabView
+        }.attach()
+
+        for (i in 0 until tabLayout.tabCount) {
+            val tab = tabLayout.getTabAt(i)
+            val tabIcon = tab?.customView?.findViewById<ImageView>(R.id.tabIcon)
+            if (i == viewPager.currentItem) {
+                tabIcon?.alpha = 1f
+            } else {
+                tabIcon?.alpha = 0.5f
+            }
+        }
+
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrollStateChanged(state: Int) {
-                if (state == ViewPager2.SCROLL_STATE_IDLE) {
-                    handler.removeCallbacks(autoSlideRunnable)
-                    handler.postDelayed(autoSlideRunnable, 3000)
+            override fun onPageSelected(position: Int) {
+                for (i in 0 until tabLayout.tabCount) {
+                    val tab = tabLayout.getTabAt(i)
+                    val tabIcon = tab?.customView?.findViewById<ImageView>(R.id.tabIcon)
+                    if (i == position) {
+                        tabIcon?.alpha = 1f
+                    } else {
+                        tabIcon?.alpha = 0.4f
+                    }
                 }
             }
         })
 
-        TabLayoutMediator(tabLayout, viewPager) { tab, _ ->
-            tab.text = ""
-        }.attach()
-
-        val getStartedButton: Button = findViewById(R.id.getstartedbtn)
+        val getStartedButton = findViewById<Button>(R.id.getstartedbtn)
         getStartedButton.setOnClickListener {
             val intent = Intent(this, StartScreen::class.java)
             startActivity(intent)
