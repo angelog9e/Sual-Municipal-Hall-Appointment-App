@@ -65,6 +65,17 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="4dp"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 of 3"
+                android:textSize="14sp"
+                android:textColor="@color/moonlight"
+                android:fontFamily="@font/notosansjp_semibold"
+                android:layout_gravity="end"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="18dp"/>
+
             <RelativeLayout
                 android:layout_width="400dp"
                 android:layout_height="600dp"
