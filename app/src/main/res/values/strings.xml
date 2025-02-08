@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Sual Municipal Hall Appointment App</string>
 
+    <string name="get_started1">Get Started</string> // first paragraph
+
+    <string name="get_started2">Get Started</string> // second paragraph
+
+    <string name="get_started3">Get Started</string> // third paragraph
+
     <string-array name="am_pm_list">
         <item>AM</item>
         <item>PM</item>
