@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Sual Municipal Hall Appointment App</string>
 
-    <string name="get_started1">Get Started</string> // first paragraph
+    <string name="get_started1">Welcome to the Sual Municipal Hall Appointment App! Our mission is to make public services more accessible and efficient for the people of Sual. This app is designed to simplify the process of booking appointments with various municipal offices, ensuring you can quickly and easily schedule your visits from the comfort of your home.</string> // first paragraph
 
-    <string name="get_started2">Get Started</string> // second paragraph
+    <string name="get_started2">Whether you need to apply for permits, pay fees, or access other essential services, our goal is to save you time and effort. By offering a user-friendly platform, we aim to enhance your experience and reduce waiting times, making it easier to connect with local government services.</string> // second paragraph
 
-    <string name="get_started3">Get Started</string> // third paragraph
+    <string name="get_started3">We are committed to providing a seamless and efficient service that helps improve communication between the municipality and its residents. Thank you for using the Sual Municipal Hall Appointment App!</string> // third paragraph
 
     <string-array name="am_pm_list">
         <item>AM</item>

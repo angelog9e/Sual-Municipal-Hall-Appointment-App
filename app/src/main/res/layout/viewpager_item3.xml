@@ -15,29 +15,14 @@
             android:background="@drawable/logo"/>
 
         <TextView
-            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/logo"
-            android:text="Welcome"
-            android:textSize="24sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_centerHorizontal="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/get_started1"
+            android:text="@string/get_started3"
             android:textSize="15sp"
             android:layout_marginTop="300sp"
             android:layout_marginRight="50sp"
             android:layout_marginLeft="50sp"
-
             />
-
 
     </RelativeLayout>
 
