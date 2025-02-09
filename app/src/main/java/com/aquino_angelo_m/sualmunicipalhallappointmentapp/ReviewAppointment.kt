@@ -1,6 +1,7 @@
 package com.aquino_angelo_m.sualmunicipalhallappointmentapp
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.ColorDrawable
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
@@ -70,8 +72,67 @@ class ReviewAppointment : DialogFragment() {
         }
     }
 
+    private fun sendDataToServer() {
+        val appointment = Appointment(
+            officeTextView = office,
+            dateTextView = date,
+            timeTextView = time,
+            otherTextView = other,
+            rNameTextView = rName,
+            rAddressTextView = rAddress,
+            rBarangayTextView = rBarangay,
+            rContactTextView = rContact,
+            rEmailTextView = rEmail,
+            vNameTextView = vName,
+            vAddressTextView = vAddress,
+            vZipTextView = vZip,
+            vProvinceTextView = vProvince,
+            vContactTextView = vContact,
+            vEmailTextView = vEmail
+        )
+
+        val service = RetrofitInstance.appointmentService
+        val call = service.submitAppointment(appointment)
+
+        call.enqueue(object : retrofit2.Callback<ApiResponse> {
+            override fun onResponse(call: retrofit2.Call<ApiResponse>, response: retrofit2.Response<ApiResponse>) {
+                if (response.isSuccessful) {
+                    val apiResponse = response.body()
+                    if (apiResponse?.status == "success") {
+                        // Successful response
+                        println("Appointment submitted successfully")
+                        goToApprovedPage()
+                    } else {
+                        // Handle error response
+                        println("Error: ${apiResponse?.message}")
+                    }
+                } else {
+                    // Handle HTTP errors
+                    println("HTTP Error: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ApiResponse>, t: Throwable) {
+                // Handle network failure
+                t.printStackTrace()
+                println("Failed to connect to the server")
+            }
+        })
+    }
+
+    private fun goToApprovedPage() {
+        val intent = Intent(requireContext(), ApprovedPage::class.java)
+        startActivity(intent)
+        dismiss()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val submitButton: Button = view.findViewById(R.id.submitbtn)
+        submitButton.setOnClickListener {
+            sendDataToServer()
+        }
 
         // Bind UI elements
         val officeTextView: TextView = view.findViewById(R.id.officepreview)

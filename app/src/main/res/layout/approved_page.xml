@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/approvedpage"
+    tools:context=".ApprovedPage">
+
+    <RelativeLayout
+        android:id="@+id/wrap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/bg_main">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:background="@drawable/logo"
+            android:scaleType="fitXY"
+            android:contentDescription="logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="140dp"
+            android:transitionName="transition_name"
+            android:elevation="24dp"/>
+
+        <ImageView
+            android:id="@+id/bg"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:background="@drawable/bg_input"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/logo"
+            android:alpha="0.8"
+            android:shadowDx="4"
+            android:shadowDy="4"
+            android:shadowColor="@color/blackknight"
+            android:shadowRadius="2"/>
+
+        <ImageView
+            android:id="@+id/check"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/check"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/logo"
+            android:layout_marginTop="50dp"/>
+
+        <TextView
+            android:id="@+id/approvedtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Appointment Submitted"
+            android:fontFamily="@font/notosansjp_semibold"
+            android:textColor="@color/blackknight"
+            android:textSize="18sp"
+            android:layout_below="@id/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="140dp"/>
+
+        <Button
+            android:id="@+id/homebtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bg"
+            android:layout_marginTop="120dp"
+            android:layout_centerHorizontal="true"
+            android:text="Return to Home"
+            android:textSize="18sp"
+            android:textColor="@color/moonlight"
+            android:textStyle="bold"
+            android:background="@drawable/button_border"
+            android:textAllCaps="false"
+            android:padding="10dp"
+            android:elevation="24dp"/>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

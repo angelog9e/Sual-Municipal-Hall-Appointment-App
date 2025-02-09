@@ -37,6 +37,8 @@ android {
 
 dependencies {
 
+    implementation (libs.squareup.retrofit)
+    implementation (libs.converter.gson)
     implementation(libs.androidx.camera.core)
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
