@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,11 @@ import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ReviewAppointment : DialogFragment() {
 
@@ -41,16 +46,10 @@ class ReviewAppointment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         arguments?.let { bundle ->
-            val frontPhotoBytes = bundle.getByteArray("frontPhoto")
-            frontPhoto = BitmapFactory.decodeByteArray(frontPhotoBytes, 0, frontPhotoBytes?.size ?: 0)
-
-            val backPhotoBytes = bundle.getByteArray("backPhoto")
-            backPhoto = BitmapFactory.decodeByteArray(backPhotoBytes, 0, backPhotoBytes?.size ?: 0)
-
-            val selfiePhotoBytes = bundle.getByteArray("selfiePhoto")
-            selfiePhoto = BitmapFactory.decodeByteArray(selfiePhotoBytes, 0, selfiePhotoBytes?.size ?: 0)
+            frontPhoto = bundle.getByteArray("frontPhoto")?.let { BitmapFactory.decodeByteArray(it, 0, it.size) }
+            backPhoto = bundle.getByteArray("backPhoto")?.let { BitmapFactory.decodeByteArray(it, 0, it.size) }
+            selfiePhoto = bundle.getByteArray("selfiePhoto")?.let { BitmapFactory.decodeByteArray(it, 0, it.size) }
 
             office = bundle.getString("office")
             date = bundle.getString("date")
@@ -94,28 +93,28 @@ class ReviewAppointment : DialogFragment() {
         val service = RetrofitInstance.appointmentService
         val call = service.submitAppointment(appointment)
 
-        call.enqueue(object : retrofit2.Callback<ApiResponse> {
-            override fun onResponse(call: retrofit2.Call<ApiResponse>, response: retrofit2.Response<ApiResponse>) {
+        call.enqueue(object : Callback<ApiResponse> {
+            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                 if (response.isSuccessful) {
-                    val apiResponse = response.body()
-                    if (apiResponse?.status == "success") {
-                        // Successful response
-                        println("Appointment submitted successfully")
-                        goToApprovedPage()
-                    } else {
-                        // Handle error response
-                        println("Error: ${apiResponse?.message}")
+                    response.body()?.let { apiResponse ->
+                        if (apiResponse.status == "success") {
+                            Log.d("Appointment", "Appointment submitted successfully")
+                            Toast.makeText(context, "Appointment submitted successfully", Toast.LENGTH_SHORT).show()
+                            goToApprovedPage()
+                        } else {
+                            Log.e("Appointment", "Error: ${apiResponse.message}")
+                            Toast.makeText(context, "Error: ${apiResponse.message}", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 } else {
-                    // Handle HTTP errors
-                    println("HTTP Error: ${response.code()}")
+                    Log.e("Appointment", "HTTP Error: ${response.code()}")
+                    Toast.makeText(context, "HTTP Error: ${response.code()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: retrofit2.Call<ApiResponse>, t: Throwable) {
-                // Handle network failure
-                t.printStackTrace()
-                println("Failed to connect to the server")
+            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+                Log.e("Appointment", "Failed to connect to the server", t)
+                Toast.makeText(context, "Failed to connect to the server", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -135,63 +134,41 @@ class ReviewAppointment : DialogFragment() {
         }
 
         // Bind UI elements
-        val officeTextView: TextView = view.findViewById(R.id.officepreview)
-        val dateTextView: TextView = view.findViewById(R.id.datepreview)
-        val timeTextView: TextView = view.findViewById(R.id.timepreview)
-        val rNameTextView: TextView = view.findViewById(R.id.namepreview)
-        val rAddressTextView: TextView = view.findViewById(R.id.addresspreview)
-        val rBarangayTextView: TextView = view.findViewById(R.id.barangaypreview)
-        val rContactTextView: TextView = view.findViewById(R.id.numberpreview)
-        val rEmailTextView: TextView = view.findViewById(R.id.emailpreview)
-        val vNameTextView: TextView = view.findViewById(R.id.namepreview)
-        val vAddressTextView: TextView = view.findViewById(R.id.addresspreview)
-        val vZipTextView: TextView = view.findViewById(R.id.zippreview)
-        val vProvinceTextView: TextView = view.findViewById(R.id.provincepreview)
-        val vContactTextView: TextView = view.findViewById(R.id.numberpreview)
-        val vEmailTextView: TextView = view.findViewById(R.id.emailpreview)
-        val frontIDButton: ImageView = view.findViewById(R.id.frontIDpreview)
-        val backIDButton: ImageView = view.findViewById(R.id.backIDpreview)
-        val selfieButton: ImageView = view.findViewById(R.id.selfiepreview)
-        val otherTextView: TextView = view.findViewById(R.id.otherpreview)
+        view.findViewById<TextView>(R.id.officepreview).text = office
+        view.findViewById<TextView>(R.id.datepreview).text = date
+        view.findViewById<TextView>(R.id.timepreview).text = time
+        view.findViewById<TextView>(R.id.otherpreview).text = other
 
-        frontIDButton.setImageBitmap(frontPhoto)
-        backIDButton.setImageBitmap(backPhoto)
-        selfieButton.setImageBitmap(selfiePhoto)
+        view.findViewById<TextView>(R.id.namepreview).text = rName
+        view.findViewById<TextView>(R.id.addresspreview).text = rAddress
+        view.findViewById<TextView>(R.id.barangaypreview).text = rBarangay
+        view.findViewById<TextView>(R.id.numberpreview).text = rContact
+        view.findViewById<TextView>(R.id.emailpreview).text = rEmail
 
-        officeTextView.text = office
-        dateTextView.text = date
-        timeTextView.text = time
-        otherTextView.text = other
+        view.findViewById<TextView>(R.id.namepreview).text = vName
+        view.findViewById<TextView>(R.id.addresspreview).text = vAddress
+        view.findViewById<TextView>(R.id.zippreview).text = vZip
+        view.findViewById<TextView>(R.id.provincepreview).text = vProvince
+        view.findViewById<TextView>(R.id.numberpreview).text = vContact
+        view.findViewById<TextView>(R.id.emailpreview).text = vEmail
 
-        rNameTextView.text = rName
-        rAddressTextView.text = rAddress
-        rBarangayTextView.text = rBarangay
-        rContactTextView.text = rContact
-        rEmailTextView.text = rEmail
-
-        vNameTextView.text = vName
-        vAddressTextView.text = vAddress
-        vZipTextView.text = vZip
-        vProvinceTextView.text = vProvince
-        vContactTextView.text = vContact
-        vEmailTextView.text = vEmail
+        view.findViewById<ImageView>(R.id.frontIDpreview).setImageBitmap(frontPhoto)
+        view.findViewById<ImageView>(R.id.backIDpreview).setImageBitmap(backPhoto)
+        view.findViewById<ImageView>(R.id.selfiepreview).setImageBitmap(selfiePhoto)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.review_appointment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        dialog?.window?.apply {
+            requestFeature(Window.FEATURE_NO_TITLE)
+            setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
+        }
+        return inflater.inflate(R.layout.review_appointment, container, false)
+    }
 
-        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
-
-        dialog?.window?.decorView?.systemUiVisibility = (
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                )
-
-        return view
+    companion object {
+        fun newInstance(bundle: Bundle): ReviewAppointment {
+            return ReviewAppointment().apply { arguments = bundle }
+        }
     }
 
     override fun onStart() {
@@ -209,11 +186,4 @@ class ReviewAppointment : DialogFragment() {
         return (this * context.resources.displayMetrics.density + 0.5f).toInt()
     }
 
-    companion object {
-        fun newInstance(bundle: Bundle): ReviewAppointment {
-            val fragment = ReviewAppointment()
-            fragment.arguments = bundle
-            return fragment
-        }
-    }
 }
