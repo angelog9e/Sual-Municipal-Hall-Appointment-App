@@ -126,7 +126,6 @@ ensuring you can quickly and easily schedule your visits from the comfort of you
 
     <string-array name="office_list">
         <item>Select Office</item>
-        <item>COMELEC</item>
         <item>Office of the Municipal Mayor</item>
         <item>Office of the Municipal Vice Mayor</item>
         <item>Office of the Human Resource Management Officer</item>
@@ -140,23 +139,244 @@ ensuring you can quickly and easily schedule your visits from the comfort of you
         <item>Office of the Municipal Civil Registrar</item>
         <item>Office of the Municipal Social Welfare and Development</item>
         <item>Office of the Municipal Agriculturist</item>
+        <item>COMELEC</item>
 
     </string-array>
 
-    <string-array name="purpose_list">
+    <string-array name="purpose_municipal_mayor">
+        <item>Select Purpose</item>
+        <item>Issuance of Local Permits and Licenses</item>
+        <item>Public Welfare and Social Services</item>
+        <item>Public Safety and Security Services</item>
+        <item>Support for Livelihood Programs</item>
+        <item>Public Infrastructure Projects and Development</item>
+        <item>Health and Sanitation Services</item>
+        <item>Promotion of Local Culture and Tourism</item>
+        <item>Advocacy for Local Legislative Proposals</item>
+        <item>Programs for Senior Citizens, PWDs, and Vulnerable Groups</item>
+        <item>Community Engagement and Consultation</item>
+        <item>Support for Local Farmers and Fisher folk</item>
+        <item>Development of Peace and Order Initiatives</item>
+        <item>Land and Property Services</item>
+        <item>Youth and Sports Development</item>
+        <item>Solicitation</item>
+
+    </string-array>
+
+    <string-array name="purpose_municipal_vice_mayor">
+        <item>Select Purpose</item>
+        <item>Legislative Functions</item>
+        <item>Support for Local Legislation and Governance</item>
+        <item>Championing Local Development Programs</item>
+        <item>Supporting Local Governance Transparency</item>
+        <item>Programs for Community Development</item>
+        <item>Engagement with Local Stakeholders</item>
+        <item>Coordination with Other Local Governments and Organizations</item>
+        <item>Disaster Response and Emergency Services</item>
+        <item>Public Outreach and Information Services</item>
+
+    </string-array>
+
+    <string-array name="purpose_municipal_secretary">
+        <item>Select Purpose</item>
+        <item>Legislative Support and Documentation</item>
+        <item>Coordination and Communication</item>
+        <item>Legislative Functions and Compliance</item>
+        <item>Oath-Taking and Appointment Ceremonies</item>
+        <item>Management of Official Correspondence</item>
+        <item>Legal and Procedural Assistance</item>
+        <item>Personnel and Administrative Services</item>
+        <item>Protocol Services and Public Engagement</item>
+        <item>Maintenance of Municipal Records</item>
+        <item>Preparation and Filing of Election-Related Documents</item>
+
+    </string-array>
+
+    <string-array name="purpose_municipal_human_resource_management_officer">
+        <item>Select Purpose</item>
+        <item>Employee Recruitment and Selection</item>
+        <item>Employee Records and Documentation</item>
+        <item>Compensation and Benefits Management</item>
+        <item>Employee Performance Management</item>
+        <item>Training and Development</item>
+        <item>Employee Welfare and Relations</item>
+        <item>Disciplinary Actions and Conflict Resolution</item>
+        <item>Retirement and Separation Services</item>
+        <item>Compliance with Labor Laws and Regulations</item>
+        <item>Organizational Development</item>
+        <item>Promotion of Equal Opportunity</item>
+        <item>Job Evaluation and Classification</item>
+        <item>HR Planning and Strategy</item>
+        <item>Employee Orientation and Onboarding</item>
+
+    </string-array>
+
+    <string-array name="purpose_municipal_treasurer">
+        <item>Select Purpose</item>
+        <item>Tax Collection Services</item>
+        <item>Revenue Generation and Fund Management</item>
+        <item>Issuance of Official Receipts and Tax Clearance</item>
+        <item>Preparation of Local Budget and Financial Reports</item>
+        <item>Treasury and Cash Management</item>
+        <item>Licensing and Permitting Services</item>
+        <item>Audit and Financial Oversight</item>
+        <item>Investment and Debt Management</item>
+        <item>Support for Financial Planning and Policy</item>
+        <item>Management of Trust Funds and Special Accounts</item>
+        <item>Tax Mapping and Property Assessment</item>
+        <item>Public Assistance and Information on Financial Matters</item>
+        <item>Tax Enforcement and Collection Efforts</item>
+        <item>Coordination with Other Government Agencies</item>
+        <item>Implementation of Local Financial Programs</item>
+
+    </string-array>
+
+    <string-array name="purpose_municipal_assessor">
+        <item>Select Purpose</item>
+        <item>Real Property Assessment and Valuation</item>
+        <item>Issuance of Tax Declarations</item>
+        <item>Property Mapping and Survey Services</item>
+        <item>Property Transfer and Ownership Records</item>
+        <item>Issuance of Certification and Official Documents</item>
+        <item>Assessment Appeals and Reviews</item>
+        <item>Real Property Tax Exemptions and Incentives</item>
+        <item>Implementation of the Tax Mapping System</item>
+        <item>Assistance in Land and Property Transactions</item>
+        <item>Updating and Maintenance of Property Records</item>
+        <item>Assistance with Property Tax Payments</item>
+        <item>Monitoring and Enforcement of Property Tax Payments</item>
+        <item>Advisory Services on Property Taxation and Compliance</item>
+        <item>Support for Local Government Planning and Development</item>
+        <item>Coordination with Other Government Offices</item>
+
+    </string-array>
+
+    <string-array name="purpose_municipal_budget_officer">
         <item>Select Office</item>
-        <item>Senior Citizen\'s ID</item>
-        <item>Persons with Disabilities (PWD) ID</item>
-        <item>Community Tax Certificate (Cedula) </item>
-        <item>Business Permit</item>
-        <item>Municipal Scholarship</item>
-        <item>Medical</item>
-        <item>Voters Registration</item>
-        <item>Residency Permit</item>
-        <item>Indigency</item>
-        <item>Building Permit</item>
-        <item>Meeting Appointment</item>
-        <item>Civil Wedding</item>
+        <item>Preparation of the Annual Budget</item>
+        <item>Financial Planning and Forecasting</item>
+        <item>Fund Allocation and Disbursement Monitoring</item>
+        <item>Budget Monitoring and Evaluation</item>
+        <item>Preparation of Financial Reports and Statements</item>
+        <item>Assistance in the Implementation of Government Programs and Projects</item>
+        <item>Preparation of Supplemental Budgets and Budget Adjustments</item>
+        <item>Ensuring Compliance with Financial Regulations</item>
+        <item>Preparation of Local Revenue Code and Financial Ordinances</item>
+        <item>Coordination with Other Offices and Agencies</item>
+
+    </string-array>
+
+    <string-array name="purpose_municipal_planning_and_development_officer">
+        <item>Select Office</item>
+        <item>Preparation and Formulation of Development Plans</item>
+        <item>Planning for Infrastructure Development</item>
+        <item>Sustainable Urban and Rural Planning</item>
+        <item>Project Identification, Formulation, and Management</item>
+        <item>Monitoring and Evaluation of Development Programs</item>
+        <item>Land Use and Zoning Administration</item>
+        <item>Urban and Rural Housing Development</item>
+        <item>Coordination with National and Regional Agencies</item>
+        <item>Disaster Risk Reduction and Management Planning</item>
+        <item>Economic Development Planning</item>
+        <item>Social Development and Welfare Planning</item>
+        <item>Research and Data Management</item>
+        <item>Conducting Public Consultations and Stakeholder Engagement</item>
+        <item>Policy Formulation and Advocacy</item>
+        <item>Technical Assistance to Local Government Units (LGUs)</item>
+
+    </string-array>
+
+    <string-array name="purpose_municipal_engineer">
+        <item>Select Office</item>
+        <item>Planning and Design of Infrastructure Projects</item>
+        <item>Implementation and Supervision of Construction Projects</item>
+        <item>Road Maintenance and Rehabilitation</item>
+        <item>Storm Drainage and Flood Control Projects</item>
+        <item>Surveying and Mapping Services</item>
+        <item>Public Works Coordination</item>
+        <item>Road Safety and Traffic Management</item>
+        <item>Disaster Risk Reduction and Management (DRRM)</item>
+        <item>Support for Housing and Urban Development</item>
+
+    </string-array>
+
+    <string-array name="purpose_municipal_health_officer">
+        <item>Select Office</item>
+        <item>Primary Healthcare Services</item>
+        <item>Maternal and Child Health Programs</item>
+        <item>Emergency Medical Services and First Aid</item>
+        <item>Environmental Health Services</item>
+        <item>Public Health Promotion and Education</item>
+        <item>Nutrition and Food Safety</item>
+        <item>Health Licensing and Permits</item>
+        <item>Health Support During Disasters</item>
+
+    </string-array>
+
+    <string-array name="purpose_municipal_civil_registrar">
+        <item>Select Office</item>
+        <item>Registration of Vital Events</item>
+        <item>Issuance of Civil Documents</item>
+        <item>Marriage License Application and Issuance</item>
+        <item>Legalization and Authentication of Civil Documents</item>
+        <item>Correction and Amendment of Civil Records</item>
+        <item>Preparation of Reports and Statistics</item>
+        <item>Referral to National Agencies</item>
+        <item>Health and Social Welfare Certifications</item>
+        <item>Marriage Counseling and Pre-Marriage Seminar (if applicable)</item>
+        <item>Issuance of Certificate of No Marriage (CENOMAR)</item>
+        <item>Family and Legal Name Services</item>
+        <item>Genealogical and Ancestral Record Services</item>
+        <item>Legal and Administrative Assistance</item>
+
+    </string-array>
+
+    <string-array name="purpose_municipal_social_welfare_and_development">
+        <item>Select Office</item>
+        <item>Social Assistance and Welfare Programs</item>
+        <item>Child and Family Welfare Programs</item>
+        <item>Programs for Women and Gender Equality</item>
+        <item>Programs for Vulnerable and Marginalized Groups</item>
+        <item>Disaster Risk Reduction and Management Services</item>
+        <item>Community-Based Programs</item>
+        <item>Youth Development Programs</item>
+        <item>Livelihood and Economic Support Programs</item>
+        <item>Social Welfare Case Management and Counseling</item>
+        <item>Health and Well-Being Programs</item>
+        <item>Public Awareness and Advocacy</item>
+
+    </string-array>
+
+    <string-array name="purpose_municipal_agriculturist">
+        <item>Select Office</item>
+        <item>Agricultural Extension Services</item>
+        <item>Provision of Seeds, Fertilizers, and Agricultural Inputs</item>
+        <item>Irrigation and Water Management Services</item>
+        <item>Livestock and Poultry Development</item>
+        <item>Sustainable Agriculture and Organic Farming</item>
+        <item>Farmer Assistance Programs</item>
+        <item>Agricultural Product Marketing and Support</item>
+        <item>Disaster Risk Reduction and Emergency Support</item>
+        <item>Research and Development in Agriculture</item>
+        <item>Education and Advocacy</item>
+        <item>Livelihood Programs for Farmers</item>
+        <item>Soil Testing and Fertilizer Recommendations</item>
+
+    </string-array>
+
+    <string-array name="purpose_comelec">
+        <item>Select Office</item>
+        <item>Voter Registration</item>
+        <item>Voter Verification</item>
+        <item>Candidate Filing of Candidacy</item>
+        <item>Election-Related Information and Services</item>
+        <item>Overseas Voting</item>
+        <item>Election Complaints and Resolution of Disputes</item>
+        <item>Voting Assistance and Education</item>
+        <item>Registration for Political Parties and Groups</item>
+        <item>Election Monitoring and Observations</item>
+        <item>Accessible Voting Services for PWDs and Senior Citizens</item>
+
     </string-array>
 
 </resources>

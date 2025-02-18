@@ -27,6 +27,7 @@ class ReviewAppointment : DialogFragment() {
     private var selfiePhoto: Bitmap? = null
 
     private var office: String? = null
+    private var purpose: String? = null
     private var date: String? = null
     private var time: String? = null
     private var other: String? = null
@@ -36,6 +37,8 @@ class ReviewAppointment : DialogFragment() {
     private var rBarangay: String? = null
     private var rContact: String? = null
     private var rEmail: String? = null
+
+    private var occupant: String? = null
 
     private var vName: String? = null
     private var vAddress: String? = null
@@ -52,6 +55,7 @@ class ReviewAppointment : DialogFragment() {
             selfiePhoto = bundle.getByteArray("selfiePhoto")?.let { BitmapFactory.decodeByteArray(it, 0, it.size) }
 
             office = bundle.getString("office")
+            purpose = bundle.getString("purpose")
             date = bundle.getString("date")
             time = bundle.getString("time")
             other = bundle.getString("other")
@@ -61,6 +65,8 @@ class ReviewAppointment : DialogFragment() {
             rBarangay = bundle.getString("rBarangay")
             rContact = bundle.getString("rContact")
             rEmail = bundle.getString("rEmail")
+
+            occupant = bundle.getString("occupant")
 
             vName = bundle.getString("vName")
             vAddress = bundle.getString("vAddress")
@@ -72,24 +78,46 @@ class ReviewAppointment : DialogFragment() {
     }
 
     private fun sendDataToServer() {
+        // Fetch the latest data from the UI
+        val updatedOffice = view?.findViewById<TextView>(R.id.officepreview)?.text.toString()
+        val updatedPurpose = view?.findViewById<TextView>(R.id.purposepreview)?.text.toString()
+        val updatedDate = view?.findViewById<TextView>(R.id.datepreview)?.text.toString()
+        val updatedTime = view?.findViewById<TextView>(R.id.timepreview)?.text.toString()
+        val updatedOther = view?.findViewById<TextView>(R.id.otherpreview)?.text.toString()
+
+        val updatedRName = view?.findViewById<TextView>(R.id.namepreview)?.text.toString()
+        val updatedRAddress = view?.findViewById<TextView>(R.id.addresspreview)?.text.toString()
+        val updatedRBarangay = view?.findViewById<TextView>(R.id.barangaypreview)?.text.toString()
+        val updatedRContact = view?.findViewById<TextView>(R.id.numberpreview)?.text.toString()
+        val updatedREmail = view?.findViewById<TextView>(R.id.emailpreview)?.text.toString()
+
+        val updatedOccupant = view?.findViewById<TextView>(R.id.occupantview)?.text.toString()
+
+        val updatedVName = view?.findViewById<TextView>(R.id.namepreview)?.text.toString()
+        val updatedVAddress = view?.findViewById<TextView>(R.id.addresspreview)?.text.toString()
+        val updatedVZip = view?.findViewById<TextView>(R.id.zippreview)?.text.toString()
+        val updatedVProvince = view?.findViewById<TextView>(R.id.provincepreview)?.text.toString()
+        val updatedVContact = view?.findViewById<TextView>(R.id.numberpreview)?.text.toString()
+        val updatedVEmail = view?.findViewById<TextView>(R.id.emailpreview)?.text.toString()
+
+        // Create the updated appointment object
         val appointment = Appointment(
-            officeTextView = office,
-            dateTextView = date,
-            timeTextView = time,
-            otherTextView = other,
-            rNameTextView = rName,
-            rAddressTextView = rAddress,
-            rBarangayTextView = rBarangay,
-            rContactTextView = rContact,
-            rEmailTextView = rEmail,
-            vNameTextView = vName,
-            vAddressTextView = vAddress,
-            vZipTextView = vZip,
-            vProvinceTextView = vProvince,
-            vContactTextView = vContact,
-            vEmailTextView = vEmail
+            occupantTextView = updatedOccupant,
+            officeTextView = updatedOffice,
+            purposeTextView = updatedPurpose,
+            dateTextView = updatedDate,
+            timeTextView = updatedTime,
+            otherTextView = updatedOther,
+            rNameTextView = updatedRName,
+            rAddressTextView = updatedRAddress,
+            rBarangayTextView = updatedRBarangay,
+            rContactTextView = updatedRContact,
+            rEmailTextView = updatedREmail,
+            vZipTextView = updatedVZip,
+            vProvinceTextView = updatedVProvince
         )
 
+        // Send data to the server
         val service = RetrofitInstance.appointmentService
         val call = service.submitAppointment(appointment)
 
@@ -135,6 +163,7 @@ class ReviewAppointment : DialogFragment() {
 
         // Bind UI elements
         view.findViewById<TextView>(R.id.officepreview).text = office
+        view.findViewById<TextView>(R.id.purposepreview).text = purpose
         view.findViewById<TextView>(R.id.datepreview).text = date
         view.findViewById<TextView>(R.id.timepreview).text = time
         view.findViewById<TextView>(R.id.otherpreview).text = other
@@ -144,6 +173,7 @@ class ReviewAppointment : DialogFragment() {
         view.findViewById<TextView>(R.id.barangaypreview).text = rBarangay
         view.findViewById<TextView>(R.id.numberpreview).text = rContact
         view.findViewById<TextView>(R.id.emailpreview).text = rEmail
+        view.findViewById<TextView>(R.id.occupantview).text = occupant
 
         view.findViewById<TextView>(R.id.namepreview).text = vName
         view.findViewById<TextView>(R.id.addresspreview).text = vAddress

@@ -41,6 +41,7 @@ class VerificationPage : AppCompatActivity() {
     private var currentPhotoTag: String? = null
 
     private var office: String? = null
+    private var purpose: String? = null
     private var date: String? = null
     private var time: String? = null
     private var other: String? = null
@@ -50,6 +51,7 @@ class VerificationPage : AppCompatActivity() {
     private var rBarangay: String? = null
     private var rContact: String? = null
     private var rEmail: String? = null
+    private var occupant: String? = null
 
     private var vName: String? = null
     private var vAddress: String? = null
@@ -153,6 +155,7 @@ class VerificationPage : AppCompatActivity() {
             office = it.getStringExtra("office")
             date = it.getStringExtra("date")
             time = it.getStringExtra("time")
+            purpose = it.getStringExtra("purpose")
             other = it.getStringExtra("other")
 
             rName = it.getStringExtra("rName")
@@ -160,6 +163,7 @@ class VerificationPage : AppCompatActivity() {
             rBarangay = it.getStringExtra("rBarangay")
             rContact = it.getStringExtra("rContact")
             rEmail = it.getStringExtra("rEmail")
+            occupant = it.getStringExtra("occupant")
 
             vName = it.getStringExtra("vName")
             vAddress = it.getStringExtra("vAddress")
@@ -225,6 +229,7 @@ class VerificationPage : AppCompatActivity() {
                         putByteArray("selfiePhoto", selfiePhoto?.let { bitmapToByteArray(it) })
 
                         putString("office", office)
+                        putString("purpose", purpose)
                         putString("date", date)
                         putString("time", time)
                         putString("other", other)
@@ -234,6 +239,7 @@ class VerificationPage : AppCompatActivity() {
                         putString("rBarangay", rBarangay)
                         putString("rContact", rContact)
                         putString("rEmail", rEmail)
+                        putString("occupant", occupant)
 
                         putString("vName", vName)
                         putString("vAddress", vAddress)
@@ -252,7 +258,7 @@ class VerificationPage : AppCompatActivity() {
     }
 
     private fun openCamera(tag: String) {
-        currentPhotoTag = tag // Store the tag in a field
+        currentPhotoTag = tag
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         try {
             startActivityForResult(cameraIntent, cameraRequestCode)
@@ -327,7 +333,7 @@ class VerificationPage : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == cameraRequestCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                currentPhotoTag?.let { openCamera(it) } // Retry opening the camera
+                currentPhotoTag?.let { openCamera(it) }
             } else {
                 Toast.makeText(this, "Camera permission is required to take a photo", Toast.LENGTH_SHORT).show()
             }

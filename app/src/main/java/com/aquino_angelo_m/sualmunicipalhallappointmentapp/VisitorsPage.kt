@@ -166,6 +166,7 @@ class VisitorsPage : AppCompatActivity() {
         val provinceInput = findViewById<Spinner>(R.id.provinceInput)
         val backButton = findViewById<Button>(R.id.backbtn)
         val nextButton = findViewById<Button>(R.id.nextbtn)
+        val occupantText = findViewById<TextView>(R.id.visoccu)
 
         setupValidationForInput(nameInput, 10, 50, R.drawable.user, R.drawable.check2, R.drawable.wrong)
         setupValidationForInput(addressInput, 10, 100, R.drawable.location, R.drawable.check2, R.drawable.wrong)
@@ -183,6 +184,7 @@ class VisitorsPage : AppCompatActivity() {
                         putString("contact", contactInput.text.toString())
                         putString("email", emailInput.text.toString())
                         putString("zip", zipInput.text.toString())
+                        putString("occupant", occupantText.text.toString())
                     })
                 }
                 startActivity(intent)
@@ -247,7 +249,7 @@ class VisitorsPage : AppCompatActivity() {
                 showToast("Please enter a valid 11-digit contact number.")
                 false
             }
-            emailInput.text.isEmpty() || !emailInput.text.toString().matches(
+            !emailInput.text.isNullOrEmpty() && !emailInput.text.toString().matches(
                 "^[a-zA-Z0-9._%+-]+@(gmail\\.com|yahoo\\.com|outlook\\.com|hotmail\\.com)\$".toRegex()
             ) -> {
                 showToast("Please enter a valid email address.")

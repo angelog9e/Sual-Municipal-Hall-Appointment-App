@@ -55,7 +55,7 @@
                 android:layout_height="100dp">
 
                 <TextView
-                    android:id="@+id/userdetails"
+                    android:id="@+id/occupantview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Details"
@@ -68,7 +68,7 @@
                     android:id="@+id/text2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/userdetails"
+                    android:layout_below="@+id/occupantview"
                     android:text="Name:"
                     android:textColor="@color/moonlight"
                     android:layout_marginStart="32dp"

@@ -8,17 +8,10 @@ import android.os.Looper
 import android.transition.Slide
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AnimationUtils
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.NumberPicker
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -45,9 +38,8 @@ class AppointmentDetails : AppCompatActivity() {
         setupFrameLayoutAnimation()
         setupOfficeSpinner()
         setupViewPager2()
-
-
-
+        setupButtonActions()
+        initializeAnimations()
     }
 
     private fun applyWindowInsets() {
@@ -60,14 +52,12 @@ class AppointmentDetails : AppCompatActivity() {
 
     private fun setupFrameLayoutAnimation() {
         val frameLayout = findViewById<FrameLayout>(R.id.sheet2)
-
         val slideTransition = Slide(Gravity.BOTTOM).apply {
             duration = 600L
             interpolator = AccelerateDecelerateInterpolator()
         }
 
         frameLayout.visibility = FrameLayout.INVISIBLE
-
         frameLayout.post {
             frameLayout.visibility = FrameLayout.VISIBLE
             slideTransition.addTarget(frameLayout)
@@ -85,14 +75,7 @@ class AppointmentDetails : AppCompatActivity() {
 
     private fun setupViewPager2() {
         viewPager = findViewById(R.id.viewPager2)
-
-        val images = listOf(
-            R.drawable.image1,
-            R.drawable.image2,
-            R.drawable.image3,
-            R.drawable.image4
-        )
-
+        val images = listOf(R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4)
         val adapter = ImagePagerAdapter(images)
         viewPager.adapter = adapter
 
@@ -103,7 +86,6 @@ class AppointmentDetails : AppCompatActivity() {
                 handler.postDelayed(this, 10000)
             }
         }
-
         handler.postDelayed(autoSlide, 5000)
 
         viewPager.setPageTransformer { page, position ->
@@ -113,228 +95,278 @@ class AppointmentDetails : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        handler.removeCallbacksAndMessages(null)
-    }
-
-    private fun animateViewsSequentially(vararg views: View) {
-        val delay = 100L // Delay between animations
-        views.forEachIndexed { index, view ->
-            view.postDelayed({
-                view.visibility = View.VISIBLE // Make the view visible
-                view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in))
-            }, index * delay)
-        }
-    }
 
     private fun setupOfficeSpinner() {
         val officeInput: Spinner = findViewById(R.id.officeInput)
+        val purposeInput: Spinner = findViewById(R.id.purposeInput)
+
         val officeList = resources.getStringArray(R.array.office_list).toMutableList()
 
-        val adapter = ArrayAdapter(
-            this,
+        // Custom adapter for the office spinner
+        val officeAdapter = object : ArrayAdapter<String>(
+            this@AppointmentDetails,
             R.layout.spinner_item,
             officeList
-        ).apply {
-            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        }
+        ) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent) as TextView
+                view.setTextColor(
+                    if (position == 0)
+                        ContextCompat.getColor(this@AppointmentDetails, R.color.lightgrey)
+                    else
+                        ContextCompat.getColor(this@AppointmentDetails, R.color.blackknight)
+                )
+                return view
+            }
 
-        officeInput.adapter = adapter
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getDropDownView(position, convertView, parent) as TextView
+                view.setTextColor(
+                    if (position == 0)
+                        ContextCompat.getColor(this@AppointmentDetails, R.color.lightgrey)
+                    else
+                        ContextCompat.getColor(this@AppointmentDetails, R.color.moonlight)
+                )
+                return view
+            }
+        }
+        officeInput.adapter = officeAdapter
 
         officeInput.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                if (position == 0) {
-                    (view as? TextView)?.setTextColor(ContextCompat.getColor(this@AppointmentDetails, R.color.lightgrey))
-                } else {
-                    (view as? TextView)?.setTextColor(ContextCompat.getColor(this@AppointmentDetails, R.color.blackknight))
+                val purposes = when (position) {
+                    1 -> resources.getStringArray(R.array.purpose_municipal_mayor)
+                    2 -> resources.getStringArray(R.array.purpose_municipal_vice_mayor)
+                    3 -> resources.getStringArray(R.array.purpose_municipal_secretary)
+                    4 -> resources.getStringArray(R.array.purpose_municipal_human_resource_management_officer)
+                    5 -> resources.getStringArray(R.array.purpose_municipal_treasurer)
+                    6 -> resources.getStringArray(R.array.purpose_municipal_assessor)
+                    7 -> resources.getStringArray(R.array.purpose_municipal_budget_officer)
+                    8 -> resources.getStringArray(R.array.purpose_municipal_planning_and_development_officer)
+                    9 -> resources.getStringArray(R.array.purpose_municipal_engineer)
+                    10 -> resources.getStringArray(R.array.purpose_municipal_health_officer)
+                    11 -> resources.getStringArray(R.array.purpose_municipal_civil_registrar)
+                    12 -> resources.getStringArray(R.array.purpose_municipal_social_welfare_and_development)
+                    13 -> resources.getStringArray(R.array.purpose_municipal_agriculturist)
+                    14 -> resources.getStringArray(R.array.purpose_comelec)
+
+                    else -> arrayOf("Select Purpose")
                 }
+
+                // Adapter for purposeInput
+                val purposeAdapter = object : ArrayAdapter<String>(
+                    this@AppointmentDetails,
+                    R.layout.spinner_item,
+                    purposes
+                ) {
+                    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                        val view = super.getView(position, convertView, parent) as TextView
+                        view.setTextColor(
+                            if (position == 0)
+                                ContextCompat.getColor(this@AppointmentDetails, R.color.lightgrey)
+                            else
+                                ContextCompat.getColor(this@AppointmentDetails, R.color.blackknight)
+                        )
+                        return view
+                    }
+
+                    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                        val view = super.getDropDownView(position, convertView, parent) as TextView
+                        view.setTextColor(
+                            if (position == 0)
+                                ContextCompat.getColor(this@AppointmentDetails, R.color.lightgrey)
+                            else
+                                ContextCompat.getColor(this@AppointmentDetails, R.color.moonlight)
+                        )
+                        return view
+                    }
+                }
+                purposeInput.adapter = purposeAdapter
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+    }
 
-        // Buttons
-        val timeButton = findViewById<Button>(R.id.timebtn)
-        val dateButton = findViewById<Button>(R.id.datebtn)
-        val backButton = findViewById<Button>(R.id.backbtn)
-        val nextButton = findViewById<Button>(R.id.nextbtn)
+    private fun setupButtonActions() {
+        val timeButton: Button = findViewById(R.id.timebtn)
+        val dateButton: Button = findViewById(R.id.datebtn)
+        val nextButton: Button = findViewById(R.id.nextbtn)
+        val backButton: Button = findViewById(R.id.backbtn)
 
-        // Texts
-        val text1 = findViewById<TextView>(R.id.datetxt)
-        val text2 = findViewById<TextView>(R.id.timetxt)
-        val text3 = findViewById<TextView>(R.id.officetxt)
-        val text4 = findViewById<TextView>(R.id.purposetxt)
-        val text5 = findViewById<TextView>(R.id.othertxt)
+        timeButton.setOnClickListener { showTimePickerDialog(timeButton) }
+        dateButton.setOnClickListener { showDatePickerDialog(dateButton) }
 
-        // Inputs
-        val purposeInput = findViewById<Spinner>(R.id.purposeInput)
-        val otherInput = findViewById<EditText>(R.id.otherInput)
+        nextButton.setOnClickListener {
+            if (isValidForm()) {
+                navigateToVerificationPage()
+            }
+        }
 
-        //Initial State
+        backButton.setOnClickListener { finish() }
+    }
+
+    private fun showTimePickerDialog(button: Button) {
+        val dialogView = layoutInflater.inflate(R.layout.custom_time_picker, null)
+        val hourPicker = dialogView.findViewById<NumberPicker>(R.id.hourPicker)
+        val minutePicker = dialogView.findViewById<NumberPicker>(R.id.minutePicker)
+        val ampmSpinner = dialogView.findViewById<Spinner>(R.id.ampmSpinner)
+
+        hourPicker.minValue = 1
+        hourPicker.maxValue = 12
+        minutePicker.minValue = 0
+        minutePicker.maxValue = 59
+
+        AlertDialog.Builder(this)
+            .setTitle("Select Time")
+            .setView(dialogView)
+            .setPositiveButton("OK") { _, _ ->
+                val selectedHour = hourPicker.value
+                val selectedMinute = minutePicker.value
+                val selectedAMPM = ampmSpinner.selectedItem.toString()
+
+                if (isValidTime(selectedHour, selectedAMPM)) {
+                    button.text = String.format(Locale.getDefault(), "%d:%02d %s", selectedHour, selectedMinute, selectedAMPM)
+                } else {
+                    Toast.makeText(this, "Please select a valid time.", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun showDatePickerDialog(button: Button) {
+        val calendar = Calendar.getInstance()
+        DatePickerDialog(
+            this,
+            { _, year, month, day ->
+                val selectedCalendar = Calendar.getInstance().apply { set(year, month, day) }
+                if (selectedCalendar.get(Calendar.DAY_OF_WEEK) in listOf(Calendar.SATURDAY, Calendar.SUNDAY)) {
+                    Toast.makeText(this, "Weekends are not allowed.", Toast.LENGTH_SHORT).show()
+                } else {
+                    button.text = String.format(Locale.getDefault(), "%04d-%02d-%02d", year, month + 1, day)
+                }
+            },
+            calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)
+        ).apply {
+            datePicker.minDate = calendar.timeInMillis
+            show()
+        }
+    }
+
+    private fun isValidTime(hour: Int, ampm: String): Boolean {
+        return (ampm == "AM" && hour in 8..11) || (ampm == "PM" && (hour == 12 || hour in 1..4))
+    }
+
+    private fun isValidForm(): Boolean {
+        val dateButton: Button = findViewById(R.id.datebtn)
+        val timeButton: Button = findViewById(R.id.timebtn)
+        val officeInput: Spinner = findViewById(R.id.officeInput)
+        val purposeInput: Spinner = findViewById(R.id.purposeInput)
+
+        return when {
+            dateButton.text.isEmpty() -> {
+                Toast.makeText(this, "Please select a date", Toast.LENGTH_SHORT).show()
+                false
+            }
+            timeButton.text.isEmpty() -> {
+                Toast.makeText(this, "Please select a time", Toast.LENGTH_SHORT).show()
+                false
+            }
+            officeInput.selectedItemPosition == 0 -> {
+                Toast.makeText(this, "Please select an office", Toast.LENGTH_SHORT).show()
+                false
+            }
+            purposeInput.selectedItemPosition == 0 -> {
+                Toast.makeText(this, "Please select a purpose", Toast.LENGTH_SHORT).show()
+                false
+            }
+            else -> true
+        }
+    }
+
+    private fun navigateToVerificationPage() {
+        val dateButton: Button = findViewById(R.id.datebtn)
+        val timeButton: Button = findViewById(R.id.timebtn)
+        val officeInput: Spinner = findViewById(R.id.officeInput)
+        val purposeInput: Spinner = findViewById(R.id.purposeInput)
+        val otherInput: EditText = findViewById(R.id.otherInput)
+
+        // Retrieve data from Resident
+        val rName = intent.getStringExtra("name")
+        val rAddress = intent.getStringExtra("address")
+        val rBarangay = intent.getStringExtra("barangay")
+        val rContact = intent.getStringExtra("contact")
+        val rEmail = intent.getStringExtra("email")
+        val occupant = intent.getStringExtra("occupant")
+
+        // Retrieve data from Visitor
+        val vName = intent.getStringExtra("name")
+        val vAddress = intent.getStringExtra("address")
+        val vZip = intent.getStringExtra("zip")
+        val vProvince = intent.getStringExtra("province")
+        val vContact = intent.getStringExtra("contact")
+        val vEmail = intent.getStringExtra("email")
+
+        val intent = Intent(this, VerificationPage::class.java).apply {
+            putExtra("date", dateButton.text.toString())
+            putExtra("time", timeButton.text.toString())
+            putExtra("office", officeInput.selectedItem.toString())
+            putExtra("purpose", purposeInput.selectedItem.toString())
+            putExtra("other", otherInput.text.toString())
+
+            // Pass additional resident and visitor data if needed
+            putExtra("rName", rName)
+            putExtra("rAddress", rAddress)
+            putExtra("rBarangay", rBarangay)
+            putExtra("rContact", rContact)
+            putExtra("rEmail", rEmail)
+            putExtra("occupant", occupant)
+
+            putExtra("vName", vName)
+            putExtra("vAddress", vAddress)
+            putExtra("vZip", vZip)
+            putExtra("vProvince", vProvince)
+            putExtra("vContact", vContact)
+            putExtra("vEmail", vEmail)
+        }
+        startActivity(intent)
+    }
+
+    private fun initializeAnimations() {
         val viewsToAnimate = arrayOf(
-            text1, dateButton, text2, timeButton,
-            text3, officeInput,
-            text4, purposeInput, text5, otherInput,
-            nextButton, backButton
+            findViewById<TextView>(R.id.datetxt),
+            findViewById<Button>(R.id.datebtn),
+            findViewById<TextView>(R.id.timetxt),
+            findViewById<Button>(R.id.timebtn),
+            findViewById<TextView>(R.id.officetxt),
+            findViewById<Spinner>(R.id.officeInput),
+            findViewById<TextView>(R.id.purposetxt),
+            findViewById<Spinner>(R.id.purposeInput),
+            findViewById<TextView>(R.id.othertxt),
+            findViewById<EditText>(R.id.otherInput),
+            findViewById<Button>(R.id.nextbtn),
+            findViewById<Button>(R.id.backbtn)
         )
 
         viewsToAnimate.forEach { it.visibility = View.INVISIBLE }
 
-        //Sequential Animation
-        val frameLayout = findViewById<FrameLayout>(R.id.sheet2)
-        frameLayout.post {
+        findViewById<FrameLayout>(R.id.sheet2).post {
             animateViewsSequentially(*viewsToAnimate)
         }
+    }
 
-        nextButton.setOnClickListener {
-            when {
-                dateButton.text.isEmpty() -> {
-                    Toast.makeText(this, "Please select a date", Toast.LENGTH_SHORT).show()
-                }
-                timeButton.text.isEmpty() -> {
-                    Toast.makeText(this, "Please select a time", Toast.LENGTH_SHORT).show()
-                }
-                officeInput.selectedItemPosition == 0 -> {
-                    Toast.makeText(this, "Please select an office", Toast.LENGTH_SHORT).show()
-                }
-                else -> {
-                    // Collect data
-                    val office = officeInput.selectedItem.toString()
-                    val date = dateButton.text.toString()
-                    val time = timeButton.text.toString()
-                    val other = otherInput.text.toString()
-
-                    // Retrieve data from Resident
-                    val rName = intent.getStringExtra("name")
-                    val rAddress = intent.getStringExtra("address")
-                    val rBarangay = intent.getStringExtra("barangay")
-                    val rContact = intent.getStringExtra("contact")
-                    val rEmail = intent.getStringExtra("email")
-
-                    // Retrieve data from Visitor
-                    val vName = intent.getStringExtra("name")
-                    val vAddress = intent.getStringExtra("address")
-                    val vZip = intent.getStringExtra("zip")
-                    val vProvince = intent.getStringExtra("province")
-                    val vContact = intent.getStringExtra("contact")
-                    val vEmail = intent.getStringExtra("email")
-
-                    // Pass data to VerificationPage
-                    val intent = Intent(this, VerificationPage::class.java).apply {
-                        putExtra("office", office)
-                        putExtra("date", date)
-                        putExtra("time", time)
-                        putExtra("other", other)
-
-                        // Pass additional resident and visitor data if needed
-                        putExtra("rName", rName)
-                        putExtra("rAddress", rAddress)
-                        putExtra("rBarangay", rBarangay)
-                        putExtra("rContact", rContact)
-                        putExtra("rEmail", rEmail)
-
-                        putExtra("vName", vName)
-                        putExtra("vAddress", vAddress)
-                        putExtra("vZip", vZip)
-                        putExtra("vProvince", vProvince)
-                        putExtra("vContact", vContact)
-                        putExtra("vEmail", vEmail)
-                    }
-                    startActivity(intent)
-                }
-            }
+    private fun animateViewsSequentially(vararg views: View) {
+        views.forEachIndexed { index, view ->
+            view.postDelayed({
+                view.visibility = View.VISIBLE
+                view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in))
+            }, index * 100L)
         }
+    }
 
-        backButton.setOnClickListener {
-
-            finish()
-        }
-
-        timeButton.setOnClickListener {
-            // Custom dialog for time selection
-            val dialogView = layoutInflater.inflate(R.layout.custom_time_picker, null)
-
-            val hourPicker = dialogView.findViewById<NumberPicker>(R.id.hourPicker)
-            val minutePicker = dialogView.findViewById<NumberPicker>(R.id.minutePicker)
-            val ampmSpinner = dialogView.findViewById<Spinner>(R.id.ampmSpinner)
-
-            // Maximum and minimum values
-            hourPicker.minValue = 1
-            hourPicker.maxValue = 12
-            minutePicker.minValue = 0
-            minutePicker.maxValue = 59
-
-            val dialog = AlertDialog.Builder(this)
-                .setTitle("Select Time")
-                .setView(dialogView)
-                .setPositiveButton("OK") { _, _ ->
-                    val selectedHour = hourPicker.value
-                    val selectedMinute = minutePicker.value
-                    val selectedAMPM = ampmSpinner.selectedItem.toString()
-
-                    val isValidTime = when (selectedAMPM) {
-                        "AM" -> selectedHour in 8..11
-                        "PM" -> selectedHour == 12 || selectedHour in 1..4
-                        else -> false
-                    }
-
-                    if (isValidTime) {
-
-                        val formattedTime = String.format(
-                            Locale.getDefault(),
-                            "%d:%02d %s",
-                            selectedHour,
-                            selectedMinute,
-                            selectedAMPM
-                        )
-
-                        timeButton.text = formattedTime
-                    } else {
-                        Toast.makeText(this, "Please select a time between 8:00 AM and 4:00 PM.", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                .setNegativeButton("Cancel", null)
-                .create()
-
-            dialog.show()
-        }
-
-        dateButton.setOnClickListener {
-            // Get the current date
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-            // Create and show the DatePickerDialog
-            val datePickerDialog = DatePickerDialog(
-                this,
-                { _, selectedYear, selectedMonth, selectedDay ->
-                    val selectedCalendar = Calendar.getInstance()
-                    selectedCalendar.set(selectedYear, selectedMonth, selectedDay)
-
-                    val dayOfWeek = selectedCalendar.get(Calendar.DAY_OF_WEEK)
-
-                    if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY) {
-                        Toast.makeText(this, "Weekends are not allowed. Please select a weekday.", Toast.LENGTH_SHORT).show()
-                    } else {
-                        val formattedDate = String.format(
-                            Locale.getDefault(),
-                            "%02d/%02d/%04d",
-                            selectedDay,
-                            selectedMonth + 1,
-                            selectedYear
-                        )
-                        dateButton.text = formattedDate
-                    }
-                },
-                year, month, day
-            )
-
-            datePickerDialog.datePicker.minDate = calendar.timeInMillis // Set the minimum date to today
-            datePickerDialog.show()
-        }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacksAndMessages(null)
     }
 }

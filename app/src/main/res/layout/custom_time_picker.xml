@@ -2,33 +2,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:gravity="center">
 
-    <NumberPicker
-        android:id="@+id/hourPicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:value="12"/>
-
     <TextView
+        android:id="@+id/workingHoursText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=":"
-        android:textSize="24sp"
-        android:layout_gravity="center"/>
+        android:text="Working hours: 8am to 4pm"
+        android:textSize="18sp"
+        android:fontFamily="@font/notosansjp_semibold"
+        android:layout_marginTop="16dp"
+        android:gravity="center" />
 
-    <NumberPicker
-        android:id="@+id/minutePicker"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:value="0"/>
+        android:orientation="horizontal"
+        android:gravity="center">
 
-    <Spinner
-        android:padding="5dp"
-        android:id="@+id/ampmSpinner"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:entries="@array/am_pm_list"
-        android:layout_gravity="center"/>
+        <NumberPicker
+            android:id="@+id/hourPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:value="12" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textSize="24sp"
+            android:layout_gravity="center" />
+
+        <NumberPicker
+            android:id="@+id/minutePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:value="0" />
+
+        <Spinner
+            android:padding="5dp"
+            android:id="@+id/ampmSpinner"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:entries="@array/am_pm_list"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
+
 </LinearLayout>

@@ -182,6 +182,7 @@ class MainActivity : AppCompatActivity() {
         val backButton = findViewById<Button>(R.id.backbtn)
         val nextButton = findViewById<Button>(R.id.nextbtn)
         val barangayInput = findViewById<Spinner>(R.id.brgyInput)
+        val occupantText = findViewById<TextView>(R.id.resoccu)
 
         setupValidationForInput(nameInput, 10, 50, R.drawable.user, R.drawable.check2, R.drawable.wrong)
         setupValidationForInput(addressInput, 12, 100, R.drawable.location, R.drawable.check2, R.drawable.wrong)
@@ -197,6 +198,8 @@ class MainActivity : AppCompatActivity() {
                         putString("barangay", barangayInput.selectedItem.toString())
                         putString("contact", contactInput.text.toString())
                         putString("email", emailInput.text.toString())
+                        putString("occupant", occupantText.text.toString())
+
                     })
                 }
                 startActivity(intent)
