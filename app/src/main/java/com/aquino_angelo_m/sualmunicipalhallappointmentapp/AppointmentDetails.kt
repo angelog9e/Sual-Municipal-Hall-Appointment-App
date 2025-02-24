@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.InputFilter
 import android.transition.Slide
 import android.view.Gravity
 import android.view.View
@@ -29,6 +30,15 @@ class AppointmentDetails : AppCompatActivity() {
     private val handler = Handler(Looper.getMainLooper())
     private var currentPage = 0
 
+    private val allowedCharactersFilter = InputFilter { source, _, _, _, _, _ ->
+        val allowedPattern = Regex("[a-zA-Z0-9 .,@]*")
+        if (allowedPattern.matches(source)) {
+            source
+        } else {
+            ""
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -40,6 +50,10 @@ class AppointmentDetails : AppCompatActivity() {
         setupViewPager2()
         setupButtonActions()
         initializeAnimations()
+
+        // Apply filter to otherInput
+        val otherInput: EditText = findViewById(R.id.otherInput)
+        otherInput.filters = arrayOf(allowedCharactersFilter)
     }
 
     private fun applyWindowInsets() {
@@ -94,7 +108,6 @@ class AppointmentDetails : AppCompatActivity() {
             page.scaleY = 1 - 0.2f * abs(position)
         }
     }
-
 
     private fun setupOfficeSpinner() {
         val officeInput: Spinner = findViewById(R.id.officeInput)

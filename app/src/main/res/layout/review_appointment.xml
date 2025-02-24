@@ -169,6 +169,7 @@
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:hint="2403"
+                    android:inputType="number"
                     android:drawableEnd="@drawable/edit"/>
 
                 <TextView
@@ -222,6 +223,7 @@
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:drawableEnd="@drawable/edit"
+                    android:inputType="number"
                     android:hint="number"/>
 
                 <TextView
@@ -273,20 +275,21 @@
                     android:textSize="16sp"
                     android:textColor="@color/moonlight"/>
 
-                <EditText
+                <Button
                     android:id="@+id/datepreview"
                     android:layout_width="160dp"
                     android:layout_height="48dp"
-                    android:background="@drawable/bg_input"
-                    android:layout_below="@id/text9"
+                    android:layout_below="@+id/text9"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
-                    android:elevation="24dp"
+                    android:layout_alignParentStart="true"
+                    android:textSize="16sp"
+                    android:hint="Date"
                     android:textColor="@color/blackknight"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
+                    android:background="@drawable/bg_input"
                     android:drawableEnd="@drawable/edit"
-                    android:hint="date"/>
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"/>
 
                 <TextView
                     android:id="@+id/text10"
@@ -295,25 +298,26 @@
                     android:layout_below="@+id/appointmentdetails"
                     android:layout_alignParentEnd="true"
                     android:text="Time:"
-                    android:layout_marginEnd="110dp"
+                    android:layout_marginEnd="120dp"
                     android:textSize="16sp"
                     android:textColor="@color/moonlight"/>
 
-                <EditText
+                <Button
                     android:id="@+id/timepreview"
-                    android:layout_width="140dp"
+                    android:layout_width="160dp"
                     android:layout_height="48dp"
-                    android:background="@drawable/bg_input"
-                    android:layout_below="@id/text10"
-                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/text9"
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="5dp"
-                    android:elevation="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:hint="Time"
+                    android:textSize="16sp"
                     android:textColor="@color/blackknight"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
+                    android:textColorHint="@color/lightgrey"
+                    android:background="@drawable/bg_input"
                     android:drawableEnd="@drawable/edit"
-                    android:hint="time"/>
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"/>
 
                 <TextView
                     android:id="@+id/text11"

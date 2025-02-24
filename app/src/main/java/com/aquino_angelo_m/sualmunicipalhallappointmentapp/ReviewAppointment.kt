@@ -1,24 +1,35 @@
 package com.aquino_angelo_m.sualmunicipalhallappointmentapp
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.NumberPicker
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Calendar
+import java.util.Locale
 
 class ReviewAppointment : DialogFragment() {
 
@@ -46,6 +57,15 @@ class ReviewAppointment : DialogFragment() {
     private var vProvince: String? = null
     private var vContact: String? = null
     private var vEmail: String? = null
+
+    private val allowedCharactersFilter = InputFilter { source, _, _, _, _, _ ->
+        val allowedPattern = Regex("[a-zA-Z0-9 .,@]*")
+        if (source.matches(allowedPattern)) {
+            source
+        } else {
+            ""
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +95,199 @@ class ReviewAppointment : DialogFragment() {
             vContact = bundle.getString("vContact")
             vEmail = bundle.getString("vEmail")
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Bind UI elements
+        view.findViewById<TextView>(R.id.officepreview).text = office
+        view.findViewById<TextView>(R.id.purposepreview).text = purpose
+        view.findViewById<TextView>(R.id.datepreview).text = date
+        view.findViewById<TextView>(R.id.timepreview).text = time
+        view.findViewById<TextView>(R.id.otherpreview).text = other
+
+        view.findViewById<TextView>(R.id.namepreview).text = rName
+        view.findViewById<TextView>(R.id.addresspreview).text = rAddress
+        view.findViewById<TextView>(R.id.barangaypreview).text = rBarangay
+        view.findViewById<TextView>(R.id.numberpreview).text = rContact
+        view.findViewById<TextView>(R.id.emailpreview).text = rEmail
+        view.findViewById<TextView>(R.id.occupantview).text = occupant
+
+        view.findViewById<TextView>(R.id.namepreview).text = vName
+        view.findViewById<TextView>(R.id.addresspreview).text = vAddress
+        view.findViewById<TextView>(R.id.zippreview).text = vZip
+        view.findViewById<TextView>(R.id.provincepreview).text = vProvince
+        view.findViewById<TextView>(R.id.numberpreview).text = vContact
+        view.findViewById<TextView>(R.id.emailpreview).text = vEmail
+
+        view.findViewById<ImageView>(R.id.frontIDpreview).setImageBitmap(frontPhoto)
+        view.findViewById<ImageView>(R.id.backIDpreview).setImageBitmap(backPhoto)
+        view.findViewById<ImageView>(R.id.selfiepreview).setImageBitmap(selfiePhoto)
+
+        setupInputValidation(view)
+        setupButtonActions(view)
+    }
+
+    private fun setupInputValidation(view: View) {
+        val nameInput = view.findViewById<EditText>(R.id.namepreview)
+        val addressInput = view.findViewById<EditText>(R.id.addresspreview)
+        val contactInput = view.findViewById<EditText>(R.id.numberpreview)
+        val emailInput = view.findViewById<EditText>(R.id.emailpreview)
+        val zipInput = view.findViewById<EditText>(R.id.zippreview)
+        val otherInput = view.findViewById<EditText>(R.id.otherpreview)
+
+        setupValidationForInput(nameInput, 10, 50, R.drawable.check2, R.drawable.wrong)
+        setupValidationForInput(addressInput, 12, 100, R.drawable.check2, R.drawable.wrong)
+        setupValidationForInput(contactInput, 11, 11, R.drawable.check2, R.drawable.wrong, "^09\\d{9}\$")
+        setupValidationForInput(emailInput, 0, 50, R.drawable.check2, R.drawable.wrong, "^[a-zA-Z0-9._%+-]+@(gmail\\.com|yahoo\\.com|outlook\\.com|hotmail\\.com)\$", optional = true)
+        setupValidationForInput(zipInput, 4, 4, R.drawable.check2, R.drawable.wrong, "\\d{4}", optional = true)
+
+        otherInput.filters = arrayOf(allowedCharactersFilter)
+
+        val submitButton: Button = view.findViewById(R.id.submitbtn)
+        submitButton.setOnClickListener {
+            if (validateInputs(nameInput, addressInput, contactInput, emailInput, zipInput)) {
+                sendDataToServer()
+            }
+        }
+    }
+
+    private fun setupValidationForInput(
+        input: EditText,
+        minLength: Int,
+        maxLength: Int,
+        validIcon: Int,
+        invalidIcon: Int,
+        pattern: String = ".*",
+        optional: Boolean = false
+    ) {
+        input.filters = arrayOf(allowedCharactersFilter, InputFilter.LengthFilter(maxLength))
+
+        input.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                val isValid = if (optional && s.isNullOrEmpty()) {
+                    true
+                } else {
+                    (s?.length ?: 0) in minLength..maxLength && s.toString()
+                        .matches(pattern.toRegex())
+                }
+                input.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    null, null,
+                    ContextCompat.getDrawable(requireContext(), if (isValid) validIcon else invalidIcon), null
+                )
+            }
+        })
+    }
+
+    private fun validateInputs(
+        nameInput: EditText,
+        addressInput: EditText,
+        contactInput: EditText,
+        emailInput: EditText,
+        zipInput: EditText,
+        dateButton: Button? = null,
+        timeButton: Button? = null
+    ): Boolean {
+        return when {
+            nameInput.text.isEmpty() || nameInput.text.length < 10 -> {
+                showToast("Please enter a name with at least 10 characters.")
+                false
+            }
+            addressInput.text.isEmpty() || addressInput.text.length < 12 -> {
+                showToast("Please enter an address with at least 12 characters.")
+                false
+            }
+            zipInput.text.length != 4 || !zipInput.text.toString().matches("\\d{4}".toRegex()) -> {
+                showToast("Please enter a 4-digit zip code.")
+                false
+            }
+            contactInput.text.isEmpty() || !contactInput.text.toString().matches("^09\\d{9}\$".toRegex()) -> {
+                showToast("Please enter a valid 11-digit contact number.")
+                false
+            }
+            !emailInput.text.isNullOrEmpty() && !emailInput.text.toString().matches(
+                "^[a-zA-Z0-9._%+-]+@(gmail\\.com|yahoo\\.com|outlook\\.com|hotmail\\.com)\$".toRegex()
+            ) -> {
+                showToast("Please enter a valid email address.")
+                false
+            }
+            timeButton != null && timeButton.text.isEmpty() -> {
+                showToast("Please select a time.")
+                false
+            }
+            dateButton != null && dateButton.text.isEmpty() -> {
+                showToast("Please select a date.")
+                false
+            }
+            else -> true
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setupButtonActions(view: View) {
+        val timeButton: Button = view.findViewById(R.id.timepreview)
+        val dateButton: Button = view.findViewById(R.id.datepreview)
+
+        timeButton.setOnClickListener { showTimePickerDialog(timeButton) }
+        dateButton.setOnClickListener { showDatePickerDialog(dateButton) }
+    }
+
+    private fun showTimePickerDialog(button: Button) {
+        val dialogView = layoutInflater.inflate(R.layout.custom_time_picker, null)
+        val hourPicker = dialogView.findViewById<NumberPicker>(R.id.hourPicker)
+        val minutePicker = dialogView.findViewById<NumberPicker>(R.id.minutePicker)
+        val ampmSpinner = dialogView.findViewById<Spinner>(R.id.ampmSpinner)
+
+        hourPicker.minValue = 1
+        hourPicker.maxValue = 12
+        minutePicker.minValue = 0
+        minutePicker.maxValue = 59
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Select Time")
+            .setView(dialogView)
+            .setPositiveButton("OK") { _, _ ->
+                val selectedHour = hourPicker.value
+                val selectedMinute = minutePicker.value
+                val selectedAMPM = ampmSpinner.selectedItem.toString()
+
+                if (isValidTime(selectedHour, selectedAMPM)) {
+                    button.text = String.format(Locale.getDefault(), "%d:%02d %s", selectedHour, selectedMinute, selectedAMPM)
+                } else {
+                    Toast.makeText(requireContext(), "Please select a valid time.", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun showDatePickerDialog(button: Button) {
+        val calendar = Calendar.getInstance()
+        DatePickerDialog(
+            requireContext(),
+            { _, year, month, day ->
+                val selectedCalendar = Calendar.getInstance().apply { set(year, month, day) }
+                if (selectedCalendar.get(Calendar.DAY_OF_WEEK) in listOf(Calendar.SATURDAY, Calendar.SUNDAY)) {
+                    Toast.makeText(requireContext(), "Weekends are not allowed.", Toast.LENGTH_SHORT).show()
+                } else {
+                    button.text = String.format(Locale.getDefault(), "%04d-%02d-%02d", year, month + 1, day)
+                }
+            },
+            calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)
+        ).apply {
+            datePicker.minDate = calendar.timeInMillis
+            show()
+        }
+    }
+
+    private fun isValidTime(hour: Int, ampm: String): Boolean {
+        return (ampm == "AM" && hour in 8..11) || (ampm == "PM" && (hour == 12 || hour in 1..4))
     }
 
     private fun sendDataToServer() {
@@ -153,40 +366,6 @@ class ReviewAppointment : DialogFragment() {
         dismiss()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val submitButton: Button = view.findViewById(R.id.submitbtn)
-        submitButton.setOnClickListener {
-            sendDataToServer()
-        }
-
-        // Bind UI elements
-        view.findViewById<TextView>(R.id.officepreview).text = office
-        view.findViewById<TextView>(R.id.purposepreview).text = purpose
-        view.findViewById<TextView>(R.id.datepreview).text = date
-        view.findViewById<TextView>(R.id.timepreview).text = time
-        view.findViewById<TextView>(R.id.otherpreview).text = other
-
-        view.findViewById<TextView>(R.id.namepreview).text = rName
-        view.findViewById<TextView>(R.id.addresspreview).text = rAddress
-        view.findViewById<TextView>(R.id.barangaypreview).text = rBarangay
-        view.findViewById<TextView>(R.id.numberpreview).text = rContact
-        view.findViewById<TextView>(R.id.emailpreview).text = rEmail
-        view.findViewById<TextView>(R.id.occupantview).text = occupant
-
-        view.findViewById<TextView>(R.id.namepreview).text = vName
-        view.findViewById<TextView>(R.id.addresspreview).text = vAddress
-        view.findViewById<TextView>(R.id.zippreview).text = vZip
-        view.findViewById<TextView>(R.id.provincepreview).text = vProvince
-        view.findViewById<TextView>(R.id.numberpreview).text = vContact
-        view.findViewById<TextView>(R.id.emailpreview).text = vEmail
-
-        view.findViewById<ImageView>(R.id.frontIDpreview).setImageBitmap(frontPhoto)
-        view.findViewById<ImageView>(R.id.backIDpreview).setImageBitmap(backPhoto)
-        view.findViewById<ImageView>(R.id.selfiepreview).setImageBitmap(selfiePhoto)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog?.window?.apply {
             requestFeature(Window.FEATURE_NO_TITLE)
@@ -215,5 +394,4 @@ class ReviewAppointment : DialogFragment() {
     private fun Int.dpToPx3(context: Context): Int {
         return (this * context.resources.displayMetrics.density + 0.5f).toInt()
     }
-
 }
