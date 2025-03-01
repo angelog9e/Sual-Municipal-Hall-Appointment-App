@@ -46,12 +46,16 @@ class VerificationPage : AppCompatActivity() {
     private var time: String? = null
     private var other: String? = null
 
+    private var officePosition: Int = 0
+    private var purposePosition: Int = 0
+
     private var rName: String? = null
     private var rAddress: String? = null
     private var rBarangay: String? = null
     private var rContact: String? = null
     private var rEmail: String? = null
     private var occupant: String? = null
+    private var zip: String? = null
 
     private var vName: String? = null
     private var vAddress: String? = null
@@ -158,12 +162,16 @@ class VerificationPage : AppCompatActivity() {
             purpose = it.getStringExtra("purpose")
             other = it.getStringExtra("other")
 
+            officePosition = it.getIntExtra("officePosition", 0)
+            purposePosition = it.getIntExtra("purposePosition", 0)
+
             rName = it.getStringExtra("rName")
             rAddress = it.getStringExtra("rAddress")
             rBarangay = it.getStringExtra("rBarangay")
             rContact = it.getStringExtra("rContact")
             rEmail = it.getStringExtra("rEmail")
             occupant = it.getStringExtra("occupant")
+            zip = it.getStringExtra("zip")
 
             vName = it.getStringExtra("vName")
             vAddress = it.getStringExtra("vAddress")
@@ -234,12 +242,16 @@ class VerificationPage : AppCompatActivity() {
                         putString("time", time)
                         putString("other", other)
 
+                        putInt("officePosition", officePosition)
+                        putInt("purposePosition", purposePosition)
+
                         putString("rName", rName)
                         putString("rAddress", rAddress)
                         putString("rBarangay", rBarangay)
                         putString("rContact", rContact)
                         putString("rEmail", rEmail)
                         putString("occupant", occupant)
+                        putString("zip", zip)
 
                         putString("vName", vName)
                         putString("vAddress", vAddress)

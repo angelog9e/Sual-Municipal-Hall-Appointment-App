@@ -312,6 +312,7 @@ class AppointmentDetails : AppCompatActivity() {
         val rContact = intent.getStringExtra("contact")
         val rEmail = intent.getStringExtra("email")
         val occupant = intent.getStringExtra("occupant")
+        val zip = intent.getStringExtra("zip")
 
         // Retrieve data from Visitor
         val vName = intent.getStringExtra("name")
@@ -327,6 +328,8 @@ class AppointmentDetails : AppCompatActivity() {
             putExtra("office", officeInput.selectedItem.toString())
             putExtra("purpose", purposeInput.selectedItem.toString())
             putExtra("other", otherInput.text.toString())
+            putExtra("officePosition", officeInput.selectedItemPosition) // Add office position
+            putExtra("purposePosition", purposeInput.selectedItemPosition) // Add purpose position
 
             // Pass additional resident and visitor data if needed
             putExtra("rName", rName)
@@ -335,6 +338,7 @@ class AppointmentDetails : AppCompatActivity() {
             putExtra("rContact", rContact)
             putExtra("rEmail", rEmail)
             putExtra("occupant", occupant)
+            putExtra("zip", zip)
 
             putExtra("vName", vName)
             putExtra("vAddress", vAddress)

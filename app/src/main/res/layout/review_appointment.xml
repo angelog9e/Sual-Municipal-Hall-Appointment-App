@@ -330,20 +330,19 @@
                     android:layout_marginStart="32dp"
                     android:textColor="@color/moonlight"/>
 
-                <EditText
+                <Spinner
                     android:id="@+id/officepreview"
                     android:layout_width="340dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_input"
-                    android:layout_centerHorizontal="true"
+                    android:layout_height="56dp"
                     android:layout_below="@id/text11"
-                    android:layout_marginStart="10dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="5dp"
-                    android:elevation="24dp"
+                    android:spinnerMode="dialog"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="18dp"
                     android:textColor="@color/blackknight"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:hint="office"/>
+                    android:background="@drawable/spinner_bg"
+                    android:elevation="24dp"/>
 
                 <TextView
                     android:id="@+id/text12"
@@ -356,20 +355,19 @@
                     android:layout_marginStart="32dp"
                     android:textColor="@color/moonlight"/>
 
-                <EditText
+                <Spinner
                     android:id="@+id/purposepreview"
                     android:layout_width="340dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_input"
-                    android:layout_centerHorizontal="true"
+                    android:layout_height="56dp"
                     android:layout_below="@id/text12"
-                    android:layout_marginStart="10dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="5dp"
-                    android:elevation="24dp"
+                    android:spinnerMode="dialog"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="18dp"
                     android:textColor="@color/blackknight"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:hint="purpose"/>
+                    android:background="@drawable/spinner_bg"
+                    android:elevation="24dp"/>
 
                 <TextView
                     android:id="@+id/text13"

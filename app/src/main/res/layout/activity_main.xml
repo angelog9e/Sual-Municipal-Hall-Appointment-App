@@ -138,6 +138,16 @@
                     android:text="Resident"
                     android:visibility="invisible"/>
 
+                <TextView
+                    android:id="@+id/reszip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="2403"
+                    android:visibility="invisible"/>
+
                 <EditText
                     android:id="@+id/nameInput"
                     android:layout_width="340dp"

@@ -15,6 +15,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -43,6 +45,9 @@ class ReviewAppointment : DialogFragment() {
     private var time: String? = null
     private var other: String? = null
 
+    private var officePosition: Int = 0
+    private var purposePosition: Int = 0
+
     private var rName: String? = null
     private var rAddress: String? = null
     private var rBarangay: String? = null
@@ -50,6 +55,7 @@ class ReviewAppointment : DialogFragment() {
     private var rEmail: String? = null
 
     private var occupant: String? = null
+    private var zip: String? = null
 
     private var vName: String? = null
     private var vAddress: String? = null
@@ -80,6 +86,9 @@ class ReviewAppointment : DialogFragment() {
             time = bundle.getString("time")
             other = bundle.getString("other")
 
+            officePosition = bundle.getInt("officePosition")
+            purposePosition = bundle.getInt("purposePosition")
+
             rName = bundle.getString("rName")
             rAddress = bundle.getString("rAddress")
             rBarangay = bundle.getString("rBarangay")
@@ -87,6 +96,7 @@ class ReviewAppointment : DialogFragment() {
             rEmail = bundle.getString("rEmail")
 
             occupant = bundle.getString("occupant")
+            zip = bundle.getString("zip")
 
             vName = bundle.getString("vName")
             vAddress = bundle.getString("vAddress")
@@ -101,8 +111,6 @@ class ReviewAppointment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Bind UI elements
-        view.findViewById<TextView>(R.id.officepreview).text = office
-        view.findViewById<TextView>(R.id.purposepreview).text = purpose
         view.findViewById<TextView>(R.id.datepreview).text = date
         view.findViewById<TextView>(R.id.timepreview).text = time
         view.findViewById<TextView>(R.id.otherpreview).text = other
@@ -113,6 +121,7 @@ class ReviewAppointment : DialogFragment() {
         view.findViewById<TextView>(R.id.numberpreview).text = rContact
         view.findViewById<TextView>(R.id.emailpreview).text = rEmail
         view.findViewById<TextView>(R.id.occupantview).text = occupant
+        view.findViewById<TextView>(R.id.zippreview).text = zip
 
         view.findViewById<TextView>(R.id.namepreview).text = vName
         view.findViewById<TextView>(R.id.addresspreview).text = vAddress
@@ -126,6 +135,9 @@ class ReviewAppointment : DialogFragment() {
         view.findViewById<ImageView>(R.id.selfiepreview).setImageBitmap(selfiePhoto)
 
         setupInputValidation(view)
+        setupButtonActions(view)
+
+        setupOfficeSpinner(view)
         setupButtonActions(view)
     }
 
@@ -230,6 +242,100 @@ class ReviewAppointment : DialogFragment() {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
+    private fun setupOfficeSpinner(view: View) {
+        val officeInput: Spinner = view.findViewById(R.id.officepreview)
+        val purposeInput: Spinner = view.findViewById(R.id.purposepreview)
+
+        val officeList = resources.getStringArray(R.array.office_list).toMutableList()
+
+        val officeAdapter = object : ArrayAdapter<String>(
+            requireContext(),
+            R.layout.spinner_item,
+            officeList
+        ) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent) as TextView
+                view.setTextColor(
+                    if (position == 0)
+                        ContextCompat.getColor(requireContext(), R.color.lightgrey)
+                    else
+                        ContextCompat.getColor(requireContext(), R.color.blackknight)
+                )
+                return view
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getDropDownView(position, convertView, parent) as TextView
+                view.setTextColor(
+                    if (position == 0)
+                        ContextCompat.getColor(requireContext(), R.color.lightgrey)
+                    else
+                        ContextCompat.getColor(requireContext(), R.color.moonlight)
+                )
+                return view
+            }
+        }
+        officeInput.adapter = officeAdapter
+
+        officeInput.setSelection(officePosition)
+
+        officeInput.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val purposes = when (position) {
+                    1 -> resources.getStringArray(R.array.purpose_municipal_mayor)
+                    2 -> resources.getStringArray(R.array.purpose_municipal_vice_mayor)
+                    3 -> resources.getStringArray(R.array.purpose_municipal_secretary)
+                    4 -> resources.getStringArray(R.array.purpose_municipal_human_resource_management_officer)
+                    5 -> resources.getStringArray(R.array.purpose_municipal_treasurer)
+                    6 -> resources.getStringArray(R.array.purpose_municipal_assessor)
+                    7 -> resources.getStringArray(R.array.purpose_municipal_budget_officer)
+                    8 -> resources.getStringArray(R.array.purpose_municipal_planning_and_development_officer)
+                    9 -> resources.getStringArray(R.array.purpose_municipal_engineer)
+                    10 -> resources.getStringArray(R.array.purpose_municipal_health_officer)
+                    11 -> resources.getStringArray(R.array.purpose_municipal_civil_registrar)
+                    12 -> resources.getStringArray(R.array.purpose_municipal_social_welfare_and_development)
+                    13 -> resources.getStringArray(R.array.purpose_municipal_agriculturist)
+                    14 -> resources.getStringArray(R.array.purpose_comelec)
+
+                    else -> arrayOf("Select Purpose")
+                }
+
+                val purposeAdapter = object : ArrayAdapter<String>(
+                    requireContext(),
+                    R.layout.spinner_item,
+                    purposes
+                ) {
+                    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                        val view = super.getView(position, convertView, parent) as TextView
+                        view.setTextColor(
+                            if (position == 0)
+                                ContextCompat.getColor(requireContext(), R.color.lightgrey)
+                            else
+                                ContextCompat.getColor(requireContext(), R.color.blackknight)
+                        )
+                        return view
+                    }
+
+                    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                        val view = super.getDropDownView(position, convertView, parent) as TextView
+                        view.setTextColor(
+                            if (position == 0)
+                                ContextCompat.getColor(requireContext(), R.color.lightgrey)
+                            else
+                                ContextCompat.getColor(requireContext(), R.color.moonlight)
+                        )
+                        return view
+                    }
+                }
+                purposeInput.adapter = purposeAdapter
+
+                purposeInput.setSelection(purposePosition)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+    }
+
     private fun setupButtonActions(view: View) {
         val timeButton: Button = view.findViewById(R.id.timepreview)
         val dateButton: Button = view.findViewById(R.id.datepreview)
@@ -292,8 +398,8 @@ class ReviewAppointment : DialogFragment() {
 
     private fun sendDataToServer() {
         // Fetch the latest data from the UI
-        val updatedOffice = view?.findViewById<TextView>(R.id.officepreview)?.text.toString()
-        val updatedPurpose = view?.findViewById<TextView>(R.id.purposepreview)?.text.toString()
+        val updatedOffice = view?.findViewById<Spinner>(R.id.officepreview)?.selectedItem.toString()
+        val updatedPurpose = view?.findViewById<Spinner>(R.id.purposepreview)?.selectedItem.toString()
         val updatedDate = view?.findViewById<TextView>(R.id.datepreview)?.text.toString()
         val updatedTime = view?.findViewById<TextView>(R.id.timepreview)?.text.toString()
         val updatedOther = view?.findViewById<TextView>(R.id.otherpreview)?.text.toString()
