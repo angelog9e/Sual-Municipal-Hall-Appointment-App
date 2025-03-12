@@ -37,6 +37,7 @@ android {
 
 dependencies {
 
+    implementation (libs.okhttp)
     implementation (libs.squareup.retrofit)
     implementation (libs.converter.gson)
     implementation(libs.androidx.camera.core)

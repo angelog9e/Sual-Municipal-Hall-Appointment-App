@@ -27,9 +27,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import com.google.gson.Gson
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.ByteArrayOutputStream
 import java.util.Calendar
 import java.util.Locale
 
@@ -396,72 +401,75 @@ class ReviewAppointment : DialogFragment() {
         return (ampm == "AM" && hour in 8..11) || (ampm == "PM" && (hour == 12 || hour in 1..4))
     }
 
+    fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
+        val outputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        return outputStream.toByteArray()
+    }
+
     private fun sendDataToServer() {
         // Fetch the latest data from the UI
-        val updatedOffice = view?.findViewById<Spinner>(R.id.officepreview)?.selectedItem.toString()
-        val updatedPurpose = view?.findViewById<Spinner>(R.id.purposepreview)?.selectedItem.toString()
-        val updatedDate = view?.findViewById<TextView>(R.id.datepreview)?.text.toString()
-        val updatedTime = view?.findViewById<TextView>(R.id.timepreview)?.text.toString()
-        val updatedOther = view?.findViewById<TextView>(R.id.otherpreview)?.text.toString()
-
-        val updatedRName = view?.findViewById<TextView>(R.id.namepreview)?.text.toString()
-        val updatedRAddress = view?.findViewById<TextView>(R.id.addresspreview)?.text.toString()
-        val updatedRBarangay = view?.findViewById<TextView>(R.id.barangaypreview)?.text.toString()
-        val updatedRContact = view?.findViewById<TextView>(R.id.numberpreview)?.text.toString()
-        val updatedREmail = view?.findViewById<TextView>(R.id.emailpreview)?.text.toString()
-
-        val updatedOccupant = view?.findViewById<TextView>(R.id.occupantview)?.text.toString()
-
-        val updatedVName = view?.findViewById<TextView>(R.id.namepreview)?.text.toString()
-        val updatedVAddress = view?.findViewById<TextView>(R.id.addresspreview)?.text.toString()
-        val updatedVZip = view?.findViewById<TextView>(R.id.zippreview)?.text.toString()
-        val updatedVProvince = view?.findViewById<TextView>(R.id.provincepreview)?.text.toString()
-        val updatedVContact = view?.findViewById<TextView>(R.id.numberpreview)?.text.toString()
-        val updatedVEmail = view?.findViewById<TextView>(R.id.emailpreview)?.text.toString()
-
-        // Create the updated appointment object
-        val appointment = Appointment(
-            occupantTextView = updatedOccupant,
-            officeTextView = updatedOffice,
-            purposeTextView = updatedPurpose,
-            dateTextView = updatedDate,
-            timeTextView = updatedTime,
-            otherTextView = updatedOther,
-            rNameTextView = updatedRName,
-            rAddressTextView = updatedRAddress,
-            rBarangayTextView = updatedRBarangay,
-            rContactTextView = updatedRContact,
-            rEmailTextView = updatedREmail,
-            vZipTextView = updatedVZip,
-            vProvinceTextView = updatedVProvince
+        val updatedAppointment = Appointment(
+            occupantTextView = view?.findViewById<TextView>(R.id.occupantview)?.text.toString(),
+            officeTextView = view?.findViewById<Spinner>(R.id.officepreview)?.selectedItem.toString(),
+            purposeTextView = view?.findViewById<Spinner>(R.id.purposepreview)?.selectedItem.toString(),
+            dateTextView = view?.findViewById<TextView>(R.id.datepreview)?.text.toString(),
+            timeTextView = view?.findViewById<TextView>(R.id.timepreview)?.text.toString(),
+            otherTextView = view?.findViewById<TextView>(R.id.otherpreview)?.text.toString(),
+            rNameTextView = view?.findViewById<TextView>(R.id.namepreview)?.text.toString(),
+            rAddressTextView = view?.findViewById<TextView>(R.id.addresspreview)?.text.toString(),
+            rBarangayTextView = view?.findViewById<TextView>(R.id.barangaypreview)?.text.toString(),
+            rContactTextView = view?.findViewById<TextView>(R.id.numberpreview)?.text.toString(),
+            rEmailTextView = view?.findViewById<TextView>(R.id.emailpreview)?.text.toString(),
+            vZipTextView = view?.findViewById<TextView>(R.id.zippreview)?.text.toString(),
+            vProvinceTextView = view?.findViewById<TextView>(R.id.provincepreview)?.text.toString()
         )
 
-        // Send data to the server
-        val service = RetrofitInstance.appointmentService
-        val call = service.submitAppointment(appointment)
+        if (frontPhoto == null || backPhoto == null || selfiePhoto == null) {
+            Toast.makeText(context, "Please ensure all photos are uploaded.", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        call.enqueue(object : Callback<ApiResponse> {
+        // Convert photos
+        val frontPhotoPart = MultipartBody.Part.createFormData(
+            "frontPhoto",
+            "front_photo.jpg",
+            bitmapToByteArray(frontPhoto!!).toRequestBody("image/jpeg".toMediaTypeOrNull())
+        )
+        val backPhotoPart = MultipartBody.Part.createFormData(
+            "backPhoto",
+            "back_photo.jpg",
+            bitmapToByteArray(backPhoto!!).toRequestBody("image/jpeg".toMediaTypeOrNull())
+        )
+        val selfiePhotoPart = MultipartBody.Part.createFormData(
+            "selfiePhoto",
+            "selfie_photo.jpg",
+            bitmapToByteArray(selfiePhoto!!).toRequestBody("image/jpeg".toMediaTypeOrNull())
+        )
+
+        // Convert appointment data to JSON
+        val gson = Gson()
+        val appointmentJson = gson.toJson(updatedAppointment)
+        val appointmentRequestBody = appointmentJson.toRequestBody("application/json".toMediaTypeOrNull())
+
+        val service = RetrofitInstance.appointmentService
+        service.submitAppointment(
+            appointmentRequestBody,
+            frontPhotoPart,
+            backPhotoPart,
+            selfiePhotoPart
+        ).enqueue(object : Callback<ApiResponse> {
             override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                 if (response.isSuccessful) {
-                    response.body()?.let { apiResponse ->
-                        if (apiResponse.status == "success") {
-                            Log.d("Appointment", "Appointment submitted successfully")
-                            Toast.makeText(context, "Appointment submitted successfully", Toast.LENGTH_SHORT).show()
-                            goToApprovedPage()
-                        } else {
-                            Log.e("Appointment", "Error: ${apiResponse.message}")
-                            Toast.makeText(context, "Error: ${apiResponse.message}", Toast.LENGTH_SHORT).show()
-                        }
-                    }
+                    Toast.makeText(context, "Appointment submitted successfully", Toast.LENGTH_SHORT).show()
+                    goToApprovedPage()
                 } else {
-                    Log.e("Appointment", "HTTP Error: ${response.code()}")
-                    Toast.makeText(context, "HTTP Error: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Upload failed: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
-                Log.e("Appointment", "Failed to connect to the server", t)
-                Toast.makeText(context, "Failed to connect to the server", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
