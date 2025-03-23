@@ -30,6 +30,8 @@ class ApprovedPage : AppCompatActivity() {
         val approvedText = findViewById<TextView>(R.id.approvedtxt)
         val checkIcon = findViewById<ImageView>(R.id.check)
         val whiteBg = findViewById<ImageView>(R.id.bg)
+        val contactButton = findViewById<TextView>(R.id.contacttxt)
+        val confirmationText = findViewById<TextView>(R.id.confirmationtxt)
 
         val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
 
@@ -38,6 +40,8 @@ class ApprovedPage : AppCompatActivity() {
         logo.startAnimation(fadeInAnimation)
         checkIcon.startAnimation(fadeInAnimation)
         whiteBg.startAnimation(fadeInAnimation)
+        confirmationText.startAnimation(fadeInAnimation)
+        contactButton.startAnimation(fadeInAnimation)
 
         homeButton.setOnClickListener {
             val intent = Intent(this, StartScreen::class.java)
@@ -48,6 +52,11 @@ class ApprovedPage : AppCompatActivity() {
             )
 
             startActivity(intent, options.toBundle())
+        }
+
+        contactButton.setOnClickListener {
+            val popup = ContactUs()
+            popup.show(supportFragmentManager, "popup_tag")
         }
     }
 }

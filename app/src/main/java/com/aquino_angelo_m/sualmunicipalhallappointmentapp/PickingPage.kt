@@ -39,12 +39,14 @@ class PickingPage : AppCompatActivity() {
         val logo = findViewById<ImageView>(R.id.logo)
         val visitorBtn = findViewById<Button>(R.id.visitorBtn)
         val questionText = findViewById<TextView>(R.id.questiontxt)
+        val contactButton: TextView = findViewById(R.id.contacttxt)
 
         val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
 
         residentBtn.startAnimation(fadeInAnimation)
         visitorBtn.startAnimation(fadeInAnimation)
         questionText.startAnimation(fadeInAnimation)
+        contactButton.startAnimation(fadeInAnimation)
 
         residentBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -66,6 +68,11 @@ class PickingPage : AppCompatActivity() {
             )
 
             startActivity(intent, options.toBundle())
+        }
+
+        contactButton.setOnClickListener {
+            val popup = ContactUs()
+            popup.show(supportFragmentManager, "popup_tag")
         }
 
     }

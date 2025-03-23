@@ -115,7 +115,7 @@
                     android:id="@+id/text1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Upload Valid ID"
+                    android:text="Capture Valid ID"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:layout_centerHorizontal="true"

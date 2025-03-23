@@ -102,6 +102,19 @@
             android:textColor="@color/blackknight"
             android:elevation="24dp"/>
 
+        <TextView
+            android:id="@+id/contacttxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Do you have any concerns? Contact us"
+            android:fontFamily="@font/notosansjp_semibold"
+            android:textColor="@color/moonlight"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_alignParentBottom="true"/>
+
 
 
 

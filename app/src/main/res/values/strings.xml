@@ -150,15 +150,15 @@ ensuring you can quickly and easily schedule your visits from the comfort of you
         <item>Public Safety and Security Services</item>
         <item>Support for Livelihood Programs</item>
         <item>Public Infrastructure Projects and Development</item>
-        <item>Health and Sanitation Services</item>
+
         <item>Promotion of Local Culture and Tourism</item>
         <item>Advocacy for Local Legislative Proposals</item>
         <item>Programs for Senior Citizens, PWDs, and Vulnerable Groups</item>
         <item>Community Engagement and Consultation</item>
         <item>Support for Local Farmers and Fisher folk</item>
         <item>Development of Peace and Order Initiatives</item>
-        <item>Land and Property Services</item>
-        <item>Youth and Sports Development</item>
+        <item>Coordination with Other Government Offices</item>
+
         <item>Solicitation</item>
 
     </string-array>
@@ -174,6 +174,7 @@ ensuring you can quickly and easily schedule your visits from the comfort of you
         <item>Coordination with Other Local Governments and Organizations</item>
         <item>Disaster Response and Emergency Services</item>
         <item>Public Outreach and Information Services</item>
+        <item>Youth and Sports Development</item>
 
     </string-array>
 
@@ -189,6 +190,7 @@ ensuring you can quickly and easily schedule your visits from the comfort of you
         <item>Protocol Services and Public Engagement</item>
         <item>Maintenance of Municipal Records</item>
         <item>Preparation and Filing of Election-Related Documents</item>
+        <item>Assistance in the Implementation of Government Programs and Projects</item>
 
     </string-array>
 
@@ -226,7 +228,7 @@ ensuring you can quickly and easily schedule your visits from the comfort of you
         <item>Tax Mapping and Property Assessment</item>
         <item>Public Assistance and Information on Financial Matters</item>
         <item>Tax Enforcement and Collection Efforts</item>
-        <item>Coordination with Other Government Agencies</item>
+
         <item>Implementation of Local Financial Programs</item>
 
     </string-array>
@@ -247,7 +249,8 @@ ensuring you can quickly and easily schedule your visits from the comfort of you
         <item>Monitoring and Enforcement of Property Tax Payments</item>
         <item>Advisory Services on Property Taxation and Compliance</item>
         <item>Support for Local Government Planning and Development</item>
-        <item>Coordination with Other Government Offices</item>
+
+        <item>Land and Property Services</item>
 
     </string-array>
 
@@ -258,7 +261,7 @@ ensuring you can quickly and easily schedule your visits from the comfort of you
         <item>Fund Allocation and Disbursement Monitoring</item>
         <item>Budget Monitoring and Evaluation</item>
         <item>Preparation of Financial Reports and Statements</item>
-        <item>Assistance in the Implementation of Government Programs and Projects</item>
+
         <item>Preparation of Supplemental Budgets and Budget Adjustments</item>
         <item>Ensuring Compliance with Financial Regulations</item>
         <item>Preparation of Local Revenue Code and Financial Ordinances</item>
@@ -278,7 +281,7 @@ ensuring you can quickly and easily schedule your visits from the comfort of you
         <item>Coordination with National and Regional Agencies</item>
         <item>Disaster Risk Reduction and Management Planning</item>
         <item>Economic Development Planning</item>
-        <item>Social Development and Welfare Planning</item>
+
         <item>Research and Data Management</item>
         <item>Conducting Public Consultations and Stakeholder Engagement</item>
         <item>Policy Formulation and Advocacy</item>
@@ -310,6 +313,7 @@ ensuring you can quickly and easily schedule your visits from the comfort of you
         <item>Nutrition and Food Safety</item>
         <item>Health Licensing and Permits</item>
         <item>Health Support During Disasters</item>
+        <item>Health and Sanitation Services</item>
 
     </string-array>
 
@@ -344,6 +348,7 @@ ensuring you can quickly and easily schedule your visits from the comfort of you
         <item>Social Welfare Case Management and Counseling</item>
         <item>Health and Well-Being Programs</item>
         <item>Public Awareness and Advocacy</item>
+        <item>Social Development and Welfare Planning</item>
 
     </string-array>
 

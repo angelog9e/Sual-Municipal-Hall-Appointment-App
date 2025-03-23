@@ -44,12 +44,12 @@
 
         <ImageView
             android:id="@+id/check"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/check"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/logo"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="20dp"/>
 
         <TextView
             android:id="@+id/approvedtxt"
@@ -59,9 +59,21 @@
             android:fontFamily="@font/notosansjp_semibold"
             android:textColor="@color/blackknight"
             android:textSize="18sp"
-            android:layout_below="@id/logo"
+            android:layout_below="@id/check"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="140dp"/>
+            />
+
+        <TextView
+            android:id="@+id/confirmationtxt"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Please wait for approval via email or text message."
+            android:fontFamily="@font/notosansjp_semibold"
+            android:textColor="@color/blackknight"
+            android:textSize="14sp"
+            android:layout_below="@id/approvedtxt"
+            android:layout_centerHorizontal="true" />
 
         <Button
             android:id="@+id/homebtn"
@@ -78,6 +90,19 @@
             android:textAllCaps="false"
             android:padding="10dp"
             android:elevation="24dp"/>
+
+        <TextView
+            android:id="@+id/contacttxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Do you have any concerns? Contact us"
+            android:fontFamily="@font/notosansjp_semibold"
+            android:textColor="@color/moonlight"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 
