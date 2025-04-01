@@ -40,7 +40,7 @@
             android:layout_height="140dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="26dp"
-            android:background="@drawable/logo"
+            android:background="@drawable/final_logo"
             android:scaleType="fitXY"
             android:contentDescription="logo"
             android:transitionName="transition_name"

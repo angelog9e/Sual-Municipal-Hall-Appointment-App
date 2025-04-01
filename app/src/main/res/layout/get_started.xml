@@ -23,7 +23,7 @@
             android:layout_width="280dp"
             android:layout_height="280dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/logo"
+            android:background="@drawable/final_logo"
             android:layout_marginTop="200dp"/>
 
         <com.google.android.material.tabs.TabLayout

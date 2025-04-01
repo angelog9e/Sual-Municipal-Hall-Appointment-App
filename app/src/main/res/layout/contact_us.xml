@@ -22,7 +22,7 @@
             android:layout_width="80sp"
             android:layout_height="80sp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/main_logo" />
+            android:background="@drawable/final_logo" />
 
         <TextView
             android:id="@+id/black_sun_bg"
@@ -56,13 +56,11 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/contact_us_text"
             android:focusable="true"
-            android:text="Facebook"
+            android:text="facebook.com/LGUSual"
             android:textSize="16sp"
             android:textColor="#fff4f0"
             android:fontFamily="@font/notosansjp_semibold"
             android:textAlignment="center"
-            android:paddingStart="20sp"
-            android:paddingEnd="24sp"
             android:drawableStart="@drawable/ic_facebook"
             android:clickable="true"/>
 
@@ -78,8 +76,6 @@
             android:textColor="#fff4f0"
             android:fontFamily="@font/notosansjp_semibold"
             android:textAlignment="center"
-            android:paddingStart="20sp"
-            android:paddingEnd="24sp"
             android:drawableStart="@drawable/ic_phone"/>
 
         <TextView
@@ -89,13 +85,11 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:layout_below="@id/facebook_text"
-            android:text="Email"
+            android:text="lgusual@yahoo.com"
             android:textSize="16sp"
             android:textColor="#fff4f0"
             android:fontFamily="@font/notosansjp_semibold"
             android:textAlignment="center"
-            android:paddingStart="20sp"
-            android:paddingEnd="24sp"
             android:drawableStart="@drawable/ic_mail"/>
 
         <Button

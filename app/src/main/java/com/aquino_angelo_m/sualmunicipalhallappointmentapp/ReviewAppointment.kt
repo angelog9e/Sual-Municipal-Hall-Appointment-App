@@ -289,9 +289,9 @@ class ReviewAppointment : DialogFragment() {
                 val purposes = when (position) {
                     1 -> resources.getStringArray(R.array.purpose_municipal_mayor)
                     2 -> resources.getStringArray(R.array.purpose_municipal_vice_mayor)
-                    3 -> resources.getStringArray(R.array.purpose_municipal_secretary)
-                    4 -> resources.getStringArray(R.array.purpose_municipal_human_resource_management_officer)
-                    5 -> resources.getStringArray(R.array.purpose_municipal_treasurer)
+                    3 -> resources.getStringArray(R.array.purpose_municipal_human_resource_management_officer)
+                    4 -> resources.getStringArray(R.array.purpose_municipal_treasurer)
+                    5 -> resources.getStringArray(R.array.purpose_municipal_secretary)
                     6 -> resources.getStringArray(R.array.purpose_municipal_assessor)
                     7 -> resources.getStringArray(R.array.purpose_municipal_budget_officer)
                     8 -> resources.getStringArray(R.array.purpose_municipal_planning_and_development_officer)

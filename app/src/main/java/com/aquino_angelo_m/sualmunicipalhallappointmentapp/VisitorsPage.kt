@@ -138,14 +138,27 @@ class VisitorsPage : AppCompatActivity() {
     private fun setupProvinceSpinner() {
         val provinceInput: Spinner = findViewById(R.id.provinceInput)
         val provinceList = resources.getStringArray(R.array.province_list)
-        val adapter = ArrayAdapter(
+
+        provinceInput.adapter = ArrayAdapter(
             this,
             R.layout.spinner_item,
             provinceList
         ).apply {
             setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         }
-        provinceInput.adapter = adapter
+
+        provinceInput.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                (view as? TextView)?.setTextColor(
+                    ContextCompat.getColor(
+                        this@VisitorsPage,
+                        if (position == 0) R.color.lightgrey else R.color.blackknight
+                    )
+                )
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
     }
 
     private val allowedCharactersFilter = InputFilter { source, _, _, _, _, _ ->
