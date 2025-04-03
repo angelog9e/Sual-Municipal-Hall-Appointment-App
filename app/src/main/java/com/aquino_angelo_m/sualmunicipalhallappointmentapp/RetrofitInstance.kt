@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
-    private const val BASE_URL = "http://192.168.1.65/sual-web/controller/" // change URL if new pull
+    private const val BASE_URL = "http://192.168.3.86/sual-web/controller/" // change URL if new pull
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->

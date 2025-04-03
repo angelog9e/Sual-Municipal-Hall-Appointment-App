@@ -238,8 +238,20 @@ class AppointmentDetails : AppCompatActivity() {
                 val selectedMinute = minutePicker.value
                 val selectedAMPM = ampmSpinner.selectedItem.toString()
 
+                // Convert to 24-hour format
+                val militaryHour = when {
+                    selectedAMPM == "PM" && selectedHour != 12 -> selectedHour + 12
+                    selectedAMPM == "AM" && selectedHour == 12 -> 0
+                    else -> selectedHour
+                }
+
                 if (isValidTime(selectedHour, selectedAMPM)) {
-                    button.text = String.format(Locale.getDefault(), "%d:%02d %s", selectedHour, selectedMinute, selectedAMPM)
+                    button.text = String.format(
+                        Locale.getDefault(),
+                        "%02d:%02d",
+                        militaryHour,
+                        selectedMinute
+                    )
                 } else {
                     Toast.makeText(this, "Please select a valid time.", Toast.LENGTH_SHORT).show()
                 }
